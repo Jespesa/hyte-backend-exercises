@@ -1,47 +1,73 @@
 import express from 'express';
-const hostname = 'localhost';
+import { getItems } from './items.js';
+const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
 
-// Staattinen HTML-sivusto tarjoillaan palvelimen juuressa
+// Staattinen html-sivusto tarjoillaan palvelimen juuressa
 app.use('/', express.static('public'));
 
-// Middleware, joka lukee JSON-dataa POST-pyyntöjen rungosta (body)
+// middleware, joka lukee json data POST-pyyntöjen rungosta (body)
 app.use(express.json());
 
-// Rest-apin resurssit tarjoillaan /api/ polun allla
+// rest-apin resurssit tarjoillaan /api/-polun alla
 app.get('/api/', (req, res) => {
-  console.log('GET PYYNTÖ JUUREEN HAVAITTU');
+  console.log('get-pyyntö juureen havaittu');
   console.log(req.url);
   res.send('Welcome to my REST API!');
 });
 
-// Syötteen lukeminen query-parametreista
-app.get('/api/sum', (req, res) => {
-    console.log(req.query);
-    const num1 = parseInt(req.query.num1);
-    const num2 = parseInt(req.query.num2);
-    
-    // Tarkista, että parametrit ovat validit
-    if (isNaN(num1) || isNaN(num2)) {
-        return res.status(400).json({ error: 'Both num1 and num2 should be valid numbers.' });
-    }
 
-    res.json({ resultnum1: num1, num2, sum: num1 + num2 });
+//item resurssien päätepisteet
+app.get ('/api/items', getItems);
+
+// syötteen lukeminen reittiparametreista (route params)
+app.get('/api/sum/:num1/:num2', (req, res) => {
+  console.log(req.params);
+  const num1 = Number(req.params.num1);
+  const num2 = Number(req.params.num2);
+  // testataan, jos jompikumpi luvuista ei ole numero, niin lähetään
+  // virhetilakoodi ja viesti json-muodossa
+  if(isNaN(num1) || isNaN(num2)) {
+    res.status(400);
+    res.json({
+      error: 'Both parameters must be numbers!'
+    });
+    return;
+  }
+  res.json({
+    num1,
+    num2,
+    sum: num1 + num2
+  });
 });
 
-// POST-pyyntö /api/moro reitille
+// syötteen lukeminen kyselyparametreista (query params)
+app.get('/api/sum/', (req, res) => {
+  console.log(req.query);
+  const num1 = parseInt(req.query.num1);
+  const num2 = parseInt(req.query.num2);
+  res.json({
+    num1,
+    num2,
+    sum: num1 + num2
+  });
+});
+
+
+// POST-pynnön käsittely ja datan lukeminen pyynnön bodystä
 app.post('/api/moro', (req, res) => {
-    if (!req.body.sender) {
-        return res.status(400).json({ error: 'Sender field is required.' });
-    }
-    console.log(req.body);
-    res.json({ reply: 'No moro ' + req.body.sender });
+  console.log(req.body);
+  res.status(200);
+  res.json({reply: 'no Moro ' + req.body.sender});
 });
 
-// Virheenkäsittely: jos ei löydy reittiä
-app.use((req, res) => {
-    res.status(404).json({ error: 'Not Found' });
+// TODO: lisää oma reitti ja toiminnallisuus omaa mielikuvitusta käyttäen, niin
+// ensimmäisen viikon harkka ok
+
+// nykyisen päivämäärän ja kellonajan palautus
+app.get('/api/time', (req, res) => {
+  res.json({ currentTime: new Date().toISOString() });
 });
 
 app.listen(port, hostname, () => {
