@@ -1,3 +1,15 @@
 # ekat testit
+###palvelimen juuri eli root
+GET http://localhost:3000
 
-GET http:localhost:3000
+###moro testi
+GET http://localhost:3000/moro
+
+###moro testi postman
+POST http://localhost:3000/api/moro
+Content-Type: application/json
+
+{
+    "sender": "jesper",
+    "message": "testitervehdys"
+}
