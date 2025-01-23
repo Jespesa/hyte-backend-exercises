@@ -1,15 +1,32 @@
 # ekat testit
-###palvelimen juuri eli root
+
+### Palvelimen juuri
 GET http://localhost:3000
 
-###moro testi
+### morotesti
 GET http://localhost:3000/moro
 
-###moro testi postman
+### morotesti POST
 POST http://localhost:3000/api/moro
-Content-Type: application/json
+content-type: application/json
 
 {
-    "sender": "jesper",
-    "message": "testitervehdys"
+  "sender": "kalle",
+  "message": "testitervehdys"
+}
+
+## items
+
+### get all items
+GET http://localhost:3000/api/items
+
+### get item by id
+GET http://localhost:3000/api/items/3
+
+### post new item
+POST http://localhost:3000/api/items
+content-type: application/json
+
+{
+  "name": "Sitruuna"
 }
