@@ -1,8 +1,11 @@
 import express from 'express';
-import {addItem, getItemById, getItems} from './items.js';
+import {addItem, getItemById, getItems, updateItem, deleteItem} from './items.js';
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
+app.put('/api/items/:id', updateItem);
+app.delete('/api/items/:id', deleteItem);
+
 
 // Staattinen html-sivusto tarjoillaan palvelimen juuressa
 app.use('/', express.static('public'));
