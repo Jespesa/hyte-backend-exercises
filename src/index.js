@@ -5,7 +5,7 @@ import { getUsers, getUserById, addUser, loginUser } from './users.js';
 
 const hostname = '127.0.0.1';
 const app = express();
-const port = 3001;
+const port = 3000;
 
 // middleware
 app.use(express.json());

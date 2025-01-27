@@ -53,6 +53,7 @@ GET http://localhost:3000/api/users/1
 ### post a new user
 POST http://localhost:3000/api/users
 content-type: application/json
+
 {
   "username": "newuser",
   "password": "newpassword",
@@ -62,18 +63,17 @@ content-type: application/json
 ### update user by ID
 PUT http://localhost:3000/api/users/2
 content-type: application/json
+
 {
   "username": "janedoe_updated",
   "password": "newpassword2",
   "email": "janedoe_updated@example.com"
 }
 
-### delete user by ID
-DELETE http://localhost:3000/api/users/3
-
 ### dummy login (valid credentials)
 POST http://localhost:3000/api/login
 content-type: application/json
+
 {
   "username": "johndoe",
   "password": "password1"
@@ -82,6 +82,7 @@ content-type: application/json
 ### dummy login (invalid credentials)
 POST http://localhost:3000/api/login
 content-type: application/json
+
 {
   "username": "invaliduser",
   "password": "wrongpassword"
