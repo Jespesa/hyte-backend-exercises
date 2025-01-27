@@ -1,10 +1,31 @@
+// src/index.js
 import express from 'express';
-import {addItem, getItemById, getItems, updateItem, deleteItem} from './items.js';
+import { getItems, getItemById, addItem, updateItem, deleteItem } from './items.js';
+import { getUsers, getUserById, addUser, loginUser } from './users.js';
+
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
+
+// Middleware to read JSON body data
+app.use(express.json());
+
+// Items endpoints
+app.get('/api/items', getItems);
+app.get('/api/items/:id', getItemById);
+app.post('/api/items', addItem);
 app.put('/api/items/:id', updateItem);
 app.delete('/api/items/:id', deleteItem);
+
+// Users endpoints
+app.get('/api/users', getUsers);
+app.get('/api/users/:id', getUserById);
+app.post('/api/users', addUser);
+app.post('/api/login', loginUser);
+
+app.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
 
 
 // Staattinen html-sivusto tarjoillaan palvelimen juuressa

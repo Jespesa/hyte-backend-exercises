@@ -30,3 +30,59 @@ content-type: application/json
 {
   "name": "Sitruuna"
 }
+
+### update item by id
+PUT http://localhost:3000/api/items/3
+content-type: application/json
+
+{
+  "name": "Uusi Porkkana"
+}
+
+### delete item by id
+DELETE http://localhost:3000/api/items/3
+
+## users
+
+### get all users
+GET http://localhost:3000/api/users
+
+### get user by ID
+GET http://localhost:3000/api/users/1
+
+### post a new user
+POST http://localhost:3000/api/users
+content-type: application/json
+{
+  "username": "newuser",
+  "password": "newpassword",
+  "email": "newuser@example.com"
+}
+
+### update user by ID
+PUT http://localhost:3000/api/users/2
+content-type: application/json
+{
+  "username": "janedoe_updated",
+  "password": "newpassword2",
+  "email": "janedoe_updated@example.com"
+}
+
+### delete user by ID
+DELETE http://localhost:3000/api/users/3
+
+### dummy login (valid credentials)
+POST http://localhost:3000/api/login
+content-type: application/json
+{
+  "username": "johndoe",
+  "password": "password1"
+}
+
+### dummy login (invalid credentials)
+POST http://localhost:3000/api/login
+content-type: application/json
+{
+  "username": "invaliduser",
+  "password": "wrongpassword"
+}

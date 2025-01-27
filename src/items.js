@@ -33,8 +33,16 @@ const addItem = (req, res) => {
   }
 };
 
-// itemin muokkaaminen (put)
+
+
+// TODO: put & delete endpoints
+// TODO: lisää users.js, ks. materiaali week 2
+
+// itemin muokkaaminen (PUT)
 const updateItem = (req, res) => {
+  console.log('Request body:', req.body);
+  console.log('Request params:', req.params);
+
   const id = parseInt(req.params.id);
   const item = items.find((item) => item.id === id);
 
@@ -42,15 +50,15 @@ const updateItem = (req, res) => {
     return res.status(404).json({ message: 'Item not found' });
   }
 
-  if (!req.body.name) {
-    return res.status(400).json({ message: 'Request is missing name property.' });
+  if (!req.body || !req.body.name) {
+    return res.status(400).json({ message: 'Request is missing name property or body is invalid.' });
   }
 
   item.name = req.body.name;
   res.json({ message: 'Item updated.', item });
 };
 
-// itemin poistaminen (delete)
+// itemin poistaminen (DELETE)
 const deleteItem = (req, res) => {
   const id = parseInt(req.params.id);
   const index = items.findIndex((item) => item.id === id);
