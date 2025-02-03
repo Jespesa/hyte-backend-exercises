@@ -28,6 +28,22 @@ CREATE TABLE DiaryEntries (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
+
+  -- New table "Activities" --
+  CREATE TABLE Activities (
+    activity_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    entry_id INT,
+    activity_type VARCHAR(50) NOT NULL,  -- esim. "Exercise", "Meal", "Medication"
+    duration INT, -- minuuteissa, jos soveltuu
+    description TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (entry_id) REFERENCES DiaryEntries(entry_id) ON DELETE CASCADE
+);
+
+
+
 -- ALTER example, adding a new column to existing table
 ALTER TABLE Users ADD COLUMN user_level VARCHAR(10) DEFAULT 'regular';
 
@@ -43,7 +59,7 @@ INSERT INTO Users (username, password, email, user_level) VALUES
   ('janedoe', 'temp-pw-2', 'janedoe@example.com', 'admin'),
   ('mike_smith', 'temp-pw-3', 'mike@example.com', 'moderator');
 
--- Example when FK constraint fails (if user_id 15 does not exist)
+-- Example when FK constraint fails (if user_id 15 does not exist) opettajan esimerkki error koodista mikä tulee
 INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
   (15, '2024-01-10', 'Happy', 70.5, 8, 'Had a great day, felt energetic', '2024-01-10 20:00:00');
 
@@ -52,3 +68,9 @@ INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes,
   (1, '2024-01-10', 'Happy', 70.5, 8, 'Had a great day, felt energetic', '2024-01-10 20:00:00'),
   (1, '2024-01-11', 'Tired', 70.2, 6, 'Long day at work, need rest', '2024-01-11 20:00:00'),
   (2, '2024-01-10', 'Stressed', 65.0, 7, 'Busy day, a bit stressed out', '2024-01-10 21:00:00');
+
+INSERT INTO Activities (user_id, entry_id, activity_type, duration, description)
+VALUES 
+(1, 1, 'Exercise', 60, 'Jogged in the park'),
+(1, 2, 'Meal', NULL, 'Ate a healthy salad'),
+(2, 3, 'Medication', NULL, 'Took vitamin D supplements');
