@@ -2,10 +2,15 @@
 import express from 'express';
 import { getItems, getItemById, addItem, updateItem, deleteItem } from './items.js';
 import { getUsers, getUserById, addUser, loginUser } from './users.js';
+import cors from 'cors';
 
 const hostname = '127.0.0.1';
 const app = express();
 const port = 3000;
+
+// tätä tarvitaan jotta ullan fronttiharjoitukset toimii (vite)
+// asenna paketti: npm install cors
+app.use(cors());
 
 // middleware
 app.use(express.json());
@@ -71,7 +76,7 @@ app.post('/api/moro', (req, res) => {
   res.json({reply: 'no Moro ' + req.body.sender});
 });
 
-// Start the server (only once)
+// Start the server
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
