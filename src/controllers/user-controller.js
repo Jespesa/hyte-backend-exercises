@@ -1,26 +1,27 @@
-import {getAllUsers} from '../models/user-model.js';
+import {selectAllUsers, selectUserById} from '../models/user-model.js';
 
 // kaikkien käyttäjätietojen haku
 const getUsers = async (req, res) => {
   // in real world application, password properties should never be sent to client
-  const users = await getAllUsers();
+  const users = await selectAllUsers();
   res.json(users);
 };
 
 // Userin haku id:n perusteella
-const getUserById = (req, res) => {
+const getUserById = async (req, res) => {
   console.log('getUserById', req.params.id);
-  const user = users.find((user) => user.id == req.params.id);
-  console.log('User found:', user);
-  // jos user löytyi, eli arvo ei ole undefined, lähetetään se vastauksena
-  if (user) {
-    // exclude password property from user object before sending it to client
-    const {id, username, email} = user;
-    res.json({id, username, email});
-    // other option: const {password, ...userWithoutPassword} = user;
-    // res.json(userWithoutPassword);
-  } else {
-    res.status(404).json({message: 'User not found'});
+
+  try {
+    const user = await selectUserById(req.params.id);
+    console.log('User found:', user);
+    // jos user löytyi, eli arvo ei ole undefined, lähetetään se vastauksena
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({message: 'User not found'});
+    }
+  } catch (error) {
+    res.status(500).json({message: error.message});
   }
 };
 

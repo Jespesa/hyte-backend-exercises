@@ -1,21 +1,6 @@
-# ekat testit
+# Testing http requests with Visual Studio Code REST Client extension
 
-### Palvelimen juuri
-GET http://localhost:3000
-
-### morotesti
-GET http://localhost:3000/moro
-
-### morotesti POST
-POST http://localhost:3000/api/moro
-content-type: application/json
-
-{
-  "sender": "kalle",
-  "message": "testitervehdys"
-}
-
-## items
+## Items (test resource/endpoints using hard-coded mock data)
 
 ### get all items
 GET http://localhost:3000/api/items
@@ -23,7 +8,7 @@ GET http://localhost:3000/api/items
 ### get item by id
 GET http://localhost:3000/api/items/3
 
-### post new item
+### post a new item
 POST http://localhost:3000/api/items
 content-type: application/json
 
@@ -31,59 +16,55 @@ content-type: application/json
   "name": "Sitruuna"
 }
 
-### update item by id
+### modify an existing item (by using item's id as a parameter in url)
 PUT http://localhost:3000/api/items/3
 content-type: application/json
 
 {
-  "name": "Uusi Porkkana"
+  "name": "new name for this item"
 }
 
-### delete item by id
+### delete an item (by id)
 DELETE http://localhost:3000/api/items/3
 
-## users
+
+###########################
+## Users resource endpoints
 
 ### get all users
 GET http://localhost:3000/api/users
 
-### get user by ID
-GET http://localhost:3000/api/users/1
+### get user by id
+GET http://localhost:3000/api/users/3
 
-### post a new user
+### create a new user (user registration)
 POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "newuser",
-  "password": "newpassword",
-  "email": "newuser@example.com"
+  "username": "newusername",
+  "password": "passwordx",
+  "email": "newemail@example.com"
 }
 
-### update user by ID
-PUT http://localhost:3000/api/users/2
+### modify an existing user by id
+PUT http://localhost:3000/api/users/3
 content-type: application/json
 
 {
-  "username": "janedoe_updated",
-  "password": "newpassword2",
-  "email": "janedoe_updated@example.com"
+  "username": "editedname",
+  "password": "editedpasswordx",
+  "email": "editedmail@example.com"
 }
 
-### dummy login (valid credentials)
-POST http://localhost:3000/api/login
+### delete a user (by id)
+DELETE http://localhost:3000/api/users/3
+
+### user login
+POST http://localhost:3000/api/users/login
 content-type: application/json
 
 {
-  "username": "johndoe",
-  "password": "password1"
-}
-
-### dummy login (invalid credentials)
-POST http://localhost:3000/api/login
-content-type: application/json
-
-{
-  "username": "invaliduser",
-  "password": "wrongpassword"
+  "username": "newusername",
+  "password": "passwordx"
 }
