@@ -1,9 +1,9 @@
 // mock data (tilapäistä testidataa)
 const items = [
-  { id: 1, name: 'Omena' },
-  { id: 2, name: 'Appelsiini' },
-  { id: 3, name: 'Porkkana' },
-  { id: 4, name: 'Mandariini' },
+  {id: 1, name: 'Omena'},
+  {id: 2, name: 'Appelsiini'},
+  {id: 3, name: 'Porkkana'},
+  {id: 4, name: 'Mandariini'},
 ];
 
 // kaikkien itemien haku
@@ -13,62 +13,59 @@ const getItems = (req, res) => {
 
 // itemin haku id:n perusteella
 const getItemById = (req, res) => {
+  console.log('getItemById', req.params.id);
   const item = items.find((item) => item.id == req.params.id);
+  console.log('item found:', item);
+  // jos item löytyi, eli arvo ei ole undefined
   if (item) {
     res.json(item);
   } else {
-    res.status(404).json({ message: 'Item not found' });
+    res.status(404).json({message: 'Item not found'});
   }
 };
 
 // itemin lisääminen
 const addItem = (req, res) => {
+  console.log('addItem request body', req.body);
+  // jos pyyntö sisältää name-ominaisuuden, lisätään uusi asia items-taulukkoon
   if (req.body.name) {
-    const latestId = items[items.length - 1]?.id || 0;
-    const newItem = { id: latestId + 1, name: req.body.name };
+    // generoidaan id-numero uudelle asialle (yhtä suurempi kuin viimeisin)
+    const latestId = items[items.length - 1].id;
+    // luodaan uusi asia olio ja lisätään se items-taulukkoon
+    const newItem = {id: latestId + 1, name: req.body.name};
     items.push(newItem);
-    res.status(201).json({ message: 'Item added.', item: newItem });
+    res.status(201);
+    return res.json({message: 'Item added.'});
+  }
+  res.status(400);
+  return res.json({message: 'Request is missing name property.'});
+};
+
+// itemin muokkaus id:n perusteella
+const editItem = (req, res) => {
+  console.log('editItem request body', req.body);
+  const item = items.find((item) => item.id == req.params.id);
+  if (item) {
+    item.name = req.body.name;
+    res.json({message: 'Item updated.'});
   } else {
-    res.status(400).json({ message: 'Request is missing name property.' });
+    res.status(404).json({message: 'Item not found'});
   }
 };
 
-
-
-// TODO: put & delete endpoints
-// TODO: lisää users.js, ks. materiaali week 2
-
-// itemin muokkaaminen (PUT)
-const updateItem = (req, res) => {
-  console.log('Request body:', req.body);
-  console.log('Request params:', req.params);
-
-  const id = parseInt(req.params.id);
-  const item = items.find((item) => item.id === id);
-
-  if (!item) {
-    return res.status(404).json({ message: 'Item not found' });
-  }
-
-  if (!req.body || !req.body.name) {
-    return res.status(400).json({ message: 'Request is missing name property or body is invalid.' });
-  }
-
-  item.name = req.body.name;
-  res.json({ message: 'Item updated.', item });
-};
-
-// itemin poistaminen (DELETE)
+// itemin poisto id:n perusteella
 const deleteItem = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = items.findIndex((item) => item.id === id);
-
-  if (index === -1) {
-    return res.status(404).json({ message: 'Item not found' });
+  console.log('deleteItem', req.params.id);
+  const index = items.findIndex((item) => item.id == req.params.id);
+  //console.log('index', index);
+  // findIndex returns -1 if item is not found
+  if (index !== -1) {
+    // remove one item from array based on index
+    items.splice(index, 1);
+    res.json({message: 'Item deleted.'});
+  } else {
+    res.status(404).json({message: 'Item not found'});
   }
-
-  const deletedItem = items.splice(index, 1)[0];
-  res.json({ message: 'Item deleted.', item: deletedItem });
 };
 
-export { getItems, getItemById, addItem, updateItem, deleteItem };
+export {getItems, getItemById, addItem, editItem, deleteItem};

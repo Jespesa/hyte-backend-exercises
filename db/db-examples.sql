@@ -1,6 +1,9 @@
--- Mysql client  käynnistys komentoriveillä --
--- Mysql client käynnistys komentoriviltä --
--- mysql -u root -p 
+-- Windows: MySQL Client start-valikko
+-- Mysql client käynnistys komentoriviltä
+-- mysql -u root -pMUNSALASANA
+
+-- Tämän skriptin suorittaminen (opettajan kone) sql clientissa:
+-- source /Users/mattpe/code/hyte/server-example-25/db/db-examples.sql
 
 DROP DATABASE IF EXISTS HealthDiary;
 CREATE DATABASE HealthDiary;
@@ -28,8 +31,7 @@ CREATE TABLE DiaryEntries (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-
-  -- New table "Activities" --
+ -- New table "Activities" --
   CREATE TABLE Activities (
     activity_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
@@ -42,26 +44,25 @@ CREATE TABLE DiaryEntries (
     FOREIGN KEY (entry_id) REFERENCES DiaryEntries(entry_id) ON DELETE CASCADE
 );
 
-
-
 -- ALTER example, adding a new column to existing table
 ALTER TABLE Users ADD COLUMN user_level VARCHAR(10) DEFAULT 'regular';
 
-
+-------------------
 -- insert test data
-
+-------------------
 
 -- Inserting a single record, without specifying column names
-INSERT INTO Users VALUES (1, 'johndoe', 'temp-pw-1', 'johndoe@example.com', '2024-01-02 10:00:00', 'regular');
+INSERT INTO Users
+  VALUES (1, 'johndoe', 'temp-pw-1', 'johndoe@example.com', '2024-01-02 10:00:00', 'regular');
 
 -- Iserting multiple user rows at once (default values like created_at are inserted without need to specify them)
 INSERT INTO Users (username, password, email, user_level) VALUES
   ('janedoe', 'temp-pw-2', 'janedoe@example.com', 'admin'),
   ('mike_smith', 'temp-pw-3', 'mike@example.com', 'moderator');
 
--- Example when FK constraint fails (if user_id 15 does not exist) opettajan esimerkki error koodista mikä tulee
+-- Example when FK constraint fails (if user_id 15 does not exist) -> changed to 3
 INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
-  (15, '2024-01-10', 'Happy', 70.5, 8, 'Had a great day, felt energetic', '2024-01-10 20:00:00');
+  (3, '2024-01-10', 'Happy', 70.5, 8, 'Had a great day, felt energetic', '2024-01-10 20:00:00');
 
 -- Inserting multiple diary entries
 INSERT INTO DiaryEntries (user_id, entry_date, mood, weight, sleep_hours, notes, created_at) VALUES
@@ -73,4 +74,4 @@ INSERT INTO Activities (user_id, entry_id, activity_type, duration, description)
 VALUES 
 (1, 1, 'Exercise', 60, 'Jogged in the park'),
 (1, 2, 'Meal', NULL, 'Ate a healthy salad'),
-(2, 3, 'Medication', NULL, 'Took vitamin D supplements');
+(2, 3, 'Medication', NULL, 'Took vitamin D supplements');  
