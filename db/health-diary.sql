@@ -76,3 +76,8 @@ INSERT INTO Exercises (user_id, type, duration, intensity, date) VALUES
 (3, 'Swimming', 60, 'Low', '2024-01-18'),
 (3, 'Yoga', 50, 'Low', '2024-01-18'),
 (1, 'Weight Training', 40, 'High', '2024-01-19');
+
+
+--
+INSERT INTO Users (username, password, email) VALUES
+('johndoe2', 'hashed_password2', 'johndoe2@example.com');

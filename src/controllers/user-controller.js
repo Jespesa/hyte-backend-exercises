@@ -1,4 +1,4 @@
-import {selectAllUsers, selectUserById} from '../models/user-model.js';
+import {insertUser, selectAllUsers, selectUserById, selectUserByNameAndPassword} from '../models/user-model.js';
 
 // kaikkien käyttäjätietojen haku
 const getUsers = async (req, res) => {
@@ -26,24 +26,22 @@ const getUserById = async (req, res) => {
 };
 
 // käyttäjän lisäys (rekisteröinti)
-const addUser = (req, res) => {
+// lisätään virheenkäsittely myöhemmin
+const addUser = async (req, res) => {
   console.log('addUser request body', req.body);
   // esitellään 3 uutta muuttujaa, johon sijoitetaan req.body:n vastaavien propertyjen arvot
   const {username, password, email} = req.body;
   // tarkistetaan, että pyynnössä on kaikki tarvittavat tiedot
   if (username && password && email) {
-    // generoidaan id-numero uudelle käyttäjälle (yhtä suurempi kuin viimeisin)
-    const latestId = users[users.length - 1].id;
-    // luodaan uusi käyttäjä olio ja lisätään se users-taulukkoon
+    // luodaan uusi käyttäjä olio ja lisätään se tietokantaa käyttäen modelia
     const newUser = {
-      id: latestId + 1,
       username,
       password,
       email,
     };
-    users.push(newUser);
+    const result = await insertUser(newUser);
     res.status(201);
-    return res.json({message: 'User added.'});
+    return res.json({message: 'User added. id: ' + result});
   }
   res.status(400);
   return res.json({
@@ -81,17 +79,13 @@ const deleteUser = (req, res) => {
 };
 
 // user authentication (login)
-const login = (req, res) => {
+const login = async (req, res) => {
   const {username, password} = req.body;
   if (!username) {
     return res.status(401).json({message: 'Username missing.'});
   }
-  const user = users.find((user) => user.username === username);
-  // jos user-olio löytyy ja sen password-ominaisuus täsmää requestissa
-  // lähetetyn password:n arvon kanssa, lähetetään vastauksessa viesti ja
-  // löydetyn käyttäjän kaikki tiedot
-  if (user && user.password === password) {
-    // TO BE FIXED: password property should never be sent to client
+  const user = await selectUserByNameAndPassword(username, password);
+  if (user) {
     res.json({message: 'login ok', user});
   } else {
     res.status(401).json({message: 'Bad username/password.'});
