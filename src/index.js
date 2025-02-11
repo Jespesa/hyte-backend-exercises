@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import {addItem, deleteItem, editItem, getItemById, getItems} from './items.js';
 
+import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
 const hostname = '127.0.0.1';
 const app = express();
@@ -27,6 +28,7 @@ app.get('/api/', (req, res) => {
 
 // Users resurssin päätepisteet (endpoints)
 app.use('/api/users', userRouter);
+app.use('/api/diaryentries', entryRouter);
 
 
 
