@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import {addItem, deleteItem, editItem, getItemById, getItems} from './items.js';
 
+import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
 const hostname = '127.0.0.1';
@@ -30,6 +31,8 @@ app.get('/api/', (req, res) => {
 app.use('/api/users', userRouter);
 app.use('/api/diaryentries', entryRouter);
 
+//käyttäjäautentikaatio (kirjautuminen)
+app.use('/api/auth', authRouter);
 
 
 // Items (testi mock-data) resurssin päätepisteet (endpoints)

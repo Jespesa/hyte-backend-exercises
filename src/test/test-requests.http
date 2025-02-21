@@ -33,6 +33,7 @@ DELETE http://localhost:3000/api/items/3
 
 ### get all users
 GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiZW1haWwiOiJuZXdlbWFpbEBleGFtcGxlLmNvbSIsImNyZWF0ZWRfYXQiOiIyMDI1LTAyLTA2VDEzOjA5OjA3LjAwMFoiLCJ1c2VyX2xldmVsIjoicmVndWxhciIsImlhdCI6MTczOTM2NTk0MiwiZXhwIjoxNzM5NDUyMzQyfQ.IO9ly-VkHACUPca_TGNlNGLA3brezP-tck1yQ1nFC5M
 
 ### get user by id
 GET http://localhost:3000/api/users/3
@@ -42,9 +43,9 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-  "username": "newusername",
+  "username": "newusername2",
   "password": "passwordx",
-  "email": "newemail@example.com"
+  "email": "newemail2@example.com"
 }
 
 ### modify an existing user by id
@@ -61,10 +62,33 @@ content-type: application/json
 DELETE http://localhost:3000/api/users/3
 
 ### user login
-POST http://localhost:3000/api/users/login
+POST http://localhost:3000/api/auth/login
 content-type: application/json
 
 {
-  "username": "newusername",
+  "username": "newusername2",
   "password": "passwordx"
 }
+
+### get my user info
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjo3LCJ1c2VybmFtZSI6Im5ld3VzZXJuYW1lIiwiZW1haWwiOiJuZXdlbWFpbEBleGFtcGxlLmNvbSIsImNyZWF0ZWRfYXQiOiIyMDI1LTAyLTA2VDEzOjA5OjA3LjAwMFoiLCJ1c2VyX2xldmVsIjoicmVndWxhciIsImlhdCI6MTczOTM2NTk0MiwiZXhwIjoxNzM5NDUyMzQyfQ.IO9ly-VkHACUPca_TGNlNGLA3brezP-tck1yQ1nFC5M
+
+## (Diary)Entries
+
+### post a new entry
+POST http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMiwidXNlcm5hbWUiOiJuZXd1c2VybmFtZTIiLCJwYXNzd29yZCI6IiQyYSQxMCRNZVpETzZ4ckpIVFNncnVrZ1ZtR2wuaFRLVUp1NjUwc1c1MlNoOHhRcjhHTlJuUlV1N1FXQyIsImVtYWlsIjoibmV3ZW1haWwyQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMTNUMTE6NDg6NTIuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzM5NDUyNjUzLCJleHAiOjE3Mzk1MzkwNTN9.xLKb3zAqkapUooZTKPGh8jC3eLNmOe3R-2tWnav0qR8
+content-type: application/json
+
+{
+ "entry_date": "2025-02-12",
+ "mood": "iloinen",
+ "weight": 60,
+ "sleep_hours": 6,
+ "notes": "tosi kiva fiilis"
+}
+
+### Get user's entries
+GET http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMiwidXNlcm5hbWUiOiJuZXd1c2VybmFtZTIiLCJwYXNzd29yZCI6IiQyYSQxMCRNZVpETzZ4ckpIVFNncnVrZ1ZtR2wuaFRLVUp1NjUwc1c1MlNoOHhRcjhHTlJuUlV1N1FXQyIsImVtYWlsIjoibmV3ZW1haWwyQGV4YW1wbGUuY29tIiwiY3JlYXRlZF9hdCI6IjIwMjUtMDItMTNUMTE6NDg6NTIuMDAwWiIsInVzZXJfbGV2ZWwiOiJyZWd1bGFyIiwiaWF0IjoxNzM5NDUyNjUzLCJleHAiOjE3Mzk1MzkwNTN9.xLKb3zAqkapUooZTKPGh8jC3eLNmOe3R-2tWnav0qR8

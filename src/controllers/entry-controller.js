@@ -1,14 +1,15 @@
-import { insertEntry, selectAllEntries, selectEntryById, updateEntry, deleteEntry } from '../models/entry-model.js';
+import { insertEntry, selectEntryById, updateEntry, deleteEntry, selectEntriesByUserId } from '../models/entry-model.js';
 
-// kaikkien päiväkirjamerkintöjen haku
+/**
+ * Get all entries of the logged in user
+ * @param {*} req
+ * @param {*} res
+ */
 const getEntries = async (req, res) => {
-  try {
-    const entries = await selectAllEntries();
-    res.json(entries);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+  const entries = await selectEntriesByUserId(req.user.user_id);
+  res.json(entries);
 };
+
 
 // Päiväkirjamerkinnän haku id:n perusteella
 const getEntryById = async (req, res) => {
@@ -91,4 +92,14 @@ const deleteDiaryEntry = async (req, res) => {
   }
 };
 
-export { getEntries, getEntryById, addEntry, editEntry, deleteDiaryEntry };
+const postEntry = async (req, res) => {
+  // user_id, entry_date, mood, weight, sleep_hours, notes
+  // TODO: add try-catch
+  const newEntry = req.body;
+  newEntry.user_id = req.user.user_id;
+  insertEntry(newEntry);
+  res.status(201).json({message: "Entry added."});
+};
+
+ 
+export {postEntry, getEntries, getEntryById, addEntry, editEntry, deleteDiaryEntry };

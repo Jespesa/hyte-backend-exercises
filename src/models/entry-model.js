@@ -22,17 +22,17 @@ const selectAllEntries = async () => {
  * @param {number} entryId The id of the entry
  * @returns {Object} The diary entry
  */
-const selectEntryById = async (entryId) => {
+const selectEntriesByUserId = async (userId) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT entry_id, user_id, entry_date, mood, weight, sleep_hours, notes, created_at FROM DiaryEntries WHERE entry_id = ?',
-      [entryId]
+      'SELECT * FROM DiaryEntries WHERE user_id=?',
+      [userId],
     );
-    console.log('selectEntryById result', rows);
-    return rows[0];
+    console.log(rows);
+    return rows;
   } catch (error) {
     console.error(error);
-    throw new Error('Database error');
+    throw new Error('database error');
   }
 };
 
@@ -99,4 +99,5 @@ const deleteEntry = async (entryId) => {
   }
 };
 
-export { selectAllEntries, selectEntryById, insertEntry, updateEntry, deleteEntry };
+
+export {selectAllEntries, selectEntriesByUserId, insertEntry, updateEntry, deleteEntry };
