@@ -1,7 +1,12 @@
 import express from 'express';
-import {postEntry} from '../controllers/entry-controller.js';
+import {
+  postEntry,
+  getEntries,
+  getEntryById,
+  editEntry,
+  deleteDiaryEntry
+} from '../controllers/entry-controller.js';
 import {authenticateToken} from '../middlewares/authentication.js';
-import {getEntries} from '../controllers/entry-controller.js';
 
 const entryRouter = express.Router();
 
@@ -10,5 +15,12 @@ entryRouter
   .route('/')
   .post(authenticateToken, postEntry)
   .get(authenticateToken, getEntries);
+
+// routes for /api/entries/:id
+entryRouter
+  .route('/:id')
+  .get(authenticateToken, getEntryById)
+  .put(authenticateToken, editEntry)
+  .delete(authenticateToken, deleteDiaryEntry);
 
 export default entryRouter;

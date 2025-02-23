@@ -56,17 +56,21 @@ const editEntry = async (req, res) => {
   if (title || content || date) {
     try {
       const entry = await selectEntryById(req.params.id);
-      if (entry) {
-        const updatedEntry = {
-          title: title || entry.title,
-          content: content || entry.content,
-          date: date || entry.date,
-        };
-        await updateEntry(req.params.id, updatedEntry);
-        res.json({ message: 'Entry updated.' });
-      } else {
-        res.status(404).json({ message: 'Entry not found' });
+      // Tarkista että merkintä on olemassa ja kuuluu kirjautuneelle käyttäjälle
+      if (!entry) {
+        return res.status(404).json({ message: 'Entry not found' });
       }
+      if (entry.user_id !== req.user.user_id) {
+        return res.status(403).json({ message: 'Access denied' });
+      }
+
+      const updatedEntry = {
+        title: title || entry.title,
+        content: content || entry.content,
+        date: date || entry.date,
+      };
+      await updateEntry(req.params.id, updatedEntry);
+      res.json({ message: 'Entry updated.' });
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
@@ -81,12 +85,16 @@ const deleteDiaryEntry = async (req, res) => {
 
   try {
     const entry = await selectEntryById(req.params.id);
-    if (entry) {
-      await deleteEntry(req.params.id);  // correctly calling the imported deleteEntry model function
-      res.json({ message: 'Entry deleted.' });
-    } else {
-      res.status(404).json({ message: 'Entry not found' });
+    // Tarkista että merkintä on olemassa ja kuuluu kirjautuneelle käyttäjälle
+    if (!entry) {
+      return res.status(404).json({ message: 'Entry not found' });
     }
+    if (entry.user_id !== req.user.user_id) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    await deleteEntry(req.params.id);
+    res.json({ message: 'Entry deleted.' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

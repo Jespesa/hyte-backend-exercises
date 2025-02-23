@@ -18,9 +18,27 @@ const selectAllEntries = async () => {
 };
 
 /**
- * Fetch a diary entry by id
+ * Fetch a diary entry by entry_id
  * @param {number} entryId The id of the entry
  * @returns {Object} The diary entry
+ */
+const selectEntryById = async (entryId) => {
+  try {
+    const [rows] = await promisePool.query(
+      'SELECT * FROM DiaryEntries WHERE entry_id = ?',
+      [entryId]
+    );
+    return rows[0] || null; // Palauttaa yhden merkinnän tai null, jos ei löydy
+  } catch (error) {
+    console.error(error);
+    throw new Error('Database error');
+  }
+};
+
+/**
+ * Fetch all entries by user_id
+ * @param {number} userId The id of the user
+ * @returns {Object[]} The diary entries for the user
  */
 const selectEntriesByUserId = async (userId) => {
   try {
@@ -32,7 +50,7 @@ const selectEntriesByUserId = async (userId) => {
     return rows;
   } catch (error) {
     console.error(error);
-    throw new Error('database error');
+    throw new Error('Database error');
   }
 };
 
@@ -99,5 +117,4 @@ const deleteEntry = async (entryId) => {
   }
 };
 
-
-export {selectAllEntries, selectEntriesByUserId, insertEntry, updateEntry, deleteEntry };
+export { selectAllEntries, selectEntryById, selectEntriesByUserId, insertEntry, updateEntry, deleteEntry };

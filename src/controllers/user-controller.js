@@ -87,4 +87,24 @@ const deleteUser = (req, res) => {
   }
 };
 
-export {getUsers, getUserById, addUser, editUser, deleteUser};
+// käyttäjän päivitysfunktio
+
+const updateUser = async (req, res) => {
+  const userId = req.user.user_id;
+  
+  // Käyttäjä voi päivittää vain omia tietojaan
+  if (parseInt(req.params.id) !== userId) {
+    return res.status(403).json({message: 'Can only update own user info'});
+  }
+  
+  // Toteuta käyttäjätietojen päivityslogiikka tähän
+  try {
+    // TODO: Toteuta updateUser model-funktio
+    await updateUser(userId, req.body);
+    res.json({message: 'User updated successfully'});
+  } catch (error) {
+    res.status(500).json({message: error.message});
+  }
+};
+
+export {updateUser, getUsers, getUserById, addUser, editUser, deleteUser};
