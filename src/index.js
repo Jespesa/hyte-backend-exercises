@@ -1,48 +1,42 @@
 import express from 'express';
 import cors from 'cors';
-import {addItem, deleteItem, editItem, getItemById, getItems} from './items.js';
+import { addItem, deleteItem, editItem, getItemById, getItems } from './items.js';
 
 import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
+
 const hostname = '127.0.0.1';
-const app = express();
 const port = 3000;
+const app = express();
 
-// middleware, mitä tarvitaan, jotta Ullan fronttiharjoitukset toimivat (Vite)
-// lisää myös: import cors from 'cors'; tiedoston yläosaan
-// ja asenna paketti: npm install cors
+// Middleware asetetaan ensin
 app.use(cors());
-
-// Staattinen html-sivusto tarjoillaan palvelimen juuressa
-app.use('/', express.static('public'));
-// middleware, joka lukee json data POST-pyyntöjen rungosta (body)
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// rest-apin resurssit tarjoillaan /api/-polun alla
-app.get('/api/', (req, res) => {
-  console.log('get-pyyntö apin juureen havaittu');
-  console.log(req.url);
-  res.send('Welcome to my REST API!');
-});
-
-
-// Users resurssin päätepisteet (endpoints)
+// Reitit lisätään middlewarejen jälkeen
+app.use('/api/entries', entryRouter);
 app.use('/api/users', userRouter);
-app.use('/api/diaryentries', entryRouter);
-
-//käyttäjäautentikaatio (kirjautuminen)
 app.use('/api/auth', authRouter);
 
+// Staattinen HTML-sivusto
+app.use('/', express.static('public'));
 
-// Items (testi mock-data) resurssin päätepisteet (endpoints)
+// Mock-data testireitit
 app.get('/api/items', getItems);
 app.get('/api/items/:id', getItemById);
 app.post('/api/items', addItem);
 app.put('/api/items/:id', editItem);
 app.delete('/api/items/:id', deleteItem);
 
-// palvelimen käynnistys lopuksi kaikkien määritysten jälkeen
+// API:n juuri
+app.get('/api/', (req, res) => {
+  console.log('GET-pyyntö API:n juureen havaittu');
+  res.send('Welcome to my REST API!');
+});
+
+// Palvelimen käynnistys
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });

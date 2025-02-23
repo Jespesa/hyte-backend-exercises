@@ -1,4 +1,4 @@
-import {insertUser, selectAllUsers, selectUserById} from '../models/user-model.js';
+import {deleteUserById, updateUserById, insertUser, selectAllUsers, selectUserById} from '../models/user-model.js';
 import bcrypt from 'bcryptjs';
 
 // kaikkien käyttäjätietojen haku
@@ -73,34 +73,37 @@ const editUser = (req, res) => {
 };
 
 // Userin poisto id:n perusteella (TODO: käytä databasea)
-const deleteUser = (req, res) => {
-  console.log('deleteUser', req.params.id);
-  const index = users.findIndex((user) => user.id == req.params.id);
-  //console.log('index', index);
-  // findIndex returns -1 if user is not found
-  if (index !== -1) {
-    // remove one user from array based on index
-    users.splice(index, 1);
-    res.json({message: 'User deleted.'});
-  } else {
-    res.status(404).json({message: 'User not found'});
+const deleteUser = async (req, res) => {
+  try {
+    // Tarkista että käyttäjä poistaa vain omaa tiliään
+    if (parseInt(req.params.id) !== req.user.user_id) {
+      return res.status(403).json({ message: 'Can only delete own account' });
+    }
+
+    const result = await deleteUserById(req.params.id);
+    if (result) {
+      res.json({ message: 'User deleted.' });
+    } else {
+      res.status(404).json({ message: 'User not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
 // käyttäjän päivitysfunktio
 
 const updateUser = async (req, res) => {
-  const userId = req.user.user_id;
-  
-  // Käyttäjä voi päivittää vain omia tietojaan
-  if (parseInt(req.params.id) !== userId) {
-    return res.status(403).json({message: 'Can only update own user info'});
-  }
-  
-  // Toteuta käyttäjätietojen päivityslogiikka tähän
   try {
-    // TODO: Toteuta updateUser model-funktio
-    await updateUser(userId, req.body);
+    const userId = req.user.user_id;
+    
+    // Käyttäjä voi päivittää vain omia tietojaan
+    if (parseInt(req.params.id) !== userId) {
+      return res.status(403).json({message: 'Can only update own user info'});
+    }
+    
+    // Kutsu model-funktiota päivitetyllä nimellä
+    await updateUserById(userId, req.body);
     res.json({message: 'User updated successfully'});
   } catch (error) {
     res.status(500).json({message: error.message});

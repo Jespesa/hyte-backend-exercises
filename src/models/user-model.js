@@ -90,4 +90,54 @@ const selectUserByUsername = async (username) => {
   }
 };
 
-export {selectUserByUsername, selectAllUsers, selectUserById, insertUser, selectUserByNameAndPassword};
+const updateUserById = async (userId, userData) => {
+  try {
+    const updates = [];
+    const values = [];
+    
+    if (userData.username) {
+      updates.push('username = ?');
+      values.push(userData.username);
+    }
+    
+    if (userData.email) {
+      updates.push('email = ?');
+      values.push(userData.email);
+    }
+    
+    if (userData.password) {
+      updates.push('password = ?');
+      values.push(userData.password);
+    }
+    
+    values.push(userId);
+    
+    const query = `
+      UPDATE Users 
+      SET ${updates.join(', ')} 
+      WHERE user_id = ?
+    `;
+    
+    const [result] = await promisePool.query(query, values);
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error('Error in updateUser:', error);
+    throw new Error('Database error while updating user');
+  }
+};
+
+const deleteUserById = async (userId) => {
+  try {
+    const [result] = await promisePool.query(
+      'DELETE FROM Users WHERE user_id = ?',
+      [userId]
+    );
+    return result.affectedRows > 0;
+  } catch (error) {
+    console.error('Error in deleteUser:', error);
+    throw new Error('Database error while deleting user');
+  }
+};
+
+
+export {deleteUserById, updateUserById, selectUserByUsername, selectAllUsers, selectUserById, insertUser, selectUserByNameAndPassword};

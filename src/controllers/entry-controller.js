@@ -28,56 +28,58 @@ const getEntryById = async (req, res) => {
   }
 };
 
-// Päiväkirjamerkinnän lisäys
-const addEntry = async (req, res) => {
-  console.log('addEntry request body', req.body);
-  const { title, content, date, userId } = req.body;
-
-  if (title && content && date && userId) {
-    const newEntry = { title, content, date, userId };
-    try {
-      const result = await insertEntry(newEntry);
-      res.status(201).json({ message: 'Entry added. id: ' + result });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  } else {
-    res.status(400).json({
-      message: 'Request should have title, content, date, and userId properties.',
-    });
-  }
-};
 
 // Päiväkirjamerkinnän muokkaus id:n perusteella
 const editEntry = async (req, res) => {
   console.log('editEntry request body', req.body);
-  const { title, content, date } = req.body;
+  
+  const { entry_date, mood, weight, sleep_hours, notes } = req.body;
+  const entryId = req.params.id;
 
-  if (title || content || date) {
-    try {
-      const entry = await selectEntryById(req.params.id);
-      // Tarkista että merkintä on olemassa ja kuuluu kirjautuneelle käyttäjälle
-      if (!entry) {
-        return res.status(404).json({ message: 'Entry not found' });
-      }
-      if (entry.user_id !== req.user.user_id) {
-        return res.status(403).json({ message: 'Access denied' });
-      }
+  // Varmista, että vähintään yksi kenttä on annettu päivitettäväksi
+  if (!entry_date && !mood && !weight && !sleep_hours && !notes) {
+    return res.status(400).json({ message: 'At least one field is required to update the entry.' });
+  }
 
-      const updatedEntry = {
-        title: title || entry.title,
-        content: content || entry.content,
-        date: date || entry.date,
-      };
-      await updateEntry(req.params.id, updatedEntry);
-      res.json({ message: 'Entry updated.' });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
+  try {
+    const entry = await selectEntryById(entryId);
+
+    // Tarkista, että merkintä on olemassa
+    if (!entry) {
+      return res.status(404).json({ message: 'Entry not found' });
     }
-  } else {
-    res.status(400).json({ message: 'At least one field is required to update the entry.' });
+
+    // Tarkista, että käyttäjällä on oikeus muokata merkintää
+    if (entry.user_id !== req.user.user_id) {
+      return res.status(403).json({ message: 'Access denied' });
+    }
+
+    // Luo uusi päivitysobjekti vain annetuista kentistä
+    const updatedEntry = {
+      entry_date: entry_date ?? entry.entry_date,
+      mood: mood ?? entry.mood,
+      weight: weight ?? entry.weight,
+      sleep_hours: sleep_hours ?? entry.sleep_hours,
+      notes: notes ?? entry.notes,
+    };
+
+    // Suorita päivitys
+    const result = await updateEntry(entryId, updatedEntry);
+
+    // Tarkista, vaikuttiko päivitys tietokantaan
+    if (result.affectedRows === 0) {
+      return res.status(400).json({ message: 'No changes made to the entry.' });
+    }
+
+    res.status(200).json({ message: 'Entry updated successfully.', updatedEntry });
+
+  } catch (error) {
+    console.error('editEntry error:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
 
 // Päiväkirjamerkinnän poisto id:n perusteella
 const deleteDiaryEntry = async (req, res) => {
@@ -85,29 +87,55 @@ const deleteDiaryEntry = async (req, res) => {
 
   try {
     const entry = await selectEntryById(req.params.id);
-    // Tarkista että merkintä on olemassa ja kuuluu kirjautuneelle käyttäjälle
+    
+    // Check if entry exists
     if (!entry) {
       return res.status(404).json({ message: 'Entry not found' });
     }
-    if (entry.user_id !== req.user.user_id) {
-      return res.status(403).json({ message: 'Access denied' });
+    
+    // Check if the logged-in user is the owner of the entry
+    if (parseInt(entry.user_id) !== parseInt(req.user.user_id)) {
+      console.log('Access denied - user is not the entry owner');
+      return res.status(403).json({ message: 'Access denied - can only delete own entries' });
     }
 
+    // If checks pass, delete the entry
     await deleteEntry(req.params.id);
-    res.json({ message: 'Entry deleted.' });
+    res.json({ message: 'Entry deleted successfully' });
   } catch (error) {
+    console.error('Error in deleteDiaryEntry:', error);
     res.status(500).json({ message: error.message });
   }
 };
 
 const postEntry = async (req, res) => {
-  // user_id, entry_date, mood, weight, sleep_hours, notes
-  // TODO: add try-catch
-  const newEntry = req.body;
-  newEntry.user_id = req.user.user_id;
-  insertEntry(newEntry);
-  res.status(201).json({message: "Entry added."});
+  try {
+    console.log("Request body:", req.body); // DEBUG
+    
+    const newEntry = {
+      user_id: req.user.user_id,
+      entry_date: req.body.entry_date,
+      mood: req.body.mood,
+      weight: req.body.weight,
+      sleep_hours: req.body.sleep_hours,
+      notes: req.body.notes
+    };
+
+    if (!newEntry.entry_date) {
+      return res.status(400).json({ message: 'entry_date is required' });
+    }
+
+    const result = await insertEntry(newEntry);
+    
+    res.status(201).json({
+      message: "Entry added.",
+      entry_id: result
+    });
+  } catch (error) {
+    console.error('Error in postEntry:', error);
+    res.status(500).json({ message: error.message });
+  }
 };
 
  
-export {postEntry, getEntries, getEntryById, addEntry, editEntry, deleteDiaryEntry };
+export {postEntry, getEntries, getEntryById, editEntry, deleteDiaryEntry };

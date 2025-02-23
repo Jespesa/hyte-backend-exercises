@@ -48,8 +48,9 @@ content-type: application/json
   "email": "jepulis@example.com"
 }
 
-### modify an existing user by id
-PUT http://localhost:3000/api/users/3
+### update an existing user by id
+PUT http://localhost:3000/api/users/13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkWndUaS4vekhzNWEvM3lKZWsyNUFUT2dxclYyYVF5UWdNL0VLUThLdkpsRjU0OWJVUlBsQUciLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yMVQxMTozNjozMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzE3NjQsImV4cCI6MTc0MDQxODE2NH0.JWtZBVeT5Cd_rV_E6-3ldFUB4ZreiOPBCSeJxKFSPHg
 content-type: application/json
 
 {
@@ -59,7 +60,8 @@ content-type: application/json
 }
 
 ### delete a user (by id)
-DELETE http://localhost:3000/api/users/3
+DELETE http://localhost:3000/api/users/13
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkWndUaS4vekhzNWEvM3lKZWsyNUFUT2dxclYyYVF5UWdNL0VLUThLdkpsRjU0OWJVUlBsQUciLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yMVQxMTozNjozMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzAxODAsImV4cCI6MTc0MDQxNjU4MH0.d2cqv7p1ZD3Kd4UncMcAm72lNYR7WLG1i7R6Pn9ggX4
 
 ### user login
 POST http://localhost:3000/api/auth/login
@@ -78,17 +80,34 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywid
 
 ### post a new entry
 POST http://localhost:3000/api/entries
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkWndUaS4vekhzNWEvM3lKZWsyNUFUT2dxclYyYVF5UWdNL0VLUThLdkpsRjU0OWJVUlBsQUciLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yMVQxMTozNjozMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzAxODAsImV4cCI6MTc0MDQxNjU4MH0.d2cqv7p1ZD3Kd4UncMcAm72lNYR7WLG1i7R6Pn9ggX4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkWndUaS4vekhzNWEvM3lKZWsyNUFUT2dxclYyYVF5UWdNL0VLUThLdkpsRjU0OWJVUlBsQUciLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yMVQxMTozNjozMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzE3NjQsImV4cCI6MTc0MDQxODE2NH0.JWtZBVeT5Cd_rV_E6-3ldFUB4ZreiOPBCSeJxKFSPHg
 content-type: application/json
 
 {
- "entry_date": "2025-02-12",
- "mood": "iloinen",
- "weight": 60,
+ "entry_date": "2025-02-23",
+ "mood": "testitesti",
+ "weight": 620,
  "sleep_hours": 6,
- "notes": "tosi kiva fiilis"
+ "notes": "testataantestaan"
 }
 
 ### Get user's entries
 GET http://localhost:3000/api/entries
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkM2NQbzE4dHpZU0h5OWFrTzBzREJxLjdUcEpJbklDR05PcXIyY0dqM2ZkT3ZqVzZlTVJxR2EiLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yM1QxOToxNjoxMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzgxNzgsImV4cCI6MTc0MDQyNDU3OH0.QcaEk6sPC3lIv_JaASYh53ytct8TQTbDF8IR6wW6Irc
+
+### update entry
+PUT http://localhost:3000/api/entries/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxMywidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkWndUaS4vekhzNWEvM3lKZWsyNUFUT2dxclYyYVF5UWdNL0VLUThLdkpsRjU0OWJVUlBsQUciLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yMVQxMTozNjozMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzAxODAsImV4cCI6MTc0MDQxNjU4MH0.d2cqv7p1ZD3Kd4UncMcAm72lNYR7WLG1i7R6Pn9ggX4
+content-type: application/json
+
+{
+  "entry_date": "2025-02-23",
+  "mood": "testi2",
+  "weight": 121,
+  "sleep_hours": 6,
+  "notes": "päivitettyfiilis2"
+}
+
+### delete an entry
+DELETE http://localhost:3000/api/entries/11
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNSwidXNlcm5hbWUiOiJqZXB1a2thIiwicGFzc3dvcmQiOiIkMmEkMTAkM2NQbzE4dHpZU0h5OWFrTzBzREJxLjdUcEpJbklDR05PcXIyY0dqM2ZkT3ZqVzZlTVJxR2EiLCJlbWFpbCI6ImplcHVsaXNAZXhhbXBsZS5jb20iLCJjcmVhdGVkX2F0IjoiMjAyNS0wMi0yM1QxOToxNjoxMC4wMDBaIiwidXNlcl9sZXZlbCI6InJlZ3VsYXIiLCJpYXQiOjE3NDAzMzgxNzgsImV4cCI6MTc0MDQyNDU3OH0.QcaEk6sPC3lIv_JaASYh53ytct8TQTbDF8IR6wW6Irc

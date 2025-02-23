@@ -81,7 +81,7 @@ const insertEntry = async (entry) => {
  */
 const updateEntry = async (entryId, updatedEntry) => {
   try {
-    await promisePool.query(
+    const [result] = await promisePool.query(
       'UPDATE DiaryEntries SET entry_date = ?, mood = ?, weight = ?, sleep_hours = ?, notes = ? WHERE entry_id = ?',
       [
         updatedEntry.entry_date,
@@ -92,12 +92,19 @@ const updateEntry = async (entryId, updatedEntry) => {
         entryId,
       ]
     );
-    console.log('updateEntry result', entryId);
+
+    if (result.affectedRows === 0) {
+      throw new Error('No entry found with the given ID');
+    }
+
+    console.log('updateEntry result', result);
+    return result;
   } catch (error) {
     console.error(error);
     throw new Error('Database error');
   }
 };
+
 
 /**
  * Delete a diary entry from the database
