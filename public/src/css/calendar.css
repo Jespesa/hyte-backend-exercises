@@ -1,0 +1,164 @@
+/* Kalenterinäkymän tyylit */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.calendar-section, .summary-section, .stats-section, .quick-entry-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.calendar-section, .quick-entry-section {
+    grid-column: span 2;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.calendar-header h3 {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.calendar-day-header {
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+.calendar-day {
+    aspect-ratio: 1/1;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+    background-color: var(--bg-light);
+}
+
+.calendar-day:hover {
+    background-color: var(--bg-dark);
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.calendar-day.today {
+    background-color: rgba(52, 152, 219, 0.1);
+    border-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.calendar-day.has-entry {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+.calendar-day.other-month {
+    opacity: 0.5;
+}
+
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+}
+
+.calendar-day-number {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.calendar-entry-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    margin-right: 0.2rem;
+    display: inline-block;
+}
+
+.calendar-day-entries {
+    flex-grow: 1;
+    font-size: 0.8rem;
+    overflow: hidden;
+}
+
+/* Stats section */
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.stat-card {
+    flex: 1;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+}
+
+.stat-card h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Responsiivisuus */
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calendar-section, .quick-entry-section {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .calendar {
+        gap: 0.2rem;
+    }
+    
+    .calendar-day {
+        padding: 0.2rem;
+    }
+    
+    .calendar-day-number {
+        font-size: 0.9rem;
+    }
+}

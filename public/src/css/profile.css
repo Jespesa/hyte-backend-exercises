@@ -1,0 +1,60 @@
+/* Käyttäjäprofiilin tyylit */
+.profile-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.profile-section, .password-section, .account-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.account-section {
+    grid-column: span 2;
+}
+
+.account-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.account-info {
+    flex-grow: 1;
+}
+
+.account-info p {
+    margin-bottom: 0.8rem;
+}
+
+.account-info strong {
+    margin-right: 0.5rem;
+    color: var(--text-light);
+}
+
+#delete-account-btn {
+    white-space: nowrap;
+}
+
+/* Responsiivisuus */
+@media (max-width: 768px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .account-section {
+        grid-column: span 1;
+    }
+    
+    .account-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    #delete-account-btn {
+        align-self: flex-start;
+    }
+}

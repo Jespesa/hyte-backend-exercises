@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terveyspäiväkirja - Merkinnät</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/diary.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Terveyspäiväkirja</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html">Etusivu</a></li>
+                    <li><a href="#" class="active">Merkinnät</a></li>
+                    <li><a href="profile.html">Profiili</a></li>
+                    <li><a href="#" id="logout-btn">Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Päiväkirjamerkinnät</h2>
+        
+        <section class="filter-section">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Hae merkintöjä...">
+                <button id="search-btn" class="btn">Hae</button>
+            </div>
+            <div class="filter-container">
+                <div class="date-range">
+                    <label for="date-from">Alkaen:</label>
+                    <input type="date" id="date-from">
+                    <label for="date-to">Päättyen:</label>
+                    <input type="date" id="date-to">
+                </div>
+                <button id="filter-btn" class="btn">Suodata</button>
+                <button id="clear-filter-btn" class="btn btn-secondary">Tyhjennä</button>
+            </div>
+        </section>
+
+        <section class="entries-section">
+            <div class="entries-header">
+                <h3>Merkinnät <span id="entries-count">(0)</span></h3>
+                <button id="add-entry-btn" class="btn btn-primary">Lisää uusi merkintä</button>
+            </div>
+
+            <div class="entries-list" id="entries-list">
+                <p class="loading">Ladataan merkintöjä...</p>
+                <!-- Merkinnät ladataan JavaScriptillä -->
+            </div>
+
+            <div class="pagination" id="pagination">
+                <!-- Sivutus generoidaan JavaScriptillä -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Merkinnän lisäys/muokkaus modal -->
+    <div id="entry-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Lisää merkintä</h2>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="entry-form">
+                    <input type="hidden" id="entry-id">
+                    <div class="form-group">
+                        <label for="modal-entry-date">Päivämäärä</label>
+                        <input type="date" id="modal-entry-date" name="entry_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-mood">Mieliala</label>
+                        <input type="text" id="modal-entry-mood" name="mood" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-weight">Paino (kg)</label>
+                        <input type="number" id="modal-entry-weight" name="weight" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-sleep">Uni (tuntia)</label>
+                        <input type="number" id="modal-entry-sleep" name="sleep_hours" min="0" max="24" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-notes">Muistiinpanot</label>
+                        <textarea id="modal-entry-notes" name="notes" rows="5"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="delete-entry" class="btn btn-danger">Poista</button>
+                        <button type="submit" class="btn btn-primary">Tallenna</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/diary.js"></script>
+</body>
+</html>

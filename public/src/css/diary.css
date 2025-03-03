@@ -1,0 +1,215 @@
+/* Päiväkirjamerkintöjen tyylit */
+.filter-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.search-container input {
+    flex-grow: 1;
+}
+
+.filter-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.date-range {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.date-range label {
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.date-range input {
+    max-width: 150px;
+}
+
+.entries-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.entries-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.entries-header h3 {
+    margin: 0;
+}
+
+.entries-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.entry-card {
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.entry-card:hover {
+    box-shadow: 0 5px 15px var(--shadow-color);
+    transform: translateY(-3px);
+}
+
+.entry-date {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.entry-mood {
+    margin-bottom: 1rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+.entry-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.entry-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.entry-meta-icon {
+    color: var(--primary-color);
+}
+
+.entry-notes {
+    margin-top: 1rem;
+    color: var(--text-color);
+}
+
+.entry-actions {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.pagination {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.pagination-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--bg-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.pagination-btn:hover {
+    background-color: var(--bg-dark);
+}
+
+.pagination-btn.active {
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    border-color: var(--primary-color);
+}
+
+/* Recent entries in dashboard */
+.recent-entry {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.recent-entry:last-child {
+    border-bottom: none;
+}
+
+.recent-entry:hover {
+    background-color: var(--bg-color);
+}
+
+.recent-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.recent-entry-date {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.recent-entry-mood {
+    font-style: italic;
+    color: var(--text-light);
+}
+
+.recent-entry-notes {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Entry form styling */
+#quick-entry-form {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+}
+
+/* Responsiivisuus */
+@media (max-width: 768px) {
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .date-range {
+        flex-wrap: wrap;
+    }
+    
+    .date-range input {
+        flex-grow: 1;
+        max-width: none;
+    }
+    
+    .entries-list {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerveysPlus - Etusivu</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/diary.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Etusivu</a></li>
+                    <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-grid">
+            <!-- Kalenteri -->
+            <section class="calendar-section">
+                <h2><i class="fas fa-calendar-alt"></i> Kalenteri</h2>
+                <div class="calendar-header">
+                    <button id="prev-month" class="btn-icon"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="current-month">Maaliskuu 2025</h3>
+                    <button id="next-month" class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="calendar" id="calendar-container">
+                    <!-- Kalenteri generoidaan JavaScriptillä -->
+                </div>
+            </section>
+
+            <!-- Merkintöjen yhteenveto -->
+            <section class="summary-section">
+                <h2><i class="fas fa-list-ul"></i> Viimeisimmät merkinnät</h2>
+                <div id="recent-entries">
+                    <p class="loading">Ladataan merkintöjä...</p>
+                    <!-- Merkinnät ladataan JavaScriptillä -->
+                </div>
+            </section>
+
+            <!-- Tilastot -->
+            <section class="stats-section">
+                <h2><i class="fas fa-chart-bar"></i> Tilastot</h2>
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <h3>Yleisin mieliala</h3>
+                        <div class="stat-value" id="avg-mood">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Uni (keskimäärin)</h3>
+                        <div class="stat-value" id="avg-sleep">-</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Paino (viimeisin)</h3>
+                        <div class="stat-value" id="latest-weight">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Nopea lisäys -->
+            <section class="quick-entry-section">
+                <h2><i class="fas fa-plus-circle"></i> Lisää merkintä</h2>
+                <form id="quick-entry-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="entry-date"><i class="fas fa-calendar"></i> Päivämäärä</label>
+                            <input type="date" id="entry-date" name="entry_date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group mood-slider-container">
+                        <label for="entry-mood-slider"><i class="fas fa-smile"></i> Mieliala (0-10)</label>
+                        <input type="range" id="entry-mood-slider" min="0" max="10" value="5" step="1" class="mood-slider">
+                        <div class="mood-value-container">
+                            <span id="mood-value" class="mood-value">5</span>
+                        </div>
+                        <div class="mood-labels">
+                            <span>Huono</span>
+                            <span>Kohtalainen</span>
+                            <span>Erinomainen</span>
+                        </div>
+                        <input type="hidden" id="entry-mood" name="mood" value="5">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="entry-weight"><i class="fas fa-weight"></i> Paino (kg)</label>
+                            <input type="number" id="entry-weight" name="weight" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="entry-sleep"><i class="fas fa-bed"></i> Uni (tuntia)</label>
+                            <input type="number" id="entry-sleep" name="sleep_hours" min="0" max="24" step="0.5">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="entry-notes"><i class="fas fa-sticky-note"></i> Muistiinpanot</label>
+                        <textarea id="entry-notes" name="notes" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Tallenna merkintä
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Merkinnän lisäys/muokkaus modal -->
+    <div id="entry-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Lisää merkintä</h2>
+                <button class="close-btn" id="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="entry-form">
+                    <input type="hidden" id="entry-id">
+                    <div class="form-group">
+                        <label for="modal-entry-date"><i class="fas fa-calendar"></i> Päivämäärä</label>
+                        <input type="date" id="modal-entry-date" name="entry_date" required>
+                    </div>
+                    
+                    <div class="form-group mood-slider-container">
+                        <label for="modal-entry-mood-slider"><i class="fas fa-smile"></i> Mieliala (0-10)</label>
+                        <input type="range" id="modal-entry-mood-slider" min="0" max="10" value="5" step="1" class="mood-slider">
+                        <div class="mood-value-container">
+                            <span id="modal-mood-value" class="mood-value">5</span>
+                        </div>
+                        <div class="mood-labels">
+                            <span>Huono</span>
+                            <span>Kohtalainen</span>
+                            <span>Erinomainen</span>
+                        </div>
+                        <input type="hidden" id="modal-entry-mood" name="mood" value="5">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="modal-entry-weight"><i class="fas fa-weight"></i> Paino (kg)</label>
+                        <input type="number" id="modal-entry-weight" name="weight" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-sleep"><i class="fas fa-bed"></i> Uni (tuntia)</label>
+                        <input type="number" id="modal-entry-sleep" name="sleep_hours" min="0" max="24" step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-entry-notes"><i class="fas fa-sticky-note"></i> Muistiinpanot</label>
+                        <textarea id="modal-entry-notes" name="notes" rows="5"></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="delete-entry" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Poista
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Tallenna
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/dashboard.js"></script>
+    <script>
+        // Mieliala sliderin toiminnallisuus
+        document.addEventListener('DOMContentLoaded', function() {
+            const moodSlider = document.getElementById('entry-mood-slider');
+            const moodValue = document.getElementById('mood-value');
+            const moodInput = document.getElementById('entry-mood');
+            
+            const modalMoodSlider = document.getElementById('modal-entry-mood-slider');
+            const modalMoodValue = document.getElementById('modal-mood-value');
+            const modalMoodInput = document.getElementById('modal-entry-mood');
+            
+            // Päivitä mieliala-arvot kun slideria liikutetaan
+            if (moodSlider && moodValue && moodInput) {
+                moodSlider.addEventListener('input', function() {
+                    const value = this.value;
+                    moodValue.textContent = value;
+                    moodInput.value = value;
+                    
+                    // Muuta mieliala-arvon väriä arvon mukaan
+                    updateMoodColor(value, moodValue);
+                });
+            }
+            
+            // Sama modaalille
+            if (modalMoodSlider && modalMoodValue && modalMoodInput) {
+                modalMoodSlider.addEventListener('input', function() {
+                    const value = this.value;
+                    modalMoodValue.textContent = value;
+                    modalMoodInput.value = value;
+                    
+                    // Muuta mieliala-arvon väriä arvon mukaan
+                    updateMoodColor(value, modalMoodValue);
+                });
+            }
+            
+            // Aseta värit aluksi
+            if (moodSlider && moodValue) {
+                updateMoodColor(moodSlider.value, moodValue);
+            }
+            
+            if (modalMoodSlider && modalMoodValue) {
+                updateMoodColor(modalMoodSlider.value, modalMoodValue);
+            }
+        });
+        
+        // Funktio mieliala-arvon värin päivittämiseen
+        function updateMoodColor(value, element) {
+            value = parseInt(value);
+            let color;
+            
+            if (value <= 2) {
+                color = '#e74c3c'; // Punainen huonolle mielialalle
+            } else if (value <= 4) {
+                color = '#e67e22'; // Oranssi kohtalaisen huonolle mielialalle
+            } else if (value <= 6) {
+                color = '#f1c40f'; // Keltainen neutraalille mielialalle
+            } else if (value <= 8) {
+                color = '#2ecc71'; // Vihreä hyvälle mielialalle
+            } else {
+                color = '#27ae60'; // Tummanvihreä erinomaiselle mielialalle
+            }
+            
+            element.style.backgroundColor = color;
+            element.style.color = 'white';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terveyspäiväkirja - Profiili</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1>Terveyspäiväkirja</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html">Etusivu</a></li>
+                    <li><a href="diary.html">Merkinnät</a></li>
+                    <li><a href="#" class="active">Profiili</a></li>
+                    <li><a href="#" id="logout-btn">Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2>Käyttäjäprofiili</h2>
+        
+        <div class="profile-container">
+            <section class="profile-section">
+                <h3>Profiilitiedot</h3>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="username">Käyttäjätunnus</label>
+                        <input type="text" id="username" name="username" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Sähköposti</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Tallenna muutokset</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="password-section">
+                <h3>Vaihda salasana</h3>
+                <form id="password-form">
+                    <div class="form-group">
+                        <label for="current-password">Nykyinen salasana</label>
+                        <input type="password" id="current-password" name="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Uusi salasana</label>
+                        <input type="password" id="new-password" name="new-password" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Vahvista uusi salasana</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Vaihda salasana</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="account-section">
+                <h3>Tilinhallinta</h3>
+                <div class="account-actions">
+                    <div class="account-info">
+                        <p><strong>Käyttäjätunnus:</strong> <span id="account-username">-</span></p>
+                        <p><strong>Sähköposti:</strong> <span id="account-email">-</span></p>
+                        <p><strong>Käyttäjätaso:</strong> <span id="account-level">-</span></p>
+                        <p><strong>Liittynyt:</strong> <span id="account-created">-</span></p>
+                        <p><strong>Merkintöjä yhteensä:</strong> <span id="entries-count">-</span></p>
+                    </div>
+                    <button id="delete-account-btn" class="btn btn-danger">Poista tili</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tilin poisto -vahvistusmodal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Poista tili</h2>
+                <button class="close-btn" id="close-delete-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Oletko varma, että haluat poistaa tilisi? Tätä toimintoa ei voi peruuttaa.</p>
+                <p>Kaikki tiliin liittyvät tiedot, mukaan lukien päiväkirjamerkinnät, poistetaan pysyvästi.</p>
+                <form id="delete-account-form">
+                    <div class="form-group">
+                        <label for="delete-password">Kirjoita salasanasi vahvistaaksesi</label>
+                        <input type="password" id="delete-password" name="password" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" id="cancel-delete" class="btn btn-secondary">Peruuta</button>
+                        <button type="submit" class="btn btn-danger">Poista tili pysyvästi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/profile.js"></script>
+</body>
+</html>

@@ -3,10 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Sivun Aloitus</title>
+    <title>TerveysPlus - Hyvinvointisi seuranta</title>
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/auth.css">
+    <link rel="stylesheet" href="src/css/enhanced-home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Tervetuloa</h1>
-    <p>Tämä on HTML-sivun aloitus.</p>
+    <div class="hero-background">
+        <div class="overlay"></div>
+        <div class="container">
+            <header class="landing-header">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i>
+                    <h1>TerveysPlus</h1>
+                </div>
+                <div class="header-text">
+                    <h2>Henkilökohtainen hyvinvointisi seuranta</h2>
+                </div>
+            </header>
+
+            <main class="landing-content">
+                <div class="benefits-section">
+                    <div class="benefit-card">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>Päiväkirja</h3>
+                        <p>Merkitse päivittäiset tiedot mielialasta, painosta ja unesta helposti.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Seuranta</h3>
+                        <p>Seuraa hyvinvointisi kehitystä selkeillä yhteenvedoilla ja tilastoilla.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Turvallisuus</h3>
+                        <p>Tietosi ovat suojattuja ja vain sinun käytettävissäsi.</p>
+                    </div>
+                </div>
+
+                <div class="auth-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" id="login-tab">Kirjaudu sisään</button>
+                        <button class="auth-tab" id="register-tab">Rekisteröidy</button>
+                    </div>
+                    
+                    <!-- Kirjautumislomake -->
+                    <form id="login-form" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-username">Käyttäjätunnus</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="login-username" name="username" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Salasana</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="login-password" name="password" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Kirjaudu
+                            </button>
+                        </div>
+                        <div id="login-message" class="message"></div>
+                    </form>
+                    
+                    <!-- Rekisteröitymislomake -->
+                    <form id="register-form" class="auth-form hidden">
+                        <div class="form-group">
+                            <label for="register-username">Käyttäjätunnus</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="register-username" name="username" required minlength="3">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Sähköposti</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="register-email" name="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Salasana</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-password" name="password" required minlength="8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password-confirm">Vahvista salasana</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="register-password-confirm" name="password-confirm" required minlength="8">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-user-plus"></i> Rekisteröidy
+                            </button>
+                        </div>
+                        <div id="register-message" class="message"></div>
+                    </form>
+                </div>
+            </main>
+
+            <footer class="landing-footer">
+                <p>&copy; 2025 TerveysPlus - Kaikki oikeudet pidätetään</p>
+                <div class="footer-links">
+                    <a href="#">Tietosuoja</a>
+                    <a href="#">Käyttöehdot</a>
+                    <a href="#">Tuki</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="src/js/main.js"></script>
+    <script type="module" src="src/js/auth.js"></script>
 </body>
 </html>
