@@ -30,13 +30,19 @@ const getUserById = async (req, res) => {
 // lisätään parempi virheenkäsittely myöhemmin
 const addUser = async (req, res) => {
   console.log('addUser request body', req.body);
+
+
+
   // esitellään 3 uutta muuttujaa, johon sijoitetaan req.body:n vastaavien propertyjen arvot
   const {username, password, email} = req.body;
+
   // tarkistetaan, että pyynnössä on kaikki tarvittavat tiedot
   if (username && password && email) {
+
     // luodaan selväkielisestä sanasta tiiviste, joka tallennetaan kantaan
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+
     // luodaan uusi käyttäjä olio ja lisätään se tietokantaa käyttäen modelia
     const newUser = {
       username,

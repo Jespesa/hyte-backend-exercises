@@ -40,17 +40,16 @@ const selectEntryById = async (entryId) => {
  * @param {number} userId The id of the user
  * @returns {Object[]} The diary entries for the user
  */
-const selectEntriesByUserId = async (userId) => {
+const selectEntriesByUserId = async (userId, next) => {
   try {
     const [rows] = await promisePool.query(
-      'SELECT * FROM DiaryEntries WHERE user_id=?',
-      [userId],
+      'SELECT * FROM DiaryEntries WHERE user_id = ?',
+      [userId]
     );
     console.log(rows);
     return rows;
   } catch (error) {
-    console.error(error);
-    throw new Error('Database error');
+    next(error);
   }
 };
 
@@ -104,7 +103,6 @@ const updateEntry = async (entryId, updatedEntry) => {
     throw new Error('Database error');
   }
 };
-
 
 /**
  * Delete a diary entry from the database

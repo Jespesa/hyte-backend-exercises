@@ -1,7 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { addItem, deleteItem, editItem, getItemById, getItems } from './items.js';
-
+import { notFoundHandler, errorHandler } from './middlewares/error-handler.js';
 import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
@@ -23,20 +22,20 @@ app.use('/api/auth', authRouter);
 // Staattinen HTML-sivusto
 app.use('/', express.static('public'));
 
-// Mock-data testireitit
-app.get('/api/items', getItems);
-app.get('/api/items/:id', getItemById);
-app.post('/api/items', addItem);
-app.put('/api/items/:id', editItem);
-app.delete('/api/items/:id', deleteItem);
-
 // API:n juuri
 app.get('/api/', (req, res) => {
   console.log('GET-pyyntö API:n juureen havaittu');
   res.send('Welcome to my REST API!');
 });
 
-// Palvelimen käynnistys
+// 404 virheitä varten
+app.use(notFoundHandler);
+// yleinen virhevastausten lähettäjä kaikkia virhetilanteita varten
+app.use(errorHandler);
+
+
+// Palvelimen käynnistys lopuksi kaikkien määritelmien jälkeen
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
+
 });
