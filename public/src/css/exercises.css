@@ -1,0 +1,259 @@
+/* Liikunta-sivun tyylit */
+.exercises-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .filter-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+  }
+  
+  .search-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .search-container input {
+    flex-grow: 1;
+  }
+  
+  .date-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .date-filter-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .date-filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+  
+  .summary-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+  }
+  
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition);
+  }
+  
+  .summary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+  }
+  
+  .summary-icon {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    width: 40px;
+    text-align: center;
+  }
+  
+  .summary-content {
+    flex-grow: 1;
+  }
+  
+  .summary-title {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.3rem;
+  }
+  
+  .summary-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  
+  .summary-section h4 {
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+  
+  .summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+  }
+  
+  .summary-item:hover {
+    background-color: var(--bg-dark);
+  }
+  
+  .summary-rank {
+    font-weight: bold;
+    color: var(--primary-color);
+    width: 25px;
+    text-align: center;
+  }
+  
+  .summary-label {
+    flex-grow: 1;
+  }
+  
+  .intensity-chart {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .chart-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .chart-label {
+    width: 100px;
+    font-size: 0.9rem;
+  }
+  
+  .chart-bar-container {
+    flex-grow: 1;
+    height: 10px;
+    background-color: var(--bg-dark);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .chart-bar {
+    height: 100%;
+    border-radius: 5px;
+  }
+  
+  .chart-value {
+    width: 30px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .exercises-list-section {
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+  }
+  
+  .exercises-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .exercises-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .exercise-card {
+    background-color: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: var(--transition);
+    box-shadow: 0 2px 5px var(--shadow-color);
+  }
+  
+  .exercise-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+  }
+  
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .exercise-date {
+    font-weight: bold;
+    color: var(--primary-color);
+  }
+  
+  .exercise-type {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.8rem;
+    background-color: var(--bg-light);
+    border-radius: 1rem;
+    color: var(--text-light);
+  }
+  
+  .exercise-details {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .exercise-duration, .exercise-intensity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .exercise-duration i, .exercise-intensity i {
+    color: var(--primary-color);
+  }
+  
+  .exercise-notes {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .exercise-notes i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+  }
+  
+  .exercise-actions {
+    display: flex;
+    justify-content: flex-end;
+  }

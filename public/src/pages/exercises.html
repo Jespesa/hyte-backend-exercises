@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerveysPlus - Liikunta</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/exercises.css">
+    <link rel="stylesheet" href="../css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
+            <nav class="main-nav">
+                <ul>
+                    <!-- Navigaatio generoidaan JavaScriptillä -->
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobiilivalikko -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Valikko</h3>
+            <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <!-- Navigaatio generoidaan JavaScriptillä -->
+        </ul>
+    </div>
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+
+    <main class="container">
+        <div class="header-with-actions">
+            <h2><i class="fas fa-running"></i> Liikunnan seuranta</h2>
+            <button id="add-exercise-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Lisää uusi liikuntasuoritus</button>
+        </div>
+        
+        <div class="exercises-container">
+            <!-- Liikunnan yhteenveto -->
+            <section class="exercise-card summary-card">
+                <h3><i class="fas fa-chart-pie"></i> Yhteenveto</h3>
+                <div class="summary-grid">
+                    <div class="stat-box">
+                        <div class="stat-label">Tällä viikolla</div>
+                        <div class="stat-value" id="weekly-exercise-time">0 min</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Tässä kuussa</div>
+                        <div class="stat-value" id="monthly-exercise-time">0 min</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Suosituin laji</div>
+                        <div class="stat-value" id="favorite-exercise">-</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-label">Keskimäärin</div>
+                        <div class="stat-value" id="avg-exercise-time">0 min/vko</div>
+                    </div>
+                </div>
+                <div class="exercise-chart-container" id="exercise-chart-container">
+                    <!-- Kaavio generoidaan JavaScriptillä -->
+                </div>
+            </section>
+            
+            <!-- Viimeiset liikuntasuoritukset -->
+            <section class="exercise-card recent-exercises">
+                <h3><i class="fas fa-history"></i> Viimeisimmät suoritukset</h3>
+                <div class="list-container">
+                    <ul class="exercise-list" id="recent-exercises-list">
+                        <li class="loading">Ladataan liikuntasuorituksia...</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Liikuntatyypit -->
+            <section class="exercise-card exercise-types">
+                <h3><i class="fas fa-dumbbell"></i> Liikuntatyypit</h3>
+                <div class="exercise-types-grid" id="exercise-types-grid">
+                    <!-- Liikuntatyypit generoidaan JavaScriptillä -->
+                </div>
+            </section>
+            
+            <!-- Liikuntakalenteri -->
+            <section class="exercise-card exercise-calendar">
+                <h3><i class="fas fa-calendar-alt"></i> Liikuntakalenteri</h3>
+                <div class="calendar-header">
+                    <button id="prev-month" class="btn-icon"><i class="fas fa-chevron-left"></i></button>
+                    <h4 id="current-month">Maaliskuu 2025</h4>
+                    <button id="next-month" class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="exercise-calendar-grid" id="exercise-calendar-grid">
+                    <!-- Kalenteri generoidaan JavaScriptillä -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Liikuntasuorituksen lisäys/muokkaus modal -->
+    <div id="exercise-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="exercise-modal-title">Lisää uusi liikuntasuoritus</h2>
+                <button class="close-btn" id="close-exercise-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="exercise-form">
+                    <input type="hidden" id="exercise-id" name="exercise_id">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exercise-date"><i class="fas fa-calendar"></i> Päivämäärä</label>
+                            <input type="date" id="exercise-date" name="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exercise-type"><i class="fas fa-running"></i> Liikuntalaji</label>
+                            <select id="exercise-type" name="type" required>
+                                <option value="">Valitse laji</option>
+                                <option value="Kävely">Kävely</option>
+                                <option value="Juoksu">Juoksu</option>
+                                <option value="Pyöräily">Pyöräily</option>
+                                <option value="Uinti">Uinti</option>
+                                <option value="Kuntosali">Kuntosali</option>
+                                <option value="Jooga">Jooga</option>
+                                <option value="Pilates">Pilates</option>
+                                <option value="Tanssi">Tanssi</option>
+                                <option value="Hiihto">Hiihto</option>
+                                <option value="Pallopelit">Pallopelit</option>
+                                <option value="Muu">Muu</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="other-exercise-type-container" class="form-group hidden">
+                        <label for="other-exercise-type">Muu liikuntalaji</label>
+                        <input type="text" id="other-exercise-type" name="other_type" placeholder="Syötä liikuntalaji">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="exercise-duration"><i class="fas fa-clock"></i> Kesto (minuutteja)</label>
+                            <input type="number" id="exercise-duration" name="duration" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exercise-intensity"><i class="fas fa-fire"></i> Rasittavuus</label>
+                            <select id="exercise-intensity" name="intensity" required>
+                                <option value="Kevyt">Kevyt</option>
+                                <option value="Keskitaso">Keskitaso</option>
+                                <option value="Raskas">Raskas</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="exercise-notes"><i class="fas fa-sticky-note"></i> Muistiinpanot</label>
+                        <textarea id="exercise-notes" name="notes" rows="3" placeholder="Lisätietoja liikuntasuorituksesta..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="delete-exercise" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Poista
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Tallenna
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/mobile-nav.js"></script>
+    <script type="module" src="../js/consistent-nav.js"></script>
+    <script type="module" src="../js/exercises.js"></script>
+</body>
+</html>

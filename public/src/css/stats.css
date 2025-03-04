@@ -1,0 +1,148 @@
+/* Tilastosivun tyylit */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.stats-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.stats-card-header h3 {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats-card-header h3 i {
+    color: var(--primary-color);
+}
+
+.stats-card-header .stats-period-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stats-card-header .stats-period-selector select {
+    padding: 0.3rem 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-light);
+}
+
+.stats-chart-container {
+    width: 100%;
+    height: 300px;
+    margin-top: 1rem;
+}
+
+.stats-chart-container.small {
+    height: 200px;
+}
+
+.stats-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stats-summary-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    background: linear-gradient(145deg, #ffffff, #f3f9ff);
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.05), -5px -5px 15px rgba(255, 255, 255, 0.8);
+}
+
+.stats-summary-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1), -8px -8px 20px rgba(255, 255, 255, 0.9);
+}
+
+.stats-summary-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.stats-summary-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stats-no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.stats-no-data i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--border-color);
+}
+
+.mood-trends,
+.sleep-trends,
+.weight-trends,
+.monthly-summary {
+    grid-column: span 2;
+}
+
+/* Korostusvärit eri käyrille */
+.mood-line { stroke: var(--primary-color); }
+.sleep-line { stroke: var(--secondary-color); }
+.weight-line { stroke: var(--accent-color); }
+
+/* Responsiivisuus */
+@media (max-width: 992px) {
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .mood-trends,
+    .sleep-trends,
+    .weight-trends,
+    .monthly-summary {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 576px) {
+    .stats-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .stats-chart-container {
+        height: 250px;
+    }
+}

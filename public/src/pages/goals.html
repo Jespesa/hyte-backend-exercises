@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerveysPlus - Tavoitteet</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/goals.css">
+    <link rel="stylesheet" href="../css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Etusivu</a></li>
+                    <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+                    <li><a href="stats.html"><i class="fas fa-chart-line"></i> Tilastot</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-bullseye"></i> Tavoitteet</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobiilivalikko -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Valikko</h3>
+            <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Etusivu</a></li>
+            <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+            <li><a href="stats.html"><i class="fas fa-chart-line"></i> Tilastot</a></li>
+            <li><a href="#" class="active"><i class="fas fa-bullseye"></i> Tavoitteet</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+            <li><a href="#" id="mobile-logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+        </ul>
+    </div>
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+
+    <main class="container">
+        <div class="header-with-actions">
+            <h2><i class="fas fa-bullseye"></i> Tavoitteet</h2>
+            <button id="add-goal-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Lisää uusi tavoite</button>
+        </div>
+        
+        <div class="goals-container" id="goals-container">
+            <!-- Aktiiviset tavoitteet -->
+            <section class="goals-card">
+                <h3><i class="fas fa-flag"></i> Aktiiviset tavoitteet</h3>
+                <ul class="goal-list" id="active-goals-list">
+                    <li class="goal-item">
+                        <div class="goal-item-header">
+                            <h4 class="goal-title"><i class="fas fa-weight"></i> Tavoitepaino</h4>
+                            <div class="goal-badges">
+                                <span class="goal-badge active">Aktiivinen</span>
+                                <span class="goal-badge progress">57%</span>
+                            </div>
+                        </div>
+                        <div class="goal-description">
+                            Tavoitteena on saavuttaa 70 kg paino kahden kuukauden sisällä.
+                        </div>
+                        <div class="goal-target">
+                            <div class="goal-target-header">
+                                <div class="goal-target-label">Edistyminen</div>
+                                <div class="goal-target-value">57% (75 kg → 72 kg / 70 kg)</div>
+                            </div>
+                            <div class="goal-progress-bar">
+                                <div class="goal-progress-fill" style="width: 57%"></div>
+                            </div>
+                        </div>
+                        <div class="goal-footer">
+                            <div class="goal-timeframe">
+                                <div><i class="fas fa-calendar-alt"></i> 1.3.2025 - 30.4.2025</div>
+                                <div><i class="fas fa-clock"></i> 28 päivää jäljellä</div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="goal-action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="goal-action-btn delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="goal-item">
+                        <div class="goal-item-header">
+                            <h4 class="goal-title"><i class="fas fa-bed"></i> Unen laatu</h4>
+                            <div class="goal-badges">
+                                <span class="goal-badge active">Aktiivinen</span>
+                                <span class="goal-badge progress">35%</span>
+                            </div>
+                        </div>
+                        <div class="goal-description">
+                            Tavoitteena on nukkua vähintään 7 tuntia joka yö ja parantaa unen laatua.
+                        </div>
+                        <div class="goal-target">
+                            <div class="goal-target-header">
+                                <div class="goal-target-label">Edistyminen</div>
+                                <div class="goal-target-value">35% (5/14 päivää tavoitteessa)</div>
+                            </div>
+                            <div class="goal-progress-bar">
+                                <div class="goal-progress-fill warning" style="width: 35%"></div>
+                            </div>
+                        </div>
+                        <div class="goal-footer">
+                            <div class="goal-timeframe">
+                                <div><i class="fas fa-calendar-alt"></i> 15.3.2025 - 15.4.2025</div>
+                                <div><i class="fas fa-clock"></i> 14 päivää jäljellä</div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="goal-action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="goal-action-btn delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            
+            <!-- Valmiit tavoitteet -->
+            <section class="goals-card">
+                <h3><i class="fas fa-check-circle"></i> Saavutetut tavoitteet</h3>
+                <ul class="goal-list" id="completed-goals-list">
+                    <li class="goal-item">
+                        <div class="goal-item-header">
+                            <h4 class="goal-title"><i class="fas fa-smile"></i> Mielialan parantaminen</h4>
+                            <div class="goal-badges">
+                                <span class="goal-badge completed">Saavutettu</span>
+                            </div>
+                        </div>
+                        <div class="goal-description">
+                            Tavoitteena oli nostaa mielialan keskiarvo vähintään tasolle 7/10.
+                        </div>
+                        <div class="goal-target">
+                            <div class="goal-target-header">
+                                <div class="goal-target-label">Tulos</div>
+                                <div class="goal-target-value">7.5/10 (tavoite: 7/10)</div>
+                            </div>
+                            <div class="goal-progress-bar">
+                                <div class="goal-progress-fill good" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="goal-footer">
+                            <div class="goal-timeframe">
+                                <div><i class="fas fa-calendar-alt"></i> 1.1.2025 - 28.2.2025</div>
+                                <div><i class="fas fa-check"></i> Saavutettu 25.2.2025</div>
+                            </div>
+                            <div class="goal-actions">
+                                <button class="goal-action-btn edit"><i class="fas fa-edit"></i></button>
+                                <button class="goal-action-btn delete"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tavoitteen lisäys/muokkaus modal -->
+    <div id="goal-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="goal-modal-title">Lisää uusi tavoite</h2>
+                <button class="close-btn" id="close-goal-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="goal-form" class="goal-form">
+                    <input type="hidden" id="goal-id" name="goal-id">
+                    
+                    <div class="form-group">
+                        <label for="goal-title-input">Tavoitteen nimi</label>
+                        <input type="text" id="goal-title-input" name="title" required placeholder="Esim. Painonpudotus, Unenlaadun parantaminen...">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tavoitteen tyyppi</label>
+                        <div class="goal-type-selector">
+                            <div class="goal-type-option" data-type="weight">
+                                <i class="fas fa-weight"></i>
+                                <h4>Paino</h4>
+                            </div>
+                            <div class="goal-type-option" data-type="sleep">
+                                <i class="fas fa-bed"></i>
+                                <h4>Uni</h4>
+                            </div>
+                            <div class="goal-type-option" data-type="mood">
+                                <i class="fas fa-smile"></i>
+                                <h4>Mieliala</h4>
+                            </div>
+                            <div class="goal-type-option" data-type="custom">
+                                <i class="fas fa-sliders-h"></i>
+                                <h4>Mukautettu</h4>
+                            </div>
+                        </div>
+                        <input type="hidden" id="goal-type" name="type" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal-description">Kuvaus</label>
+                        <textarea id="goal-description" name="description" rows="3" placeholder="Kerro tarkemmin tavoitteestasi..."></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="goal-start-date">Alkupäivä</label>
+                            <input type="date" id="goal-start-date" name="start_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="goal-end-date">Loppupäivä</label>
+                            <input type="date" id="goal-end-date" name="end_date" required>
+                        </div>
+                    </div>
+                    
+                    <div id="goal-target-container">
+                        <!-- Tämä muuttuu dynaamisesti valitun tavoitetyypin mukaan -->
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Tallenna tavoite
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Poista tavoite -modal -->
+    <div id="delete-goal-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Poista tavoite</h2>
+                <button class="close-btn" id="close-delete-goal-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Haluatko varmasti poistaa tämän tavoitteen?</p>
+                <p><strong id="delete-goal-title"></strong></p>
+                
+                <div class="form-actions">
+                    <button id="delete-goal-cancel-btn" class="btn btn-secondary">Peruuta</button>
+                    <button id="delete-goal-confirm-btn" class="btn btn-danger">Poista tavoite</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/goals.js"></script>
+</body>
+</html>

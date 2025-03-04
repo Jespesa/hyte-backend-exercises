@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerveysPlus - Lääkitys</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/medications.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Etusivu</a></li>
+                    <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+                    <li><a href="stats.html"><i class="fas fa-chart-bar"></i> Tilastot</a></li>
+                    <li><a href="goals.html"><i class="fas fa-flag-checkered"></i> Tavoitteet</a></li>
+                    <li><a href="medications.html" class="active"><i class="fas fa-pills"></i> Lääkitys</a></li>
+                    <li><a href="exercises.html"><i class="fas fa-running"></i> Liikunta</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2><i class="fas fa-pills"></i> Lääkitykset</h2>
+        
+        <div class="medications-container">
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Hae lääkityksiä...">
+                    <button id="search-btn" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Hae
+                    </button>
+                </div>
+            </section>
+            
+            <section class="active-medications-section">
+                <h3><i class="fas fa-check-circle"></i> Aktiiviset lääkitykset</h3>
+                <div class="active-medications-list" id="active-medications-list">
+                    <p class="loading">Ladataan lääkityksiä...</p>
+                </div>
+            </section>
+            
+            <section class="medications-section">
+                <div class="medications-header">
+                    <h3><i class="fas fa-list"></i> Kaikki lääkitykset</h3>
+                    <button id="add-medication-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Lisää lääkitys
+                    </button>
+                </div>
+                
+                <div class="medications-list" id="medications-list">
+                    <p class="loading">Ladataan lääkityksiä...</p>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Lääkityksen lisäys/muokkaus modal -->
+    <div id="medication-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Lisää lääkitys</h2>
+                <button class="close-btn" id="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="medication-form">
+                    <input type="hidden" id="medication-id" name="medication-id">
+                    
+                    <div class="form-group">
+                        <label for="medication-name">Lääkkeen nimi</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-pills"></i>
+                            <input type="text" id="medication-name" name="name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medication-dosage">Annostus</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-prescription-bottle"></i>
+                            <input type="text" id="medication-dosage" name="dosage" placeholder="esim. 500 mg">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medication-frequency">Käyttötiheys</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-clock"></i>
+                            <input type="text" id="medication-frequency" name="frequency" placeholder="esim. 3 kertaa päivässä">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="medication-start-date">Aloituspäivä</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-plus"></i>
+                                <input type="date" id="medication-start-date" name="start_date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="medication-end-date">Lopetuspäivä (valinnainen)</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-calendar-times"></i>
+                                <input type="date" id="medication-end-date" name="end_date">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="medication-notes">Lisätiedot</label>
+                        <textarea id="medication-notes" name="notes" rows="3" placeholder="Lisätietoja lääkityksestä..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" id="delete-medication" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Poista
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Tallenna
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/medications.js"></script>
+</body>
+</html>

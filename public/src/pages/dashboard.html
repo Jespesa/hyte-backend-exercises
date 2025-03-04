@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/calendar.css">
     <link rel="stylesheet" href="../css/diary.css">
     <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/mobile-nav.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -15,19 +16,42 @@
     <header class="main-header">
         <div class="container">
             <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#" class="active"><i class="fas fa-home"></i> Etusivu</a></li>
-                    <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
-                    <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
-                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
-                </ul>
-            </nav>
+           <!-- Päivitetty navigaatio -->
+<nav class="main-nav">
+    <ul>
+        <li><a href="#" class="active"><i class="fas fa-home"></i> Etusivu</a></li>
+        <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+        <li><a href="stats.html"><i class="fas fa-chart-bar"></i> Tilastot</a></li>
+        <li><a href="goals.html"><i class="fas fa-flag-checkered"></i> Tavoitteet</a></li>
+        <li><a href="medications.html"><i class="fas fa-pills"></i> Lääkitys</a></li>
+        <li><a href="exercises.html"><i class="fas fa-running"></i> Liikunta</a></li>
+        <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+        <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+    </ul>
+</nav>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
             <div class="user-info">
                 <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
             </div>
         </div>
     </header>
+
+    <!-- Mobiilivalikko -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Valikko</h3>
+            <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="#" class="active"><i class="fas fa-home"></i> Etusivu</a></li>
+            <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+            <li><a href="stats.html"><i class="fas fa-chart-line"></i> Tilastot</a></li>
+            <li><a href="goals.html"><i class="fas fa-bullseye"></i> Tavoitteet</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+            <li><a href="#" id="mobile-logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+        </ul>
+    </div>
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
 
     <main class="container">
         <div class="dashboard-grid">
@@ -179,72 +203,7 @@
     <div id="toast" class="toast"></div>
 
     <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/mobile-nav.js"></script>
     <script type="module" src="../js/dashboard.js"></script>
-    <script>
-        // Mieliala sliderin toiminnallisuus
-        document.addEventListener('DOMContentLoaded', function() {
-            const moodSlider = document.getElementById('entry-mood-slider');
-            const moodValue = document.getElementById('mood-value');
-            const moodInput = document.getElementById('entry-mood');
-            
-            const modalMoodSlider = document.getElementById('modal-entry-mood-slider');
-            const modalMoodValue = document.getElementById('modal-mood-value');
-            const modalMoodInput = document.getElementById('modal-entry-mood');
-            
-            // Päivitä mieliala-arvot kun slideria liikutetaan
-            if (moodSlider && moodValue && moodInput) {
-                moodSlider.addEventListener('input', function() {
-                    const value = this.value;
-                    moodValue.textContent = value;
-                    moodInput.value = value;
-                    
-                    // Muuta mieliala-arvon väriä arvon mukaan
-                    updateMoodColor(value, moodValue);
-                });
-            }
-            
-            // Sama modaalille
-            if (modalMoodSlider && modalMoodValue && modalMoodInput) {
-                modalMoodSlider.addEventListener('input', function() {
-                    const value = this.value;
-                    modalMoodValue.textContent = value;
-                    modalMoodInput.value = value;
-                    
-                    // Muuta mieliala-arvon väriä arvon mukaan
-                    updateMoodColor(value, modalMoodValue);
-                });
-            }
-            
-            // Aseta värit aluksi
-            if (moodSlider && moodValue) {
-                updateMoodColor(moodSlider.value, moodValue);
-            }
-            
-            if (modalMoodSlider && modalMoodValue) {
-                updateMoodColor(modalMoodSlider.value, modalMoodValue);
-            }
-        });
-        
-        // Funktio mieliala-arvon värin päivittämiseen
-        function updateMoodColor(value, element) {
-            value = parseInt(value);
-            let color;
-            
-            if (value <= 2) {
-                color = '#e74c3c'; // Punainen huonolle mielialalle
-            } else if (value <= 4) {
-                color = '#e67e22'; // Oranssi kohtalaisen huonolle mielialalle
-            } else if (value <= 6) {
-                color = '#f1c40f'; // Keltainen neutraalille mielialalle
-            } else if (value <= 8) {
-                color = '#2ecc71'; // Vihreä hyvälle mielialalle
-            } else {
-                color = '#27ae60'; // Tummanvihreä erinomaiselle mielialalle
-            }
-            
-            element.style.backgroundColor = color;
-            element.style.color = 'white';
-        }
-    </script>
 </body>
 </html>
