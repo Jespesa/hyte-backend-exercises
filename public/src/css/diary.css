@@ -193,6 +193,69 @@
     padding: 1.5rem;
 }
 
+/* Mieliala slider */
+.mood-slider-container {
+    margin-bottom: 1.5rem;
+}
+
+.mood-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 8px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #e74c3c, #f39c12, #f1c40f, #2ecc71);
+    outline: none;
+}
+
+.mood-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--primary-color);
+}
+
+.mood-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--primary-color);
+}
+
+.mood-value-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mood-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+.mood-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
 /* Responsiivisuus */
 @media (max-width: 768px) {
     .filter-container {

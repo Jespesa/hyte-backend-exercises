@@ -1,259 +1,369 @@
 /* Liikunta-sivun tyylit */
 .exercises-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.header-with-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+@media (min-width: 992px) {
+  .exercises-container {
+    grid-template-columns: 1fr 1fr;
   }
   
-  .filter-section {
-    background-color: var(--bg-light);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
+  .summary-card, .exercise-calendar {
+    grid-column: span 2;
   }
-  
-  .search-container {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .search-container input {
-    flex-grow: 1;
-  }
-  
-  .date-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: center;
-  }
-  
-  .date-filter-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .date-filter-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-left: auto;
-  }
-  
-  .summary-section {
-    background-color: var(--bg-light);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
-  }
-  
+}
+
+/* Yleiset korttityylit */
+.exercise-card {
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.exercise-card h3 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.exercise-card h3 i {
+  color: var(--primary-color);
+}
+
+/* Yhteenvetokortti */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-box {
+  background: linear-gradient(145deg, #ffffff, #f3f9ff);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.03), -5px -5px 15px rgba(255, 255, 255, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06), -8px -8px 20px rgba(255, 255, 255, 0.8);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.exercise-chart-container {
+  height: 300px;
+  width: 100%;
+  margin-top: 1rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+  padding: 1rem;
+  position: relative;
+}
+
+/* Viimeisimmät suoritukset */
+.list-container {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.exercise-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.exercise-item {
+  background: linear-gradient(145deg, #ffffff, #f3f9ff);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  padding: 1.2rem;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.03), -5px -5px 15px rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  transition: var(--transition);
+}
+
+.exercise-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06), -8px -8px 20px rgba(255, 255, 255, 0.8);
+}
+
+.exercise-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.exercise-date {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.exercise-type {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--primary-color);
+  padding: 0.3rem 0.7rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.exercise-details {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.exercise-duration, .exercise-intensity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.exercise-notes {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  border-top: 1px solid rgba(220, 220, 220, 0.5);
+  padding-top: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.edit-exercise-btn {
+  background-color: rgba(52, 152, 219, 0.1);
+  color: var(--primary-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.edit-exercise-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Liikuntatyypit */
+.exercise-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 1rem;
+}
+
+.exercise-type-card {
+  background: linear-gradient(145deg, #ffffff, #f3f9ff);
+  border-radius: 12px;
+  padding: 1.2rem 1rem;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.03), -5px -5px 15px rgba(255, 255, 255, 0.5);
+  text-align: center;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.exercise-type-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.06), -8px -8px 20px rgba(255, 255, 255, 0.8);
+}
+
+.exercise-type-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(52, 152, 219, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.8rem;
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+.exercise-type-name {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.exercise-type-stats {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* Liikuntakalenteri */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.calendar-header h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.exercise-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-weight: 600;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+.calendar-day {
+  min-height: 80px;
+  border: 1px solid rgba(220, 220, 220, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.calendar-day:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.05);
+  z-index: 1;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.calendar-day.today {
+  background-color: rgba(52, 152, 219, 0.1);
+  border-color: var(--primary-color);
+}
+
+.calendar-day.other-month {
+  opacity: 0.5;
+}
+
+.calendar-day-number {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-day-entries {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.calendar-entry-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+}
+
+/* Modaali */
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+  color: white;
+}
+
+#other-exercise-type-container.hidden {
+  display: none;
+}
+
+/* Responsiivisuus */
+@media (max-width: 992px) {
   .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
   }
   
-  .summary-card {
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    padding: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: var(--transition);
+  .exercise-types-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-day {
+    min-height: 60px;
   }
   
-  .summary-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--shadow-color);
+  .calendar-day-header {
+    font-size: 0.8rem;
   }
   
-  .summary-icon {
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    width: 40px;
-    text-align: center;
-  }
-  
-  .summary-content {
-    flex-grow: 1;
-  }
-  
-  .summary-title {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 0.3rem;
-  }
-  
-  .summary-value {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-  }
-  
-  .summary-section h4 {
-    margin-top: 1.5rem;
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
-  }
-  
-  .summary-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  
-  .summary-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 0.5rem;
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    transition: var(--transition);
-  }
-  
-  .summary-item:hover {
-    background-color: var(--bg-dark);
-  }
-  
-  .summary-rank {
-    font-weight: bold;
-    color: var(--primary-color);
-    width: 25px;
-    text-align: center;
-  }
-  
-  .summary-label {
-    flex-grow: 1;
-  }
-  
-  .intensity-chart {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  }
-  
-  .chart-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .chart-label {
-    width: 100px;
-    font-size: 0.9rem;
-  }
-  
-  .chart-bar-container {
-    flex-grow: 1;
-    height: 10px;
-    background-color: var(--bg-dark);
-    border-radius: 5px;
-    overflow: hidden;
-  }
-  
-  .chart-bar {
-    height: 100%;
-    border-radius: 5px;
-  }
-  
-  .chart-value {
-    width: 30px;
-    text-align: right;
-    font-weight: bold;
-    font-size: 0.9rem;
-  }
-  
-  .exercises-list-section {
-    background-color: var(--bg-light);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
-  }
-  
-  .exercises-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  
-  .exercises-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-  
-  .exercise-card {
-    background-color: var(--bg-color);
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    transition: var(--transition);
-    box-shadow: 0 2px 5px var(--shadow-color);
-  }
-  
-  .exercise-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px var(--shadow-color);
-  }
-  
-  .exercise-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-  }
-  
-  .exercise-date {
-    font-weight: bold;
-    color: var(--primary-color);
-  }
-  
-  .exercise-type {
-    font-size: 0.9rem;
-    padding: 0.2rem 0.8rem;
-    background-color: var(--bg-light);
-    border-radius: 1rem;
-    color: var(--text-light);
+  .calendar-day-number {
+    font-size: 0.8rem;
   }
   
   .exercise-details {
-    display: flex;
-    gap: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  
-  .exercise-duration, .exercise-intensity {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 0.5rem;
-    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .exercise-calendar-grid {
+    gap: 0.3rem;
   }
   
-  .exercise-duration i, .exercise-intensity i {
-    color: var(--primary-color);
+  .calendar-day {
+    padding: 0.3rem;
+    min-height: 50px;
   }
-  
-  .exercise-notes {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-bottom: 1rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .exercise-notes i {
-    color: var(--primary-color);
-    margin-right: 0.5rem;
-  }
-  
-  .exercise-actions {
-    display: flex;
-    justify-content: flex-end;
-  }
+}

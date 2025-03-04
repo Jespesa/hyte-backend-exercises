@@ -77,8 +77,17 @@
                         <input type="date" id="modal-entry-date" name="entry_date" required>
                     </div>
                     <div class="form-group">
-                        <label for="modal-entry-mood">Mieliala</label>
-                        <input type="text" id="modal-entry-mood" name="mood" required>
+                        <label for="modal-entry-mood-slider"><i class="fas fa-smile"></i> Mieliala (0-10)</label>
+                        <input type="range" id="modal-entry-mood-slider" min="0" max="10" value="5" step="1" class="mood-slider">
+                        <div class="mood-value-container">
+                            <span id="modal-mood-value" class="mood-value">5</span>
+                        </div>
+                        <div class="mood-labels">
+                            <span>Huono</span>
+                            <span>Kohtalainen</span>
+                            <span>Erinomainen</span>
+                        </div>
+                        <input type="hidden" id="modal-entry-mood" name="mood" value="5">
                     </div>
                     <div class="form-group">
                         <label for="modal-entry-weight">Paino (kg)</label>

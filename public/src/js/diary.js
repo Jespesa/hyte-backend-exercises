@@ -258,6 +258,11 @@ function openNewEntryModal() {
     document.getElementById('modal-entry-weight').value = '';
     document.getElementById('modal-entry-sleep').value = '';
     document.getElementById('modal-entry-notes').value = '';
+
+    modalMoodSlider.value = 5;
+    modalMoodValue.textContent = 5;
+    modalMoodInput.value = 5;
+    updateMoodColor(5, modalMoodValue);
     
     deleteEntryBtn.style.display = 'none';
     currentEntryId = null;
@@ -271,6 +276,12 @@ async function openEntryModal(entryId) {
         modalTitle.textContent = 'Muokkaa merkintää';
         
         const entry = await getEntryById(entryId);
+
+        const moodValue = entry.mood || 5;
+        modalMoodSlider.value = moodValue;
+        modalMoodValue.textContent = moodValue;
+        modalMoodInput.value = moodValue;
+        updateMoodColor(moodValue, modalMoodValue);
         
         document.getElementById('entry-id').value = entry.entry_id;
         document.getElementById('modal-entry-date').value = formatDateForInput(entry.entry_date);
@@ -406,3 +417,43 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Mieliala sliderin toiminnallisuus
+const modalMoodSlider = document.getElementById('modal-entry-mood-slider');
+const modalMoodValue = document.getElementById('modal-mood-value');
+const modalMoodInput = document.getElementById('modal-entry-mood');
+
+if (modalMoodSlider && modalMoodValue && modalMoodInput) {
+    modalMoodSlider.addEventListener('input', function() {
+        const value = this.value;
+        modalMoodValue.textContent = value;
+        modalMoodInput.value = value;
+        
+        // Päivitä väri
+        updateMoodColor(value, modalMoodValue);
+    });
+    
+    // Aseta alkuarvo
+    updateMoodColor(modalMoodSlider.value, modalMoodValue);
+}
+
+// Päivitä mieliala-arvon väri
+function updateMoodColor(value, element) {
+    value = parseInt(value);
+    let color;
+    
+    if (value <= 2) {
+        color = '#e74c3c'; // Punainen huonolle mielialalle
+    } else if (value <= 4) {
+        color = '#e67e22'; // Oranssi kohtalaisen huonolle mielialalle
+    } else if (value <= 6) {
+        color = '#f1c40f'; // Keltainen neutraalille mielialalle
+    } else if (value <= 8) {
+        color = '#2ecc71'; // Vihreä hyvälle mielialalle
+    } else {
+        color = '#27ae60'; // Tummanvihreä erinomaiselle mielialalle
+    }
+    
+    element.style.backgroundColor = color;
+    element.style.color = 'white';
+}
