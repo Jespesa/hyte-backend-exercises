@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerveysPlus - Ravinto</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/nutrition.css">
+    <link rel="stylesheet" href="../css/mobile-nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <h1><i class="fas fa-heartbeat"></i> TerveysPlus</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="dashboard.html"><i class="fas fa-home"></i> Etusivu</a></li>
+                    <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+                    <li><a href="stats.html"><i class="fas fa-chart-line"></i> Tilastot</a></li>
+                    <li><a href="goals.html"><i class="fas fa-bullseye"></i> Tavoitteet</a></li>
+                    <li><a href="medications.html"><i class="fas fa-pills"></i> Lääkitys</a></li>
+                    <li><a href="exercises.html"><i class="fas fa-running"></i> Liikunta</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-utensils"></i> Ravinto</a></li>
+                    <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+                    <li><a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i> <span id="user-greeting">Tervetuloa!</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobiilivalikko -->
+    <div class="mobile-nav" id="mobile-nav">
+        <div class="mobile-nav-header">
+            <h3>Valikko</h3>
+            <button class="mobile-nav-close" id="mobile-nav-close"><i class="fas fa-times"></i></button>
+        </div>
+        <ul>
+            <li><a href="dashboard.html"><i class="fas fa-home"></i> Etusivu</a></li>
+            <li><a href="diary.html"><i class="fas fa-book"></i> Merkinnät</a></li>
+            <li><a href="stats.html"><i class="fas fa-chart-line"></i> Tilastot</a></li>
+            <li><a href="goals.html"><i class="fas fa-bullseye"></i> Tavoitteet</a></li>
+            <li><a href="medications.html"><i class="fas fa-pills"></i> Lääkitys</a></li>
+            <li><a href="exercises.html"><i class="fas fa-running"></i> Liikunta</a></li>
+            <li><a href="#" class="active"><i class="fas fa-utensils"></i> Ravinto</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profiili</a></li>
+            <li><a href="#" id="mobile-logout-btn"><i class="fas fa-sign-out-alt"></i> Kirjaudu ulos</a></li>
+        </ul>
+    </div>
+    <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+
+    <main class="container">
+        <div class="header-with-actions">
+            <h2><i class="fas fa-utensils"></i> Ravintoseuranta</h2>
+            <button id="add-meal-btn" class="btn btn-primary"><i class="fas fa-plus"></i> Lisää uusi ateria</button>
+        </div>
+        
+        <div class="nutrition-container">
+            <!-- Tulossa pian -ilmoitus -->
+            <section class="coming-soon-card">
+                <div class="coming-soon-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Ravintoseuranta tulossa pian!</h3>
+                <p>Tämä ominaisuus on parhaillaan kehityksessä. Pian voit lisätä ja seurata päivittäistä ravintoasi, seurata kalorikulutustasi ja analysoida ruokavaliotasi.</p>
+                <p>Tulevat ominaisuudet:</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Aterioiden ja ruokien kirjaaminen</li>
+                    <li><i class="fas fa-check"></i> Kaloriseuranta</li>
+                    <li><i class="fas fa-check"></i> Ravintoaineiden analysointi</li>
+                    <li><i class="fas fa-check"></i> Ruokavaliotavoitteet</li>
+                    <li><i class="fas fa-check"></i> Ravintotilastot ja -raportit</li>
+                </ul>
+                <p>Pysy kuulolla ja tarkista pian uudelleen!</p>
+            </section>
+        </div>
+    </main>
+
+    <!-- Aterian lisäys modal (näytetään vain demolle) -->
+    <div id="meal-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Lisää uusi ateria</h2>
+                <button class="close-btn" id="close-meal-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>Tämä toiminto ei ole vielä käytettävissä. Ravintoseuranta on tulossa pian!</p>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" id="close-demo-btn">Sulje</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast-ilmoitukset -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/mobile-nav.js"></script>
+    <script type="module" src="../js/consistent-nav.js"></script>
+    <script type="module" src="../js/nutrition.js"></script>
+</body>
+</html>

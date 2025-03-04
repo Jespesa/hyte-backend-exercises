@@ -5,9 +5,7 @@ import {
   getExerciseById, 
   addExercise, 
   updateExercise, 
-  deleteExercise, 
-  getExercisesByDateRange, 
-  getExerciseSummary 
+  deleteExercise
 } from './api-exercises.js';
 
 // Varmistetaan, että käyttäjä on kirjautunut
@@ -19,29 +17,38 @@ if (!checkAuth()) {
 // Globaalit muuttujat
 let allExercises = [];
 let currentExerciseId = null;
-let exerciseSummary = null;
 
 // DOM-elementit
-const exercisesList = document.getElementById('exercises-list');
+const exercisesList = document.getElementById('recent-exercises-list');
 const exerciseSummaryEl = document.getElementById('exercise-summary');
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
 const addExerciseBtn = document.getElementById('add-exercise-btn');
 const exerciseModal = document.getElementById('exercise-modal');
 const exerciseForm = document.getElementById('exercise-form');
-const modalTitle = document.getElementById('modal-title');
-const closeModalBtn = document.getElementById('close-modal');
+const modalTitle = document.getElementById('exercise-modal-title');
+const closeModalBtn = document.getElementById('close-exercise-modal');
 const deleteExerciseBtn = document.getElementById('delete-exercise');
-const dateFromInput = document.getElementById('date-from');
-const dateToInput = document.getElementById('date-to');
-const filterDateBtn = document.getElementById('filter-date-btn');
-const resetFilterBtn = document.getElementById('reset-filter-btn');
+const exerciseTypeSelect = document.getElementById('exercise-type');
+const otherExerciseContainer = document.getElementById('other-exercise-type-container');
+const otherExerciseInput = document.getElementById('other-exercise-type');
+
+// Kalenteri-elementit
+const exerciseCalendar = document.getElementById('exercise-calendar-grid');
+const currentMonthEl = document.getElementById('current-month');
+const prevMonthBtn = document.getElementById('prev-month');
+const nextMonthBtn = document.getElementById('next-month');
+
+// Tilastoelementit
+const weeklyExerciseTime = document.getElementById('weekly-exercise-time');
+const monthlyExerciseTime = document.getElementById('monthly-exercise-time');
+const favoriteExercise = document.getElementById('favorite-exercise');
+const avgExerciseTime = document.getElementById('avg-exercise-time');
+const exerciseTypesGrid = document.getElementById('exercise-types-grid');
 
 // Hae kaikki liikuntamerkinnät
 async function fetchAllExercises() {
   try {
     if (exercisesList) {
-      exercisesList.innerHTML = '<p class="loading">Ladataan liikuntamerkintöjä...</p>';
+      exercisesList.innerHTML = '<li class="loading">Ladataan liikuntasuorituksia...</li>';
     }
     
     const exercises = await getExercises();
@@ -51,376 +58,601 @@ async function fetchAllExercises() {
     allExercises.sort((a, b) => new Date(b.date) - new Date(a.date));
     
     // Näytä liikuntamerkinnät
-    displayExercises(allExercises);
+    displayExercises();
     
-    // Hae ja näytä yhteenveto
-    await fetchAndDisplaySummary();
+    // Päivitä liikuntayhteenveto
+    updateExerciseStats();
+    
+    // Päivitä liikuntatyypit
+    updateExerciseTypes();
+    
+    // Päivitä kalenteri
+    if (exerciseCalendar) {
+      renderExerciseCalendar();
+    }
+    
+    return exercises;
   } catch (error) {
     console.error('Virhe liikuntamerkintöjen hakemisessa:', error);
     showToast('Liikuntamerkintöjen hakeminen epäonnistui', 'error');
     
     if (exercisesList) {
-      exercisesList.innerHTML = '<p>Liikuntamerkintöjen hakeminen epäonnistui.</p>';
+      exercisesList.innerHTML = '<li>Liikuntamerkintöjen hakeminen epäonnistui.</li>';
     }
   }
 }
 
-// Näytä liikuntamerkinnät
-function displayExercises(exercises) {
+// Näytä liikuntamerkinnät listassa
+function displayExercises() {
   if (!exercisesList) return;
   
-  if (exercises.length === 0) {
-    exercisesList.innerHTML = '<p>Ei liikuntamerkintöjä.</p>';
+  if (allExercises.length === 0) {
+    exercisesList.innerHTML = '<li>Ei liikuntasuorituksia.</li>';
     return;
   }
   
-  exercisesList.innerHTML = exercises.map(exercise => {
+  // Näytä vain viimeisimmät 5 suoritusta
+  const recentExercises = allExercises.slice(0, 5);
+  
+  exercisesList.innerHTML = recentExercises.map(exercise => {
     // Määritä väri intensiteetin mukaan
-    let intensityColor;
+    let intensityColor, intensityIcon;
+    
     switch(exercise.intensity && exercise.intensity.toLowerCase()) {
-      case 'high':
-      case 'kova':
+      case 'raskas':
         intensityColor = '#e74c3c';
+        intensityIcon = 'fa-fire';
         break;
-      case 'medium':
-      case 'keskiraskas':
+      case 'keskitaso':
         intensityColor = '#f39c12';
+        intensityIcon = 'fa-fire-alt';
         break;
-      case 'low':
       case 'kevyt':
-        intensityColor = '#2ecc71';
-        break;
       default:
-        intensityColor = '#3498db';
+        intensityColor = '#2ecc71';
+        intensityIcon = 'fa-feather';
     }
     
     return `
-      <div class="exercise-card">
-        <div class="exercise-header">
+      <li class="exercise-item">
+        <div class="exercise-item-header">
           <div class="exercise-date">${formatDate(exercise.date)}</div>
           <div class="exercise-type">${exercise.type}</div>
         </div>
         <div class="exercise-details">
           <div class="exercise-duration">
-            <i class="fas fa-stopwatch"></i>
-            ${exercise.duration} min
+            <i class="fas fa-stopwatch"></i> ${exercise.duration} min
           </div>
           <div class="exercise-intensity" style="color: ${intensityColor}">
-            <i class="fas fa-tachometer-alt"></i>
-            ${exercise.intensity || 'Ei määritelty'}
+            <i class="fas ${intensityIcon}"></i> ${exercise.intensity || 'Ei määritelty'}
           </div>
         </div>
         ${exercise.notes ? `
           <div class="exercise-notes">
-            <i class="fas fa-sticky-note"></i>
-            ${exercise.notes}
+            <i class="fas fa-sticky-note"></i> ${exercise.notes}
           </div>
         ` : ''}
         <div class="exercise-actions">
-          <button class="btn edit-exercise-btn" data-id="${exercise.id}">
+          <button class="btn edit-exercise-btn" data-id="${exercise.id || ''}">
             <i class="fas fa-edit"></i> Muokkaa
           </button>
         </div>
-      </div>
+      </li>
     `;
   }).join('');
   
   // Lisää click-tapahtuma muokkausnapeille
   document.querySelectorAll('.edit-exercise-btn').forEach(button => {
     button.addEventListener('click', (e) => {
-      e.stopPropagation();
+      e.preventDefault();
       const exerciseId = button.dataset.id;
-      openExerciseModal(exerciseId);
+      openEditExerciseModal(exerciseId);
     });
   });
 }
 
-// Hae ja näytä yhteenveto
-async function fetchAndDisplaySummary() {
-  if (!exerciseSummaryEl) return;
+// Päivitä liikuntayhteenveto
+function updateExerciseStats() {
+  if (!weeklyExerciseTime || !monthlyExerciseTime || !favoriteExercise || !avgExerciseTime) return;
   
-  try {
-    exerciseSummaryEl.innerHTML = '<p class="loading">Ladataan yhteenvetoa...</p>';
+  if (allExercises.length === 0) {
+    weeklyExerciseTime.textContent = '0 min';
+    monthlyExerciseTime.textContent = '0 min';
+    favoriteExercise.textContent = '-';
+    avgExerciseTime.textContent = '0 min/vko';
+    return;
+  }
+  
+  // Laske liikunta-aika tällä viikolla
+  const now = new Date();
+  const startOfWeek = new Date(now);
+  startOfWeek.setDate(now.getDate() - now.getDay() + (now.getDay() === 0 ? -6 : 1)); // Maanantai
+  startOfWeek.setHours(0, 0, 0, 0);
+  
+  const weeklyExercises = allExercises.filter(exercise => 
+    new Date(exercise.date) >= startOfWeek
+  );
+  
+  const weeklyTime = weeklyExercises.reduce((sum, exercise) => sum + (exercise.duration || 0), 0);
+  weeklyExerciseTime.textContent = `${weeklyTime} min`;
+  
+  // Laske liikunta-aika tässä kuussa
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  
+  const monthlyExercises = allExercises.filter(exercise => 
+    new Date(exercise.date) >= startOfMonth
+  );
+  
+  const monthlyTime = monthlyExercises.reduce((sum, exercise) => sum + (exercise.duration || 0), 0);
+  monthlyExerciseTime.textContent = `${monthlyTime} min`;
+  
+  // Suosituin liikuntalaji
+  const exerciseTypes = {};
+  allExercises.forEach(exercise => {
+    if (!exercise.type) return;
     
-    exerciseSummary = await getExerciseSummary();
-    
-    if (!exerciseSummary || exerciseSummary.totalExercises === 0) {
-      exerciseSummaryEl.innerHTML = '<p>Ei liikuntamerkintöjä yhteenvetoa varten.</p>';
-      return;
+    if (!exerciseTypes[exercise.type]) {
+      exerciseTypes[exercise.type] = 0;
     }
     
-    // Suosituimmat liikuntatyypit
-    const topExerciseTypes = Object.entries(exerciseSummary.exercisesByType)
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 3);
+    exerciseTypes[exercise.type]++;
+  });
+  
+  let maxCount = 0;
+  let favoriteType = '-';
+  
+  for (const [type, count] of Object.entries(exerciseTypes)) {
+    if (count > maxCount) {
+      maxCount = count;
+      favoriteType = type;
+    }
+  }
+  
+  favoriteExercise.textContent = favoriteType;
+  
+  // Keskimääräinen liikunta-aika viikossa
+  // Laske ensimmäisen ja viimeisen liikuntasuorituksen välinen aika viikkoina
+  if (allExercises.length > 1) {
+    const firstExercise = allExercises[allExercises.length - 1];
+    const lastExercise = allExercises[0];
     
-    const topExerciseTypesHtml = topExerciseTypes.map(([type, count], index) => `
-      <div class="summary-item">
-        <span class="summary-rank">${index + 1}.</span>
-        <span class="summary-label">${type}</span>
-        <span class="summary-value">${count} kertaa</span>
-      </div>
-    `).join('');
+    const firstDate = new Date(firstExercise.date);
+    const lastDate = new Date(lastExercise.date);
     
-    // Luodaan diagrammi-data (yksinkertainen graafi)
-    const intensityData = Object.entries(exerciseSummary.exercisesByIntensity);
-    const intensityChartHtml = `
-      <div class="intensity-chart">
-        ${intensityData.map(([intensity, count]) => {
-          const percentage = (count / exerciseSummary.totalExercises) * 100;
-          let color;
-          
-          switch(intensity.toLowerCase()) {
-            case 'high':
-            case 'kova':
-              color = '#e74c3c';
-              break;
-            case 'medium':
-            case 'keskiraskas':
-              color = '#f39c12';
-              break;
-            case 'low':
-            case 'kevyt':
-              color = '#2ecc71';
-              break;
-            default:
-              color = '#3498db';
-          }
-          
-          return `
-            <div class="chart-item">
-              <div class="chart-label">${intensity}</div>
-              <div class="chart-bar-container">
-                <div class="chart-bar" style="width: ${percentage}%; background-color: ${color}"></div>
-              </div>
-              <div class="chart-value">${count}</div>
-            </div>
-          `;
-        }).join('')}
+    const weeksDiff = Math.max(1, Math.ceil((lastDate - firstDate) / (7 * 24 * 60 * 60 * 1000)));
+    
+    const totalDuration = allExercises.reduce((sum, exercise) => sum + (exercise.duration || 0), 0);
+    const avgDuration = totalDuration / weeksDiff;
+    
+    avgExerciseTime.textContent = `${Math.round(avgDuration)} min/vko`;
+  } else if (allExercises.length === 1) {
+    avgExerciseTime.textContent = `${allExercises[0].duration || 0} min/vko`;
+  }
+}
+
+// Päivitä liikuntatyypit
+function updateExerciseTypes() {
+  if (!exerciseTypesGrid) return;
+  
+  if (allExercises.length === 0) {
+    exerciseTypesGrid.innerHTML = '<p>Ei liikuntasuorituksia.</p>';
+    return;
+  }
+  
+  // Kerää kaikki liikuntatyypit ja niiden esiintymät
+  const exerciseTypes = {};
+  
+  allExercises.forEach(exercise => {
+    if (!exercise.type) return;
+    
+    if (!exerciseTypes[exercise.type]) {
+      exerciseTypes[exercise.type] = {
+        count: 0,
+        totalDuration: 0
+      };
+    }
+    
+    exerciseTypes[exercise.type].count++;
+    exerciseTypes[exercise.type].totalDuration += (exercise.duration || 0);
+  });
+  
+  // Järjestä liikuntatyypit suosion mukaan
+  const sortedTypes = Object.entries(exerciseTypes).sort((a, b) => b[1].count - a[1].count);
+  
+  // Näytä enintään 6 suosituinta tyyppiä
+  const topTypes = sortedTypes.slice(0, 6);
+  
+  exerciseTypesGrid.innerHTML = topTypes.map(([type, data]) => {
+    return `
+      <div class="exercise-type-card">
+        <div class="exercise-type-icon">
+          <i class="fas fa-${getExerciseTypeIcon(type)}"></i>
+        </div>
+        <div class="exercise-type-name">${type}</div>
+        <div class="exercise-type-stats">
+          <div>${data.count} kertaa</div>
+          <div>${data.totalDuration} min</div>
+        </div>
       </div>
     `;
-    
-    exerciseSummaryEl.innerHTML = `
-      <div class="summary-grid">
-        <div class="summary-card">
-          <div class="summary-icon">
-            <i class="fas fa-running"></i>
-          </div>
-          <div class="summary-content">
-            <div class="summary-title">Liikuntakerrat</div>
-            <div class="summary-value">${exerciseSummary.totalExercises}</div>
-          </div>
-        </div>
-        
-        <div class="summary-card">
-          <div class="summary-icon">
-            <i class="fas fa-stopwatch"></i>
-          </div>
-          <div class="summary-content">
-            <div class="summary-title">Kokonaiskesto</div>
-            <div class="summary-value">${exerciseSummary.totalDuration} min</div>
-          </div>
-        </div>
-        
-        <div class="summary-card">
-          <div class="summary-icon">
-            <i class="fas fa-fire-alt"></i>
-          </div>
-          <div class="summary-content">
-            <div class="summary-title">Keskimääräinen kesto</div>
-            <div class="summary-value">${Math.round(exerciseSummary.totalDuration / exerciseSummary.totalExercises)} min</div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="summary-section">
-        <h4>Suosituimmat liikuntatyypit</h4>
-        <div class="summary-list">
-          ${topExerciseTypesHtml || '<p>Ei tarpeeksi tietoa.</p>'}
-        </div>
-      </div>
-      
-      <div class="summary-section">
-        <h4>Intensiteetti</h4>
-        ${intensityChartHtml}
-      </div>
-    `;
-  } catch (error) {
-    console.error('Virhe yhteenvedon hakemisessa:', error);
-    exerciseSummaryEl.innerHTML = '<p>Yhteenvedon hakeminen epäonnistui.</p>';
-  }
+  }).join('');
 }
 
-// Suodata liikuntamerkinnät
-function filterExercises() {
-  const searchTerm = searchInput.value.toLowerCase().trim();
-  const fromDate = dateFromInput.value ? new Date(dateFromInput.value) : null;
-  const toDate = dateToInput.value ? new Date(dateToInput.value) : null;
+// Hae liikuntatyypille ikoni
+function getExerciseTypeIcon(type) {
+  const typeLower = type.toLowerCase();
   
-  let filteredExercises = [...allExercises];
+  if (typeLower.includes('juoksu') || typeLower.includes('lenkki')) return 'running';
+  if (typeLower.includes('kävely')) return 'walking';
+  if (typeLower.includes('pyöräily')) return 'biking';
+  if (typeLower.includes('uinti')) return 'swimming-pool';
+  if (typeLower.includes('kuntosali')) return 'dumbbell';
+  if (typeLower.includes('jooga')) return 'om';
+  if (typeLower.includes('pilates')) return 'spa';
+  if (typeLower.includes('tanssi')) return 'music';
+  if (typeLower.includes('hiihto')) return 'skiing';
+  if (typeLower.includes('pallo')) return 'futbol';
   
-  // Suodata hakusanan perusteella
-  if (searchTerm) {
-    filteredExercises = filteredExercises.filter(exercise => 
-      (exercise.type && exercise.type.toLowerCase().includes(searchTerm)) ||
-      (exercise.notes && exercise.notes.toLowerCase().includes(searchTerm)) ||
-      (exercise.intensity && exercise.intensity.toLowerCase().includes(searchTerm))
-    );
-  }
-  
-  // Suodata päivämäärän perusteella
-  if (fromDate || toDate) {
-    filteredExercises = filteredExercises.filter(exercise => {
-      const exerciseDate = new Date(exercise.date);
-      return (!fromDate || exerciseDate >= fromDate) &&
-             (!toDate || exerciseDate <= toDate);
-    });
-  }
-  
-  // Näytä suodatetut liikuntamerkinnät
-  displayExercises(filteredExercises);
+  return 'running'; // Oletus
 }
 
-// Tyhjennä suodattimet
-function resetFilters() {
-  searchInput.value = '';
-  dateFromInput.value = '';
-  dateToInput.value = '';
-  displayExercises(allExercises);
-}
-
-// Avaa uuden liikuntamerkinnän lisäysmodaali
+// Avaa uuden liikuntasuorituksen lisäysmodaali
 function openNewExerciseModal() {
-  modalTitle.textContent = 'Lisää uusi liikuntamerkintä';
+  if (!exerciseModal) return;
+  
+  modalTitle.textContent = 'Lisää uusi liikuntasuoritus';
+  
   document.getElementById('exercise-id').value = '';
+  document.getElementById('exercise-date').value = formatDateForInput(new Date());
   document.getElementById('exercise-type').value = '';
   document.getElementById('exercise-duration').value = '';
-  document.getElementById('exercise-intensity').value = 'medium';
-  document.getElementById('exercise-date').value = formatDateForInput(new Date());
+  document.getElementById('exercise-intensity').value = 'Keskitaso';
   document.getElementById('exercise-notes').value = '';
   
-  deleteExerciseBtn.style.display = 'none';
+  if (otherExerciseContainer) {
+    otherExerciseContainer.classList.add('hidden');
+  }
+  
+  if (deleteExerciseBtn) {
+    deleteExerciseBtn.style.display = 'none';
+  }
+  
   currentExerciseId = null;
   
   exerciseModal.classList.add('show');
 }
 
-// Avaa liikuntamerkinnän muokkausmodaali
-async function openExerciseModal(exerciseId) {
+// Avaa liikuntasuorituksen muokkausmodaali
+async function openEditExerciseModal(exerciseId) {
+  if (!exerciseModal) return;
+  
   try {
-    modalTitle.textContent = 'Muokkaa liikuntamerkintää';
+    modalTitle.textContent = 'Muokkaa liikuntasuoritusta';
     
     const exercise = await getExerciseById(exerciseId);
     
     document.getElementById('exercise-id').value = exercise.id;
-    document.getElementById('exercise-type').value = exercise.type || '';
-    document.getElementById('exercise-duration').value = exercise.duration || '';
-    document.getElementById('exercise-intensity').value = exercise.intensity || 'medium';
     document.getElementById('exercise-date').value = formatDateForInput(exercise.date);
+    document.getElementById('exercise-duration').value = exercise.duration || '';
+    document.getElementById('exercise-intensity').value = exercise.intensity || 'Keskitaso';
     document.getElementById('exercise-notes').value = exercise.notes || '';
     
-    deleteExerciseBtn.style.display = 'block';
+    // Aseta liikuntatyyppi tai "Muu" jos tyyppiä ei löydy listasta
+    const typeExists = Array.from(exerciseTypeSelect.options).some(
+      option => option.value === exercise.type
+    );
+    
+    if (typeExists) {
+      exerciseTypeSelect.value = exercise.type;
+      if (otherExerciseContainer) {
+        otherExerciseContainer.classList.add('hidden');
+      }
+    } else {
+      exerciseTypeSelect.value = 'Muu';
+      if (otherExerciseContainer && otherExerciseInput) {
+        otherExerciseContainer.classList.remove('hidden');
+        otherExerciseInput.value = exercise.type;
+      }
+    }
+    
+    if (deleteExerciseBtn) {
+      deleteExerciseBtn.style.display = 'block';
+    }
+    
     currentExerciseId = exercise.id;
     
     exerciseModal.classList.add('show');
   } catch (error) {
-    console.error('Virhe liikuntamerkinnän hakemisessa:', error);
-    showToast('Liikuntamerkinnän hakeminen epäonnistui', 'error');
+    console.error('Virhe liikuntasuorituksen hakemisessa:', error);
+    showToast('Liikuntasuorituksen hakeminen epäonnistui', 'error');
   }
 }
 
 // Sulje modaali
 function closeModal() {
-  exerciseModal.classList.remove('show');
+  if (exerciseModal) {
+    exerciseModal.classList.remove('show');
+  }
 }
 
-// Tallenna liikuntamerkintä
+// Tallenna liikuntasuoritus
 async function saveExercise(formData) {
   try {
+    // Määritä liikuntatyyppi
+    let exerciseType = formData.get('type');
+    
+    if (exerciseType === 'Muu' && formData.get('other_type')) {
+      exerciseType = formData.get('other_type');
+    }
+    
     const exerciseData = {
-      type: formData.get('type'),
+      type: exerciseType,
       duration: parseInt(formData.get('duration'), 10) || 0,
-      intensity: formData.get('intensity'),
+      intensity: formData.get('intensity') || 'Keskitaso',
       date: formData.get('date'),
       notes: formData.get('notes')
     };
     
-    const exerciseId = formData.get('exercise-id');
+    const exerciseId = formData.get('exercise_id');
     
     if (exerciseId) {
-      // Päivitä olemassa oleva liikuntamerkintä
+      // Päivitä olemassa oleva liikuntasuoritus
       await updateExercise(exerciseId, exerciseData);
-      showToast('Liikuntamerkintä päivitetty', 'success');
+      showToast('Liikuntasuoritus päivitetty', 'success');
     } else {
-      // Lisää uusi liikuntamerkintä
+      // Lisää uusi liikuntasuoritus
       await addExercise(exerciseData);
-      showToast('Liikuntamerkintä lisätty', 'success');
+      showToast('Liikuntasuoritus lisätty', 'success');
     }
     
-    // Hae päivitetyt liikuntamerkinnät
+    // Hae päivitetyt liikuntasuoritukset
     await fetchAllExercises();
     
     // Sulje modaali
     closeModal();
   } catch (error) {
-    console.error('Virhe liikuntamerkinnän tallentamisessa:', error);
-    showToast('Liikuntamerkinnän tallentaminen epäonnistui', 'error');
+    console.error('Virhe liikuntasuorituksen tallentamisessa:', error);
+    showToast('Liikuntasuorituksen tallentaminen epäonnistui', 'error');
   }
 }
 
-// Poista liikuntamerkintä
+// Poista liikuntasuoritus
 async function removeExercise(exerciseId) {
-  if (!confirm('Haluatko varmasti poistaa tämän liikuntamerkinnän?')) {
+  if (!confirm('Haluatko varmasti poistaa tämän liikuntasuorituksen?')) {
     return;
   }
   
   try {
     await deleteExercise(exerciseId);
-    showToast('Liikuntamerkintä poistettu', 'success');
+    showToast('Liikuntasuoritus poistettu', 'success');
     
-    // Hae päivitetyt liikuntamerkinnät
+    // Hae päivitetyt liikuntasuoritukset
     await fetchAllExercises();
     
     // Sulje modaali
     closeModal();
   } catch (error) {
-    console.error('Virhe liikuntamerkinnän poistamisessa:', error);
-    showToast('Liikuntamerkinnän poistaminen epäonnistui', 'error');
+    console.error('Virhe liikuntasuorituksen poistamisessa:', error);
+    showToast('Liikuntasuorituksen poistaminen epäonnistui', 'error');
   }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Hae napit ja modalin elementit
-  const addExerciseBtn = document.getElementById("add-exercise-btn");
-  const modal = document.getElementById("exercise-modal");
-  const modalTitle = document.getElementById("exercise-modal-title");
-  const closeModalBtn = document.getElementById("close-exercise-modal");
+// Kalenteri-toiminnallisuus
+let currentDate = new Date();
 
-  // Tarkista, että elementit löytyvät
-  if (!addExerciseBtn || !modal || !modalTitle || !closeModalBtn) {
-      console.error("Yksi tai useampi modalin elementti puuttuu!");
-      return;
+// Renderöi liikuntakalenteri
+function renderExerciseCalendar() {
+  if (!exerciseCalendar || !currentMonthEl) return;
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  
+  // Aseta kuukauden nimi
+  const monthName = new Date(year, month, 1).toLocaleDateString('fi-FI', { month: 'long', year: 'numeric' });
+  currentMonthEl.textContent = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+  
+  // Hae kuukauden ensimmäinen ja viimeinen päivä
+  const firstDayOfMonth = new Date(year, month, 1);
+  const lastDayOfMonth = new Date(year, month + 1, 0);
+  
+  // Hae ensimmäisen päivän viikonpäivä (0 = sunnuntai, 1 = maanantai, jne.)
+  // Suomen kalenterissa viikko alkaa maanantaista (1), joten tehdään korjaus
+  let firstDayIndex = firstDayOfMonth.getDay();
+  if (firstDayIndex === 0) firstDayIndex = 7; // Sunnuntai on 7, ei 0
+  firstDayIndex--; // Maanantai on 0, tiistai on 1, jne.
+  
+  // Hae päivien lukumäärä kuukaudessa
+  const daysInMonth = lastDayOfMonth.getDate();
+  
+  // Luo kalenterin päät ja rivi päiville
+  let calendarHTML = `
+    <div class="calendar-day-header">Ma</div>
+    <div class="calendar-day-header">Ti</div>
+    <div class="calendar-day-header">Ke</div>
+    <div class="calendar-day-header">To</div>
+    <div class="calendar-day-header">Pe</div>
+    <div class="calendar-day-header">La</div>
+    <div class="calendar-day-header">Su</div>
+  `;
+  
+  // Lisää edellisen kuukauden päivät
+  const prevMonthLastDay = new Date(year, month, 0).getDate();
+  
+  for (let i = firstDayIndex - 1; i >= 0; i--) {
+    const dayNumber = prevMonthLastDay - i;
+    const dateString = `${year}-${String(month).padStart(2, '0')}-${String(dayNumber).padStart(2, '0')}`;
+    calendarHTML += `
+      <div class="calendar-day other-month" data-date="${dateString}">
+        <div class="calendar-day-number">${dayNumber}</div>
+        <div class="calendar-day-entries"></div>
+      </div>
+    `;
   }
-
-  // Funktio modalin avaamiseen
-  function openNewExerciseModal() {
-      modalTitle.textContent = "Lisää uusi liikuntasuoritus"; // Varmistetaan, että elementti on käytettävissä
-      modal.style.display = "block";
+  
+  // Lisää tämän kuukauden päivät
+  const today = new Date();
+  
+  for (let i = 1; i <= daysInMonth; i++) {
+    const date = new Date(year, month, i);
+    const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+    
+    // Tarkista, onko päivä tänään
+    const isToday = date.getDate() === today.getDate() && 
+                    date.getMonth() === today.getMonth() && 
+                    date.getFullYear() === today.getFullYear();
+    
+    // Tarkista, onko päivälle liikuntasuorituksia
+    const dayExercises = allExercises.filter(exercise => {
+      const exerciseDate = new Date(exercise.date);
+      return exerciseDate.getDate() === i && 
+            exerciseDate.getMonth() === month && 
+            exerciseDate.getFullYear() === year;
+    });
+    
+    // Koosta päivän HTML
+    calendarHTML += `
+      <div class="calendar-day${isToday ? ' today' : ''}${dayExercises.length > 0 ? ' has-entry' : ''}" data-date="${dateString}">
+        <div class="calendar-day-number">${i}</div>
+        <div class="calendar-day-entries">
+          ${dayExercises.map(exercise => {
+            // Määritä väri intensiteetin mukaan
+            let color = '#3498db'; // Oletus
+            switch(exercise.intensity && exercise.intensity.toLowerCase()) {
+              case 'raskas':
+                color = '#e74c3c';
+                break;
+              case 'keskitaso':
+                color = '#f39c12';
+                break;
+              case 'kevyt':
+                color = '#2ecc71';
+                break;
+            }
+            
+            return `<div class="calendar-entry-indicator" style="background-color: ${color};" title="${exercise.type}: ${exercise.duration} min"></div>`;
+          }).join('')}
+        </div>
+      </div>
+    `;
   }
-
-  // Funktio modalin sulkemiseen
-  function closeExerciseModal() {
-      modal.style.display = "none";
+  
+  // Lisää seuraavan kuukauden päiviä tarvittava määrä
+  const daysToAdd = 42 - (firstDayIndex + daysInMonth);
+  
+  for (let i = 1; i <= daysToAdd; i++) {
+    const dateString = `${year}-${String(month + 2).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+    calendarHTML += `
+      <div class="calendar-day other-month" data-date="${dateString}">
+        <div class="calendar-day-number">${i}</div>
+        <div class="calendar-day-entries"></div>
+      </div>
+    `;
   }
+  
+  // Aseta HTML kalenteriin
+  exerciseCalendar.innerHTML = calendarHTML;
+  
+  // Lisää click-tapahtuma päiville
+  document.querySelectorAll('.calendar-day').forEach(day => {
+    day.addEventListener('click', () => {
+      const dateString = day.dataset.date;
+      openNewExerciseWithDate(dateString);
+    });
+  });
+}
 
-  // Lisää event listener napille
-  addExerciseBtn.addEventListener("click", openNewExerciseModal);
-  closeModalBtn.addEventListener("click", closeExerciseModal);
+// Vaihda kuukautta eteen- tai taaksepäin
+function changeMonth(amount) {
+  currentDate.setMonth(currentDate.getMonth() + amount);
+  renderExerciseCalendar();
+}
 
-  // Sulje modal klikkaamalla taustaa
-  window.addEventListener("click", function(event) {
-      if (event.target === modal) {
-          closeExerciseModal();
+// Avaa uusi liikuntasuoritus valitulla päivämäärällä
+function openNewExerciseWithDate(dateString) {
+  if (!exerciseModal) return;
+  
+  modalTitle.textContent = 'Lisää uusi liikuntasuoritus';
+  
+  document.getElementById('exercise-id').value = '';
+  document.getElementById('exercise-date').value = dateString || formatDateForInput(new Date());
+  document.getElementById('exercise-type').value = '';
+  document.getElementById('exercise-duration').value = '';
+  document.getElementById('exercise-intensity').value = 'Keskitaso';
+  document.getElementById('exercise-notes').value = '';
+  
+  if (otherExerciseContainer) {
+    otherExerciseContainer.classList.add('hidden');
+  }
+  
+  if (deleteExerciseBtn) {
+    deleteExerciseBtn.style.display = 'none';
+  }
+  
+  currentExerciseId = null;
+  
+  exerciseModal.classList.add('show');
+}
+
+// Tapahtumankäsittelijät
+document.addEventListener('DOMContentLoaded', () => {
+  // Hae liikuntasuoritukset
+  fetchAllExercises().then(() => {
+    // Renderöi kalenteri kun data on haettu
+    renderExerciseCalendar();
+  });
+  
+  // Kalenterin kuukauden vaihto
+  if (prevMonthBtn) {
+    prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+  }
+  
+  if (nextMonthBtn) {
+    nextMonthBtn.addEventListener('click', () => changeMonth(1));
+  }
+  
+  // Muu liikuntalaji -kenttä
+  if (exerciseTypeSelect) {
+    exerciseTypeSelect.addEventListener('change', function() {
+      if (this.value === 'Muu' && otherExerciseContainer) {
+        otherExerciseContainer.classList.remove('hidden');
+      } else if (otherExerciseContainer) {
+        otherExerciseContainer.classList.add('hidden');
       }
+    });
+  }
+  
+  // Lisää liikuntasuoritus -nappi
+  if (addExerciseBtn) {
+    addExerciseBtn.addEventListener('click', openNewExerciseModal);
+  }
+  
+  // Liikuntasuorituksen tallennus
+  if (exerciseForm) {
+    exerciseForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(exerciseForm);
+      await saveExercise(formData);
+    });
+  }
+  
+  // Sulje modaali -nappi
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
+  
+  // Poista liikuntasuoritus -nappi
+  if (deleteExerciseBtn) {
+    deleteExerciseBtn.addEventListener('click', () => {
+      if (currentExerciseId) {
+        removeExercise(currentExerciseId);
+      }
+    });
+  }
+  
+  // Sulje modaali, kun klikataan taustaa
+  window.addEventListener('click', (e) => {
+    if (e.target === exerciseModal) {
+      closeModal();
+    }
   });
 });

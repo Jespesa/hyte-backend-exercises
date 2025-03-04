@@ -1,0 +1,99 @@
+/* Ravintosivun tyylit */
+.nutrition-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .header-with-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  /* Tulossa pian -kortti */
+  .coming-soon-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .coming-soon-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+  }
+  
+  .coming-soon-card h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+  }
+  
+  .coming-soon-card p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  
+  .coming-soon-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 400px;
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  
+  .coming-soon-card li {
+    padding: 0.6rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  
+  .coming-soon-card li i {
+    color: var(--secondary-color);
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Responsiivisuus */
+  @media (max-width: 768px) {
+    .header-with-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .header-with-actions button {
+      width: 100%;
+    }
+    
+    .coming-soon-card {
+      padding: 1.5rem;
+    }
+  }
