@@ -109,27 +109,3 @@ export {
     formatDateForInput,
     displayUsername
 };
-
-// Uloskirjautuminen
-function logout() {
-    // Poista token ja käyttäjätiedot
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    
-    // Näytä käyttäjälle ilmoitus
-    showToast('Uloskirjautuminen onnistui', 'success');
-    
-    // Viive ennen uudelleenohjausta, jotta ilmoitus näkyy
-    setTimeout(() => {
-        // Ohjaa käyttäjä kirjautumissivulle
-        // Tarkistetaan ensin, millä sivulla ollaan
-        const pathParts = window.location.pathname.split('/');
-        const isInSubfolder = pathParts.includes('pages') || pathParts.includes('src');
-        
-        if (isInSubfolder) {
-            window.location.href = '../../index.html'; // Jos ollaan alikansiossa
-        } else {
-            window.location.href = 'index.html'; // Jos ollaan päätasolla
-        }
-    }, 1500);
-}
