@@ -389,60 +389,38 @@ async function removeExercise(exerciseId) {
   }
 }
 
-// Tapahtumankäsittelijät
-document.addEventListener('DOMContentLoaded', () => {
-  // Hae liikuntamerkinnät
-  fetchAllExercises();
-  
-  // Lisää tapahtumankäsittelijät
-  if (searchBtn) {
-    searchBtn.addEventListener('click', filterExercises);
+document.addEventListener("DOMContentLoaded", function() {
+  // Hae napit ja modalin elementit
+  const addExerciseBtn = document.getElementById("add-exercise-btn");
+  const modal = document.getElementById("exercise-modal");
+  const modalTitle = document.getElementById("exercise-modal-title");
+  const closeModalBtn = document.getElementById("close-exercise-modal");
+
+  // Tarkista, että elementit löytyvät
+  if (!addExerciseBtn || !modal || !modalTitle || !closeModalBtn) {
+      console.error("Yksi tai useampi modalin elementti puuttuu!");
+      return;
   }
-  
-  if (searchInput) {
-    searchInput.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        filterExercises();
+
+  // Funktio modalin avaamiseen
+  function openNewExerciseModal() {
+      modalTitle.textContent = "Lisää uusi liikuntasuoritus"; // Varmistetaan, että elementti on käytettävissä
+      modal.style.display = "block";
+  }
+
+  // Funktio modalin sulkemiseen
+  function closeExerciseModal() {
+      modal.style.display = "none";
+  }
+
+  // Lisää event listener napille
+  addExerciseBtn.addEventListener("click", openNewExerciseModal);
+  closeModalBtn.addEventListener("click", closeExerciseModal);
+
+  // Sulje modal klikkaamalla taustaa
+  window.addEventListener("click", function(event) {
+      if (event.target === modal) {
+          closeExerciseModal();
       }
-    });
-  }
-  
-  if (filterDateBtn) {
-    filterDateBtn.addEventListener('click', filterExercises);
-  }
-  
-  if (resetFilterBtn) {
-    resetFilterBtn.addEventListener('click', resetFilters);
-  }
-  
-  if (addExerciseBtn) {
-    addExerciseBtn.addEventListener('click', openNewExerciseModal);
-  }
-  
-  if (exerciseForm) {
-    exerciseForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = new FormData(exerciseForm);
-      await saveExercise(formData);
-    });
-  }
-  
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener('click', closeModal);
-  }
-  
-  if (deleteExerciseBtn) {
-    deleteExerciseBtn.addEventListener('click', () => {
-      if (currentExerciseId) {
-        removeExercise(currentExerciseId);
-      }
-    });
-  }
-  
-  // Sulje modaali, kun klikataan taustaa
-  window.addEventListener('click', (e) => {
-    if (e.target === exerciseModal) {
-      closeModal();
-    }
   });
 });
