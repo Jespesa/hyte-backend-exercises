@@ -20,6 +20,7 @@
     "prettier": "3.4.2"
   },
   "dependencies": {
+    "apidoc": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
