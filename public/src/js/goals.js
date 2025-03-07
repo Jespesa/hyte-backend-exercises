@@ -1,6 +1,31 @@
+// Debugging helpers
+window.addEventListener('error', function(event) {
+    console.error('Global error caught:', event.error);
+});
+
+function debugElement(id, name) {
+    const element = document.getElementById(id);
+    console.log(`Element ${name} (${id}): ${element ? 'FOUND' : 'NOT FOUND'}`);
+    return element;
+}
+
+// Test API connection
+async function testApiConnection() {
+    try {
+        console.log('Testing API connection...');
+        const goals = await getGoals();
+        console.log('API connection successful, got', goals.length, 'goals');
+        return true;
+    } catch (error) {
+        console.error('API connection test failed:', error);
+        return false;
+    }
+}
+
 // Tavoitesivun toiminnallisuudet
-import { checkAuth, showToast, formatDate } from './main.js';
+import { checkAuth, showToast, formatDate, formatDateForInput } from './main.js';
 import { getEntries } from './api.js';
+import { getGoals, getGoalById, addGoal, updateGoal, deleteGoal, completeGoal } from './api-goals.js';
 
 // Varmistetaan, että käyttäjä on kirjautunut
 if (!checkAuth()) {
@@ -50,22 +75,16 @@ const deleteGoalConfirmBtn = document.getElementById('delete-goal-confirm-btn');
 const addGoalBtn = document.getElementById('add-goal-btn');
 const goalsContainer = document.getElementById('goals-container');
 
-// Simuloidaan tavoitteiden tallennus ja lataus (todellisessa sovelluksessa käytettäisiin API:a)
-function loadGoals() {
-    const storedGoals = localStorage.getItem('healthDiaryGoals');
-    if (storedGoals) {
-        try {
-            allGoals = JSON.parse(storedGoals);
-        } catch (error) {
-            console.error('Virhe tavoitteiden latauksessa:', error);
-            allGoals = [];
-        }
+// Tavoitteiden lataus API:n kautta
+async function loadGoals() {
+    try {
+        const goals = await getGoals();
+        allGoals = goals;
+        renderGoals();
+    } catch (error) {
+        console.error('Virhe tavoitteiden haussa:', error);
+        showToast('Tavoitteiden hakeminen epäonnistui', 'error');
     }
-    renderGoals();
-}
-
-function saveGoals() {
-    localStorage.setItem('healthDiaryGoals', JSON.stringify(allGoals));
 }
 
 // Tavoitteiden renderöinti
@@ -120,13 +139,13 @@ function createGoalItemHTML(goal) {
     if (goal.completed) {
         statusBadge = '<span class="goal-badge completed">Saavutettu</span>';
         timeframeHtml = `
-            <div><i class="fas fa-calendar-alt"></i> ${formatDate(goal.startDate)} - ${formatDate(goal.endDate)}</div>
-            <div><i class="fas fa-check"></i> Saavutettu ${formatDate(goal.completedDate || new Date())}</div>
+            <div><i class="fas fa-calendar-alt"></i> ${formatDate(goal.start_date)} - ${formatDate(goal.end_date)}</div>
+            <div><i class="fas fa-check"></i> Saavutettu ${formatDate(goal.completed_date || new Date())}</div>
         `;
     } else {
         // Tarkista, onko tavoite myöhässä
         const now = new Date();
-        const endDate = new Date(goal.endDate);
+        const endDate = new Date(goal.end_date);
         const isOverdue = endDate < now;
         
         if (isOverdue) {
@@ -142,7 +161,7 @@ function createGoalItemHTML(goal) {
         const daysLeft = Math.max(0, Math.ceil((endDate - now) / (1000 * 60 * 60 * 24)));
         
         timeframeHtml = `
-            <div><i class="fas fa-calendar-alt"></i> ${formatDate(goal.startDate)} - ${formatDate(goal.endDate)}</div>
+            <div><i class="fas fa-calendar-alt"></i> ${formatDate(goal.start_date)} - ${formatDate(goal.end_date)}</div>
             <div><i class="fas fa-clock"></i> ${daysLeft} päivää jäljellä</div>
         `;
     }
@@ -151,7 +170,7 @@ function createGoalItemHTML(goal) {
     const targetValueHtml = getTargetValueHtml(goal, progress);
     
     return `
-        <li class="goal-item" data-id="${goal.id}">
+        <li class="goal-item" data-id="${goal.goal_id}">
             <div class="goal-item-header">
                 <h4 class="goal-title"><i class="${icon}"></i> ${goal.title}</h4>
                 <div class="goal-badges">
@@ -175,25 +194,27 @@ function createGoalItemHTML(goal) {
                     ${timeframeHtml}
                 </div>
                 <div class="goal-actions">
-                    <button class="goal-action-btn edit" data-id="${goal.id}"><i class="fas fa-edit"></i></button>
-                    <button class="goal-action-btn delete" data-id="${goal.id}"><i class="fas fa-trash"></i></button>
+                    <button class="goal-action-btn edit" data-id="${goal.goal_id}"><i class="fas fa-edit"></i></button>
+                    <button class="goal-action-btn delete" data-id="${goal.goal_id}"><i class="fas fa-trash"></i></button>
                 </div>
             </div>
         </li>
     `;
 }
 
+// Rest of your functions remain mostly the same, with updates to use the backend API
+
 // Hae tavoitteen edistymisteksti tavoitetyypin mukaan
 function getTargetValueHtml(goal, progress) {
     switch (goal.type) {
         case 'weight':
-            const currentWeight = getLatestValue('weight') || goal.startValue;
-            return `${Math.round(progress || 0)}% (${goal.startValue} kg → ${currentWeight} kg / ${goal.targetValue} kg)`;
+            const currentWeight = getLatestValue('weight') || goal.start_value;
+            return `${Math.round(progress || 0)}% (${goal.start_value} kg → ${currentWeight} kg / ${goal.target_value} kg)`;
         
         case 'sleep':
             // Laske, montako kertaa tavoite on saavutettu
-            const sleepTarget = goal.targetValue || 7;
-            const sleepEntries = getEntriesBetweenDates(goal.startDate, goal.endDate)
+            const sleepTarget = goal.target_value || 7;
+            const sleepEntries = getEntriesBetweenDates(goal.start_date, goal.end_date)
                 .filter(entry => entry.sleep_hours != null);
             
             const successfulDays = sleepEntries.filter(entry => entry.sleep_hours >= sleepTarget).length;
@@ -207,7 +228,7 @@ function getTargetValueHtml(goal, progress) {
         
         case 'mood':
             // Laske mielialan keskiarvo
-            const moodEntries = getEntriesBetweenDates(goal.startDate, goal.endDate)
+            const moodEntries = getEntriesBetweenDates(goal.start_date, goal.end_date)
                 .filter(entry => entry.mood != null);
             
             if (moodEntries.length === 0) {
@@ -215,7 +236,7 @@ function getTargetValueHtml(goal, progress) {
             }
             
             const avgMood = moodEntries.reduce((sum, entry) => sum + parseFloat(entry.mood), 0) / moodEntries.length;
-            return `${avgMood.toFixed(1)}/10 (tavoite: ${goal.targetValue}/10)`;
+            return `${avgMood.toFixed(1)}/10 (tavoite: ${goal.target_value}/10)`;
         
         default:
             return `${Math.round(progress || 0)}%`;
@@ -228,16 +249,15 @@ function calculateGoalProgress(goal) {
     
     switch (goal.type) {
         case 'weight':
-            const currentWeight = getLatestValue('weight') || goal.startValue;
-            const totalChange = goal.startValue - goal.targetValue;
-            const currentChange = goal.startValue - currentWeight;
+            const currentWeight = getLatestValue('weight') || goal.start_value;
+            const totalChange = goal.start_value - goal.target_value;
+            const currentChange = goal.start_value - currentWeight;
             
             // Jos tavoite on saavutettu (paino on tavoitteessa)
-            if ((goal.targetDirection === 'decrease' && currentWeight <= goal.targetValue) ||
-                (goal.targetDirection === 'increase' && currentWeight >= goal.targetValue)) {
+            if ((goal.target_direction === 'decrease' && currentWeight <= goal.target_value) ||
+                (goal.target_direction === 'increase' && currentWeight >= goal.target_value)) {
                 return 100;
             }
-            
             
             // Jos totalChange on 0 tai lähellä nollaa, vältetään jakaminen nollalla
             if (Math.abs(totalChange) < 0.1) return 0;
@@ -247,8 +267,8 @@ function calculateGoalProgress(goal) {
         
         case 'sleep':
             // Laske, montako kertaa tavoite on saavutettu
-            const sleepTarget = goal.targetValue || 7;
-            const sleepEntries = getEntriesBetweenDates(goal.startDate, goal.endDate)
+            const sleepTarget = goal.target_value || 7;
+            const sleepEntries = getEntriesBetweenDates(goal.start_date, goal.end_date)
                 .filter(entry => entry.sleep_hours != null);
             
             const successfulDays = sleepEntries.filter(entry => entry.sleep_hours >= sleepTarget).length;
@@ -260,13 +280,13 @@ function calculateGoalProgress(goal) {
         
         case 'mood':
             // Laske mielialan keskiarvo
-            const moodEntries = getEntriesBetweenDates(goal.startDate, goal.endDate)
+            const moodEntries = getEntriesBetweenDates(goal.start_date, goal.end_date)
                 .filter(entry => entry.mood != null);
             
             if (moodEntries.length === 0) return 0;
             
             const avgMood = moodEntries.reduce((sum, entry) => sum + parseFloat(entry.mood), 0) / moodEntries.length;
-            const targetMood = goal.targetValue || 7;
+            const targetMood = goal.target_value || 7;
             
             // Jos tavoite on saavutettu
             if (avgMood >= targetMood) return 100;
@@ -347,177 +367,230 @@ function addGoalItemEventListeners() {
     });
 }
 
-// Avaa uuden tavoitteen lisäysmodaali
 function openNewGoalModal() {
+    console.log('Opening new goal modal');
+    
+    if (!goalModal) {
+        console.error('Goal modal not found');
+        return;
+    }
+    
     goalModalTitle.textContent = 'Lisää uusi tavoite';
-    goalId.value = '';
-    goalTitle.value = '';
-    goalDescription.value = '';
+    
+    // Clear form
+    if (goalForm) goalForm.reset();
+    if (goalId) goalId.value = '';
+    if (goalTitle) goalTitle.value = '';
+    if (goalDescription) goalDescription.value = '';
     
     // Aseta oletusarvoiset päivämäärät
     const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    
     const oneMonthLater = new Date(today);
     oneMonthLater.setMonth(today.getMonth() + 1);
     
-    goalStartDate.value = formatDateForInput(today);
-    goalEndDate.value = formatDateForInput(oneMonthLater);
+    if (goalStartDate) goalStartDate.value = formatDateForInput(today);
+    if (goalEndDate) goalEndDate.value = formatDateForInput(oneMonthLater);
     
     // Nollaa tavoitetyyppi ja valitse viimeksi käytetty tyyppi
-    selectGoalType(lastSelectedGoalType);
+    selectGoalType(lastSelectedGoalType || 'weight');
     
-    // Näytä modaali
+    // This is critical - make the modal visible
+    console.log('Adding show class to modal');
+    goalModal.style.display = 'block'; // Add this direct style
     goalModal.classList.add('show');
+    
+    // Debug whether the show class worked
+    console.log('Modal classes after:', goalModal.className);
+    console.log('Modal display style:', goalModal.style.display);
 }
 
 // Avaa tavoitteen muokkausmodaali
 function openEditGoalModal(id) {
-    const goal = allGoals.find(g => g.id == id);
-    if (!goal) return;
+    console.log('Opening edit goal modal for ID:', id);
     
-    goalModalTitle.textContent = 'Muokkaa tavoitetta';
-    goalId.value = goal.id;
-    goalTitle.value = goal.title || '';
-    goalDescription.value = goal.description || '';
-    goalStartDate.value = formatDateForInput(goal.startDate || new Date());
-    goalEndDate.value = formatDateForInput(goal.endDate || new Date());
+    if (!goalModal) {
+        console.error('Goal modal not found');
+        return;
+    }
     
-    // Valitse tavoitetyyppi
-    selectGoalType(goal.type || 'weight');
-    
-    // Täytä tavoitearvot
-    setTimeout(() => {
-        const targetInput = document.getElementById('goal-target-value');
-        if (targetInput) targetInput.value = goal.targetValue || '';
+    try {
+        goalModalTitle.textContent = 'Muokkaa tavoitetta';
         
-        const startValueInput = document.getElementById('goal-start-value');
-        if (startValueInput) startValueInput.value = goal.startValue || '';
-        
-        const directionSelect = document.getElementById('goal-target-direction');
-        if (directionSelect) directionSelect.value = goal.targetDirection || 'decrease';
-    }, 100);
-    
-    // Näytä modaali
-    goalModal.classList.add('show');
+        // Hae tavoitteen tiedot API:sta
+        console.log('Fetching goal data from API...');
+        getGoalById(id).then(goal => {
+            console.log('Goal data received:', goal);
+            
+            if (goalId) goalId.value = goal.goal_id;
+            if (goalTitle) goalTitle.value = goal.title || '';
+            if (goalDescription) goalDescription.value = goal.description || '';
+            if (goalStartDate) goalStartDate.value = formatDateForInput(goal.start_date || new Date());
+            if (goalEndDate) goalEndDate.value = formatDateForInput(goal.end_date || new Date());
+            
+            // Valitse tavoitetyyppi
+            selectGoalType(goal.type || 'weight');
+            
+            // Täytä tavoitearvot
+            setTimeout(() => {
+                const targetInput = document.getElementById('goal-target-value');
+                if (targetInput) targetInput.value = goal.target_value || '';
+                
+                const startValueInput = document.getElementById('goal-start-value');
+                if (startValueInput) startValueInput.value = goal.start_value || '';
+                
+                const directionSelect = document.getElementById('goal-target-direction');
+                if (directionSelect) directionSelect.value = goal.target_direction || 'decrease';
+            }, 100);
+            
+            // Make the modal visible
+            goalModal.style.display = 'block'; // Direct style
+            goalModal.classList.add('show');
+        }).catch(error => {
+            console.error('Error fetching goal:', error);
+            showToast('Tavoitteen tietojen hakeminen epäonnistui', 'error');
+        });
+    } catch (error) {
+        console.error('Error in openEditGoalModal:', error);
+        showToast('Tavoitteen tietojen hakeminen epäonnistui', 'error');
+    }
 }
+
+
 
 // Avaa tavoitteen poistomodaali
 function openDeleteGoalModal(id) {
-    const goal = allGoals.find(g => g.id == id);
-    if (!goal) return;
+    console.log('Opening delete goal modal for ID:', id);
     
-    deleteGoalTitle.textContent = goal.title;
-    currentGoalId = goal.id;
+    if (!deleteGoalModal) {
+        console.error('Delete goal modal not found');
+        return;
+    }
     
-    // Näytä modaali
+    const goal = allGoals.find(g => g.goal_id == id);
+    if (!goal) {
+        console.error('Goal not found in allGoals');
+        return;
+    }
+    
+    if (deleteGoalTitle) deleteGoalTitle.textContent = goal.title;
+    currentGoalId = goal.goal_id;
+    
+    // Make the modal visible
+    deleteGoalModal.style.display = 'block'; // Direct style
     deleteGoalModal.classList.add('show');
 }
 
 // Sulje tavoitemodaali
 function closeGoalModalHandler() {
+    console.log('Closing goal modal');
+    
+    if (!goalModal) {
+        console.error('Goal modal not found');
+        return;
+    }
+    
     goalModal.classList.remove('show');
+    // Additional way to hide the modal
+    setTimeout(() => {
+        goalModal.style.display = 'none';
+    }, 300); // Short delay to allow for animation
 }
 
 // Sulje poistomodaali
 function closeDeleteGoalModalHandler() {
+    console.log('Closing delete goal modal');
+    
+    if (!deleteGoalModal) {
+        console.error('Delete goal modal not found');
+        return;
+    }
+    
     deleteGoalModal.classList.remove('show');
+    // Additional way to hide the modal
+    setTimeout(() => {
+        deleteGoalModal.style.display = 'none';
+    }, 300); // Short delay to allow for animation
 }
 
 // Tallenna tavoite
-function saveGoal(formData) {
-    // Määritä id:t uudelle tai muokattavalle tavoitteelle
-    const id = formData.get('goal-id') || Date.now().toString();
-    
-    // Löydä mahdollinen olemassa oleva tavoite
-    const existingGoalIndex = allGoals.findIndex(g => g.id == id);
-    
-    // Kerää tavoitteen perustiedot
-    const goal = {
-        id,
-        title: formData.get('title'),
-        type: formData.get('type'),
-        description: formData.get('description'),
-        startDate: formData.get('start_date'),
-        endDate: formData.get('end_date'),
-        created: existingGoalIndex >= 0 ? allGoals[existingGoalIndex].created : new Date(),
-        modified: new Date()
-    };
-    
-    // Lisää tyyppikohtaiset tiedot
-    switch (goal.type) {
-        case 'weight':
-            goal.startValue = parseFloat(formData.get('start_value')) || getLatestValue('weight') || 70;
-            goal.targetValue = parseFloat(formData.get('target_value')) || 65;
-            goal.targetDirection = formData.get('target_direction') || 'decrease';
-            break;
+async function saveGoal(formData) {
+    try {
+        // Määritä id:t uudelle tai muokattavalle tavoitteelle
+        const id = formData.get('goal-id');
         
-        case 'sleep':
-            goal.targetValue = parseFloat(formData.get('target_value')) || 7;
-            break;
+        // Kerää tavoitteen perustiedot
+        const goalData = {
+            title: formData.get('title'),
+            type: formData.get('type'),
+            description: formData.get('description'),
+            start_date: formData.get('start_date'),
+            end_date: formData.get('end_date')
+        };
         
-        case 'mood':
-            goal.targetValue = parseFloat(formData.get('target_value')) || 7;
-            break;
-        
-        case 'custom':
-            goal.startValue = parseFloat(formData.get('start_value')) || 0;
-            goal.targetValue = parseFloat(formData.get('target_value')) || 100;
-            goal.targetDirection = formData.get('target_direction') || 'increase';
-            goal.unit = formData.get('unit') || '%';
-            break;
-    }
-    
-    // Tarkista onko tavoite jo saavutettu
-    const progress = calculateGoalProgress(goal);
-    if (progress >= 100 && !goal.completed) {
-        goal.completed = true;
-        goal.completedDate = new Date();
-    }
-    
-    // Tallenna tavoite
-    if (existingGoalIndex >= 0) {
-        // Säilytä completed ja completedDate arvot, jos ne olivat jo asetettu
-        if (allGoals[existingGoalIndex].completed) {
-            goal.completed = true;
-            goal.completedDate = allGoals[existingGoalIndex].completedDate;
+        // Lisää tyyppikohtaiset tiedot
+        switch (goalData.type) {
+            case 'weight':
+                goalData.start_value = parseFloat(formData.get('start_value')) || getLatestValue('weight') || 70;
+                goalData.target_value = parseFloat(formData.get('target_value')) || 65;
+                goalData.target_direction = formData.get('target_direction') || 'decrease';
+                goalData.unit = 'kg';
+                break;
+            
+            case 'sleep':
+                goalData.target_value = parseFloat(formData.get('target_value')) || 7;
+                goalData.unit = 'h';
+                break;
+            
+            case 'mood':
+                goalData.target_value = parseFloat(formData.get('target_value')) || 7;
+                break;
+            
+            case 'custom':
+                goalData.start_value = parseFloat(formData.get('start_value')) || 0;
+                goalData.target_value = parseFloat(formData.get('target_value')) || 100;
+                goalData.target_direction = formData.get('target_direction') || 'increase';
+                goalData.unit = formData.get('unit') || '%';
+                break;
         }
         
-        allGoals[existingGoalIndex] = goal;
-    } else {
-        allGoals.push(goal);
+        if (id) {
+            // Päivitä olemassa oleva tavoite
+            await updateGoal(id, goalData);
+            showToast('Tavoite päivitetty', 'success');
+        } else {
+            // Lisää uusi tavoite
+            await addGoal(goalData);
+            showToast('Uusi tavoite lisätty', 'success');
+        }
+        
+        // Tallenna viimeisin tavoitetyyppi
+        lastSelectedGoalType = goalData.type;
+        
+        // Päivitä tavoitteet
+        await loadGoals();
+        
+        // Sulje modaali
+        closeGoalModalHandler();
+    } catch (error) {
+        console.error('Virhe tavoitteen tallentamisessa:', error);
+        showToast('Tavoitteen tallentaminen epäonnistui: ' + error.message, 'error');
     }
-    
-    // Tallenna viimeisin tavoitetyyppi
-    lastSelectedGoalType = goal.type;
-    
-    // Päivitä tavoitteet
-    saveGoals();
-    renderGoals();
-    
-    // Sulje modaali
-    closeGoalModalHandler();
-    
-    // Näytä ilmoitus
-    showToast(existingGoalIndex >= 0 ? 'Tavoite päivitetty' : 'Uusi tavoite lisätty', 'success');
 }
 
 // Poista tavoite
-function deleteGoal(id) {
-    // Etsi tavoitteen indeksi
-    const goalIndex = allGoals.findIndex(g => g.id == id);
-    
-    if (goalIndex >= 0) {
+async function deleteGoalFromAPI(id) {
+    try {
         // Poista tavoite
-        allGoals.splice(goalIndex, 1);
+        await deleteGoal(id);
         
         // Päivitä tavoitteet
-        saveGoals();
-        renderGoals();
+        await loadGoals();
         
         // Näytä ilmoitus
         showToast('Tavoite poistettu', 'success');
+    } catch (error) {
+        console.error('Virhe tavoitteen poistamisessa:', error);
+        showToast('Tavoitteen poistaminen epäonnistui: ' + error.message, 'error');
     }
     
     // Sulje modaali
@@ -632,12 +705,6 @@ function updateGoalTargetFields(type) {
     goalTargetContainer.innerHTML = html;
 }
 
-// Aputoiminto päivämäärän formatointiin lomaketta varten
-function formatDateForInput(dateString) {
-    const date = new Date(dateString);
-    return date.toISOString().split('T')[0];
-}
-
 // Hae merkinnät
 async function fetchAllEntries() {
     try {
@@ -689,39 +756,75 @@ function initializeMobileNav() {
 
 // Tapahtumankäsittelijät
 document.addEventListener('DOMContentLoaded', () => {
+    // Test API connection
+    testApiConnection();
+
+    // Ensure modals have the right base styles in case CSS is missing
+    if (goalModal) {
+        goalModal.style.position = 'fixed';
+        goalModal.style.zIndex = '100';
+        goalModal.style.left = '0';
+        goalModal.style.top = '0';
+        goalModal.style.width = '100%';
+        goalModal.style.height = '100%';
+        goalModal.style.overflow = 'auto';
+        goalModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        goalModal.style.display = 'none'; // Hidden by default
+    }
+
+    if (deleteGoalModal) {
+        deleteGoalModal.style.position = 'fixed';
+        deleteGoalModal.style.zIndex = '100';
+        deleteGoalModal.style.left = '0';
+        deleteGoalModal.style.top = '0';
+        deleteGoalModal.style.width = '100%';
+        deleteGoalModal.style.height = '100%';
+        deleteGoalModal.style.overflow = 'auto';
+        deleteGoalModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        deleteGoalModal.style.display = 'none'; // Hidden by default
+    }
+
+    // After 1 second, inspect modal structure
+    setTimeout(() => {
+        if (goalModal) {
+            console.log('Modal HTML structure:');
+            console.log(goalModal.outerHTML);
+        }
+    }, 1000);
+
     // Alusta mobiilinavigaatio
     initializeMobileNav();
-    
-    // Hae merkinnät
+
+    // Hae merkinnät ja tavoitteet
     fetchAllEntries();
-    
-    // Lataa tavoitteet
     loadGoals();
-    
+
     // Lisää tapahtumankäsittelijät
     if (addGoalBtn) {
         addGoalBtn.addEventListener('click', openNewGoalModal);
     }
-    
+
     if (closeGoalModal) {
         closeGoalModal.addEventListener('click', closeGoalModalHandler);
     }
-    
+
     if (closeDeleteGoalModal) {
         closeDeleteGoalModal.addEventListener('click', closeDeleteGoalModalHandler);
     }
-    
+
     if (deleteGoalCancelBtn) {
         deleteGoalCancelBtn.addEventListener('click', closeDeleteGoalModalHandler);
     }
-    
+
     if (deleteGoalConfirmBtn) {
         deleteGoalConfirmBtn.addEventListener('click', () => {
             if (currentGoalId) {
-                deleteGoal(currentGoalId);
+                deleteGoalFromAPI(currentGoalId);
             }
         });
     }
+});
+
     
     // Tavoitetyypin valinta
     goalTypeOptions.forEach(option => {
@@ -749,4 +852,3 @@ document.addEventListener('DOMContentLoaded', () => {
             closeDeleteGoalModalHandler();
         }
     });
-});

@@ -1,9 +1,12 @@
+// This is the updated src/index.js file with the goals router added
+
 import express from 'express';
 import cors from 'cors';
 import { notFoundHandler, errorHandler } from './middlewares/error-handler.js';
 import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
+import goalRouter from './routes/goal-router.js'; // Add this line
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -18,6 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/entries', entryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/goals', goalRouter); // Add this line
 
 // Staattinen HTML-sivusto
 app.use('/', express.static('public'));
@@ -33,9 +37,7 @@ app.use(notFoundHandler);
 // yleinen virhevastausten lähettäjä kaikkia virhetilanteita varten
 app.use(errorHandler);
 
-
 // Palvelimen käynnistys lopuksi kaikkien määritelmien jälkeen
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
-
 });
