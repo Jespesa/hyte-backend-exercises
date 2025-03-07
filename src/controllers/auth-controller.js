@@ -11,8 +11,6 @@ const login = async (req, res, next) => {
     return next(customError('Username is missing', 400));
   }
   const user = await selectUserByUsername(username);
-  // jos käyttäjä löytyi tietokannasta verrataan kirjautumiseen syötettyä sanaa tietokannan
-  // salasanatiivisteeseen
   if (user) {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -22,9 +20,10 @@ const login = async (req, res, next) => {
       return res.json({message: 'login ok', user, token});
     }
   }
-  res.status(401).json({message: 'Bad username/password.'});
-  next(customError('Bad username/password.', 401));
-};
+ 
+  return next(customError('Bad username/password.', 401));
+  
+}
 
 const getMe = (req, res) => {
   const user = req.user;

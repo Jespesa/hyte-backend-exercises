@@ -293,27 +293,35 @@ function changeMonth(amount) {
     renderCalendar();
 }
 
-// Avaa uuden merkinnän lisäysmodaali
 function openNewEntryModal(dateString) {
     modalTitle.textContent = 'Lisää uusi merkintä';
     document.getElementById('entry-id').value = '';
     document.getElementById('modal-entry-date').value = dateString || formatDateForInput(new Date());
-    
+
     // Alusta slider keskiarvoon (5)
     modalMoodSlider.value = 5;
     modalMoodValue.textContent = 5;
     modalMoodInput.value = 5;
     updateMoodColor(5, modalMoodValue);
-    
+
     document.getElementById('modal-entry-weight').value = '';
     document.getElementById('modal-entry-sleep').value = '';
     document.getElementById('modal-entry-notes').value = '';
-    
+
     deleteEntryBtn.style.display = 'none';
     currentEntryId = null;
-    
+
+    // Lisää tapahtumankuuntelija liukusäätimelle
+    modalMoodSlider.addEventListener('input', function() {
+        const value = this.value;
+        modalMoodValue.textContent = value;
+        modalMoodInput.value = value;
+        updateMoodColor(value, modalMoodValue);
+    });
+
     entryModal.classList.add('show');
 }
+
 
 // Avaa merkinnän muokkausmodaali
 async function openEntryModal(entryId) {
