@@ -1,6 +1,47 @@
 import promisePool from '../utils/database.js';
 
 /**
+ * Format date values for SQL queries
+ * @param {string|Date} dateValue - The date to format
+ * @returns {string|null} Formatted date or null
+ */
+const formatDateForSQL = (dateValue) => {
+  if (!dateValue) return null;
+  
+  // If it's already a Date object, format it
+  if (dateValue instanceof Date) {
+    return dateValue.toISOString().split('T')[0];
+  }
+  
+  // If it's a string but not in ISO format, convert it
+  if (typeof dateValue === 'string' && !dateValue.includes('T')) {
+    // Simple date validation regex (YYYY-MM-DD)
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (dateRegex.test(dateValue)) {
+      return dateValue;
+    }
+    
+    // Try to parse the date and format it
+    try {
+      const date = new Date(dateValue);
+      if (!isNaN(date.getTime())) {
+        return date.toISOString().split('T')[0];
+      }
+    } catch (e) {
+      console.error('Error parsing date:', e);
+    }
+  }
+  
+  // If it's already in ISO format, extract just the date part
+  if (typeof dateValue === 'string' && dateValue.includes('T')) {
+    return dateValue.split('T')[0];
+  }
+  
+  // Return original value if no formatting needed
+  return dateValue;
+};
+
+/**
  * Fetch all medications from the database
  * @returns {Promise<Object[]>} The list of medications
  */
@@ -24,13 +65,15 @@ const selectAllMedications = async () => {
  */
 const selectMedicationById = async (medicationId) => {
   try {
+    console.log(`Fetching medication with ID: ${medicationId}`);
     const [rows] = await promisePool.query(
       'SELECT * FROM Medications WHERE medication_id = ?',
       [medicationId]
     );
+    console.log('Medication query result:', rows.length > 0 ? 'Found' : 'Not found');
     return rows[0] || null; // Return one medication or null if not found
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching medication ${medicationId}:`, error);
     throw new Error('Database error');
   }
 };
@@ -42,14 +85,15 @@ const selectMedicationById = async (medicationId) => {
  */
 const selectMedicationsByUserId = async (userId) => {
   try {
+    console.log(`Fetching medications for user ID: ${userId}`);
     const [rows] = await promisePool.query(
       'SELECT * FROM Medications WHERE user_id = ? ORDER BY start_date DESC',
       [userId]
     );
-    console.log('selectMedicationsByUserId result', rows);
+    console.log(`Found ${rows.length} medications for user ${userId}`);
     return rows;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching medications for user ${userId}:`, error);
     throw new Error('Database error');
   }
 };
@@ -61,21 +105,37 @@ const selectMedicationsByUserId = async (userId) => {
  */
 const insertMedication = async (medication) => {
   try {
+    console.log('Inserting new medication:', medication);
+    
+    // Format dates
+    const formattedStartDate = formatDateForSQL(medication.start_date);
+    const formattedEndDate = formatDateForSQL(medication.end_date);
+    
+    console.log('Formatted dates:', {
+      start_date: formattedStartDate,
+      end_date: formattedEndDate
+    });
+    
     const [result] = await promisePool.query(
       `INSERT INTO Medications (
         user_id, name, dosage, frequency, 
         start_date, end_date, notes
       ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
-        medication.user_id, medication.name, medication.dosage, medication.frequency,
-        medication.start_date, medication.end_date, medication.notes
+        medication.user_id, 
+        medication.name, 
+        medication.dosage, 
+        medication.frequency,
+        formattedStartDate, 
+        formattedEndDate, 
+        medication.notes
       ]
     );
-    console.log('insertMedication result', result);
+    console.log('insertMedication result:', result);
     return result.insertId;
   } catch (error) {
-    console.error(error);
-    throw new Error('Database error');
+    console.error('Error inserting medication:', error);
+    throw new Error(`Database error: ${error.message}`);
   }
 };
 
@@ -87,6 +147,8 @@ const insertMedication = async (medication) => {
  */
 const updateMedication = async (medicationId, updatedMedication) => {
   try {
+    console.log(`Updating medication ${medicationId}:`, updatedMedication);
+    
     // Build the query dynamically based on provided fields
     const fields = [];
     const values = [];
@@ -106,11 +168,14 @@ const updateMedication = async (medicationId, updatedMedication) => {
     }
     if (updatedMedication.start_date !== undefined) {
       fields.push('start_date = ?');
-      values.push(updatedMedication.start_date);
+      values.push(formatDateForSQL(updatedMedication.start_date));
     }
     if (updatedMedication.end_date !== undefined) {
       fields.push('end_date = ?');
-      values.push(updatedMedication.end_date);
+      values.push(formatDateForSQL(updatedMedication.end_date));
+    } else if ('end_date' in updatedMedication && updatedMedication.end_date === null) {
+      // Handle explicit null value for end_date
+      fields.push('end_date = NULL');
     }
     if (updatedMedication.notes !== undefined) {
       fields.push('notes = ?');
@@ -127,6 +192,8 @@ const updateMedication = async (medicationId, updatedMedication) => {
 
     // Build the final query
     const query = `UPDATE Medications SET ${fields.join(', ')} WHERE medication_id = ?`;
+    console.log('Update query:', query);
+    console.log('Update values:', values);
 
     const [result] = await promisePool.query(query, values);
 
@@ -134,11 +201,11 @@ const updateMedication = async (medicationId, updatedMedication) => {
       throw new Error('No medication found with the given ID');
     }
 
-    console.log('updateMedication result', result);
+    console.log('updateMedication result:', result);
     return result;
   } catch (error) {
-    console.error(error);
-    throw new Error('Database error');
+    console.error(`Error updating medication ${medicationId}:`, error);
+    throw new Error(`Database error: ${error.message}`);
   }
 };
 
@@ -149,6 +216,7 @@ const updateMedication = async (medicationId, updatedMedication) => {
  */
 const deleteMedication = async (medicationId) => {
   try {
+    console.log(`Deleting medication with ID: ${medicationId}`);
     const [result] = await promisePool.query(
       'DELETE FROM Medications WHERE medication_id = ?',
       [medicationId]
@@ -158,11 +226,11 @@ const deleteMedication = async (medicationId) => {
       throw new Error('No medication found with the given ID');
     }
 
-    console.log('deleteMedication result', result);
+    console.log('deleteMedication result:', result);
     return result;
   } catch (error) {
-    console.error(error);
-    throw new Error('Database error');
+    console.error(`Error deleting medication ${medicationId}:`, error);
+    throw new Error(`Database error: ${error.message}`);
   }
 };
 
@@ -173,6 +241,7 @@ const deleteMedication = async (medicationId) => {
  */
 const selectActiveMedications = async (userId) => {
   try {
+    console.log(`Fetching active medications for user ID: ${userId}`);
     const [rows] = await promisePool.query(
       `SELECT * FROM Medications 
        WHERE user_id = ? 
@@ -180,10 +249,10 @@ const selectActiveMedications = async (userId) => {
        ORDER BY name ASC`,
       [userId]
     );
-    console.log('selectActiveMedications result', rows);
+    console.log(`Found ${rows.length} active medications for user ${userId}`);
     return rows;
   } catch (error) {
-    console.error(error);
+    console.error(`Error fetching active medications for user ${userId}:`, error);
     throw new Error('Database error');
   }
 };

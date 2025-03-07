@@ -6,18 +6,19 @@ const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
   console.log('token', token);
-  if (token == null) {
-    return res.sendStatus(401);
+  
+  if (!token) {
+    return res.status(401).json({ message: 'Authentication token is missing' });
   }
+  
   try {
     req.user = jwt.verify(token, process.env.JWT_SECRET);
+    console.log('User authenticated:', req.user.username);
     next();
   } catch (error) {
-    //res.status(403).json({message: 'invalid token'});
-    error.status = 403;
-    next(error);
+    console.error('Token verification error:', error.message);
+    return res.status(403).json({ message: 'Invalid or expired token' });
   }
 };
 
-
-export {authenticateToken};
+export { authenticateToken };

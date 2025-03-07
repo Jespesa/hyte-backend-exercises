@@ -70,6 +70,7 @@ function displayMedications() {
   
   medicationsList.innerHTML = allMedications.map(medication => {
     const isActive = !medication.end_date || new Date(medication.end_date) >= new Date();
+    console.log(`Rendering medication: ${medication.medication_id} - ${medication.name}`);
     
     return `
       <div class="medication-card ${isActive ? 'active-medication' : 'inactive-medication'}">
@@ -85,7 +86,7 @@ function displayMedications() {
           ${medication.notes ? `<p><i class="fas fa-sticky-note"></i> <strong>Huomiot:</strong> ${medication.notes}</p>` : ''}
         </div>
         <div class="medication-actions">
-          <button class="btn edit-medication-btn" data-id="${medication.id}">
+          <button class="btn edit-medication-btn" data-id="${medication.medication_id}">
             <i class="fas fa-edit"></i> Muokkaa
           </button>
         </div>
@@ -97,8 +98,9 @@ function displayMedications() {
   document.querySelectorAll('.edit-medication-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       e.stopPropagation();
-      const medicationId = button.dataset.id;
-      openMedicationModal(medicationId);
+      const medicationId = button.getAttribute('data-id');
+      console.log(`Edit button clicked for medication: ${medicationId}`);
+      openEditMedicationModal(medicationId);
     });
   });
 }
@@ -168,7 +170,7 @@ function filterMedications() {
           ${medication.notes ? `<p><i class="fas fa-sticky-note"></i> <strong>Huomiot:</strong> ${medication.notes}</p>` : ''}
         </div>
         <div class="medication-actions">
-          <button class="btn edit-medication-btn" data-id="${medication.id}">
+          <button class="btn edit-medication-btn" data-id="${medication.medication_id}">
             <i class="fas fa-edit"></i> Muokkaa
           </button>
         </div>
@@ -180,8 +182,8 @@ function filterMedications() {
   document.querySelectorAll('.edit-medication-btn').forEach(button => {
     button.addEventListener('click', (e) => {
       e.stopPropagation();
-      const medicationId = button.dataset.id;
-      openMedicationModal(medicationId);
+      const medicationId = button.getAttribute('data-id');
+      openEditMedicationModal(medicationId);
     });
   });
 }
@@ -204,22 +206,39 @@ function openNewMedicationModal() {
 }
 
 // Avaa lääkityksen muokkausmodaali
-async function openMedicationModal(medicationId) {
+async function openEditMedicationModal(medicationId) {
+  if (!medicationId) {
+    console.error('Trying to edit medication with undefined ID');
+    showToast('Virhe lääkityksen muokkaamisessa: ID puuttuu', 'error');
+    return;
+  }
+  
+  console.log(`Opening edit modal for medication ID: ${medicationId}`);
+  
   try {
     modalTitle.textContent = 'Muokkaa lääkitystä';
     
+    // Hae lääkityksen tiedot API:sta
     const medication = await getMedicationById(medicationId);
     
-    document.getElementById('medication-id').value = medication.id;
+    if (!medication) {
+      console.error(`Medication with ID ${medicationId} not found`);
+      showToast('Lääkitystä ei löytynyt', 'error');
+      return;
+    }
+    
+    console.log(`Medication data received:`, medication);
+    
+    document.getElementById('medication-id').value = medication.medication_id;
     document.getElementById('medication-name').value = medication.name || '';
     document.getElementById('medication-dosage').value = medication.dosage || '';
     document.getElementById('medication-frequency').value = medication.frequency || '';
-    document.getElementById('medication-start-date').value = formatDateForInput(medication.start_date);
+    document.getElementById('medication-start-date').value = formatDateForInput(medication.start_date || new Date());
     document.getElementById('medication-end-date').value = medication.end_date ? formatDateForInput(medication.end_date) : '';
     document.getElementById('medication-notes').value = medication.notes || '';
     
     deleteMedicationBtn.style.display = 'block';
-    currentMedicationId = medication.id;
+    currentMedicationId = medication.medication_id;
     
     medicationModal.classList.add('show');
   } catch (error) {
@@ -247,6 +266,8 @@ async function saveMedication(formData) {
     
     const medicationId = formData.get('medication-id');
     
+    console.log(`Saving medication. ID: ${medicationId}`, medicationData);
+    
     if (medicationId) {
       // Päivitä olemassa oleva lääkitys
       await updateMedication(medicationId, medicationData);
@@ -264,17 +285,24 @@ async function saveMedication(formData) {
     closeModal();
   } catch (error) {
     console.error('Virhe lääkityksen tallentamisessa:', error);
-    showToast('Lääkityksen tallentaminen epäonnistui', 'error');
+    showToast('Lääkityksen tallentaminen epäonnistui: ' + error.message, 'error');
   }
 }
 
 // Poista lääkitys
 async function removeMedication(medicationId) {
+  if (!medicationId) {
+    console.error('Trying to delete medication with undefined ID');
+    showToast('Virhe lääkityksen poistamisessa: ID puuttuu', 'error');
+    return;
+  }
+  
   if (!confirm('Haluatko varmasti poistaa tämän lääkityksen?')) {
     return;
   }
   
   try {
+    console.log(`Removing medication: ${medicationId}`);
     await deleteMedication(medicationId);
     showToast('Lääkitys poistettu', 'success');
     
@@ -285,12 +313,14 @@ async function removeMedication(medicationId) {
     closeModal();
   } catch (error) {
     console.error('Virhe lääkityksen poistamisessa:', error);
-    showToast('Lääkityksen poistaminen epäonnistui', 'error');
+    showToast('Lääkityksen poistaminen epäonnistui: ' + error.message, 'error');
   }
 }
 
 // Tapahtumankäsittelijät
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('Medications page loaded');
+  
   // Hae lääkitykset
   fetchAllMedications();
   
@@ -327,6 +357,9 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteMedicationBtn.addEventListener('click', () => {
       if (currentMedicationId) {
         removeMedication(currentMedicationId);
+      } else {
+        console.error('Cannot delete: currentMedicationId is null');
+        showToast('Virhe: Ei tietoa poistettavasta lääkityksestä', 'error');
       }
     });
   }

@@ -5,23 +5,37 @@ import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
 import goalRouter from './routes/goal-router.js';
-import medicationRouter from './routes/medication-router.js'; // Add this line
+import medicationRouter from './routes/medication-router.js';
 
 const hostname = '127.0.0.1';
 const port = 3000;
 const app = express();
 
+// Enhanced CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://127.0.0.1:5500'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
 // Middleware asetetaan ensin
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Add a debug middleware to log requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
 
 // Reitit lisätään middlewarejen jälkeen
 app.use('/api/entries', entryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/goals', goalRouter);
-app.use('/api/medications', medicationRouter); // Add this line
+app.use('/api/medications', medicationRouter);
 
 // Staattinen HTML-sivusto
 app.use('/', express.static('public'));
