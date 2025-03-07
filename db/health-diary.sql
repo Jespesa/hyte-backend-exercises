@@ -33,8 +33,12 @@ CREATE TABLE Medications (
     frequency VARCHAR(50),
     start_date DATE,
     end_date DATE,
+    notes TEXT, 
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NULL ON UPDATE CURRENT_TIMESTAMP, 
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
 
 CREATE TABLE Exercises (
     exercise_id INT AUTO_INCREMENT PRIMARY KEY,

@@ -1,12 +1,11 @@
-// This is the updated src/index.js file with the goals router added
-
 import express from 'express';
 import cors from 'cors';
 import { notFoundHandler, errorHandler } from './middlewares/error-handler.js';
 import authRouter from './routes/auth-router.js';
 import entryRouter from './routes/entry-router.js';
 import userRouter from './routes/user-router.js';
-import goalRouter from './routes/goal-router.js'; // Add this line
+import goalRouter from './routes/goal-router.js';
+import medicationRouter from './routes/medication-router.js'; // Add this line
 
 const hostname = '127.0.0.1';
 const port = 3000;
@@ -21,7 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/entries', entryRouter);
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/goals', goalRouter); // Add this line
+app.use('/api/goals', goalRouter);
+app.use('/api/medications', medicationRouter); // Add this line
 
 // Staattinen HTML-sivusto
 app.use('/', express.static('public'));
