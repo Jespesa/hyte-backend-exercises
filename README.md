@@ -32,7 +32,7 @@ TerveysPlus is a comprehensive personal health tracking application that allows 
 
 - **Frontend:** [http://localhost:3000](http://localhost:3000)
 - **Backend API:** [http://localhost:3000/api](http://localhost:3000/api)
-- **API Documentation:** [http://localhost:3000/apidoc](http://localhost:3000/apidoc)
+- **API Documentation:** [API Documentation](apidoc.md)
 
 ## Database Description
 
