@@ -55,7 +55,7 @@ const insertUser = async (user) => {
 };
 
 /**
- * NON-SAFE login
+ * 
  * @param {*} username
  * @param {*} password
  * @returns
