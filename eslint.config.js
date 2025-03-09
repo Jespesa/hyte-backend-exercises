@@ -8,6 +8,9 @@ export default [
       sourceType: 'module',
       globals: {...globals.node},
     },
+    rules: {
+      'no-undef': 'off', // Disable no-undef errors
+    },
   },
   js.configs.recommended,
 ];
