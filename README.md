@@ -2,6 +2,8 @@
 
 TerveysPlus is a comprehensive personal health tracking application that allows users to monitor various aspects of their wellbeing including daily mood, weight, sleep patterns, medications, and exercise activities. The application provides intuitive visualizations and trends analysis to help users understand their health journey better.
 
+- **Ohjelmistotestaus Sakari** [Ohjelmistotestaus](#ohjelmistotestaus---yksilötehtävät)
+
 ## Screenshots
 
 ### Dashboard
