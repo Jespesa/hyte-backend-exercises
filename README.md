@@ -156,7 +156,6 @@ Stores health-related goals:
 - Nutrition section is not fully implemented yet.
 - Navigation bar does not show every tab in every section. (could be improved.)
 
-## References and Credits
 
 ### Technologies Used
 - **Frontend:** HTML5, CSS3, JavaScript (ES6+)
@@ -180,3 +179,16 @@ Stores health-related goals:
 - Claude
 - Chatgpt
 - Youtube
+
+### Ohjelmistotestaus - yksilötehtävät
+Tehtävä 1
+
+Asensin koneelleni seuraavat työkalut =
+- Robot Framework
+- Browser Library
+- Requests library
+- CryptoLibrary
+- Robotidy
+
+Tehtävä 
+
