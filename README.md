@@ -189,6 +189,3 @@ Asensin koneelleni seuraavat työkalut =
 - Requests library
 - CryptoLibrary
 - Robotidy
-
-Tehtävä 
-
