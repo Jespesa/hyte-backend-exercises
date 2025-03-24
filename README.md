@@ -37,7 +37,6 @@ TerveysPlus is a comprehensive personal health tracking application that allows 
 - **API Documentation:** [API Documentation](apidoc.md)
 
 ## Database Description
-
 The application uses a MySQL database named `HealthDiary` with the following tables:
 
 ### Users
