@@ -197,3 +197,8 @@ Tehtävä 2
 
 Tehtävä 3
 
+- Web form-esimerkkisivun jokainen kenttä ja lomake testattu ja testistä saatu 13/13 PASS, katso web_form_test.robot tiedosto.
+
+Tehtävä 4
+
+- 
