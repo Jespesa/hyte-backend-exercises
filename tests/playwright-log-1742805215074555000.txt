@@ -1,0 +1,200 @@
+{"level":30,"time":"2025-03-24T08:33:35.741Z","pid":26612,"hostname":"Jesper","msg":"Listening on 54500"}
+(node:26612) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-03-24T08:33:36.286Z","pid":26612,"hostname":"Jesper","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-03-24T08:33:36.505Z","pid":26612,"hostname":"Jesper","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-03-24T08:33:36.506Z","pid":26612,"hostname":"Jesper","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-03-24T08:33:36.506Z","pid":26612,"hostname":"Jesper","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-03-24T08:33:36.514Z","pid":26612,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:33:36.515Z","pid":26612,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:33:36.534Z","pid":26612,"hostname":"Jesper","msg":"Changed active context"}
+{"level":30,"time":"2025-03-24T08:33:36.682Z","pid":26612,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:33:36.682Z","pid":26612,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:33:36.965Z","pid":26612,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-03-24T08:33:36.983Z","pid":26612,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-03-24T08:33:36.983Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with css=.auth-container in page."}
+{"level":30,"time":"2025-03-24T08:33:37.008Z","pid":26612,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-03-24T08:33:37.012Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.013Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.029Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.029Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.049Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.063Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.063Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.073Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.073Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.081Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.095Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.095Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.105Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.105Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.113Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.127Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.127Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.136Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.136Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.147Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.161Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.161Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.171Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.171Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.180Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.194Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.194Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.204Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.204Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.214Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.227Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.227Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.239Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.239Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.247Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.261Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.261Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.271Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.271Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.278Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.291Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.291Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.301Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.301Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.307Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.320Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.320Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.330Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.330Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.337Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.351Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.351Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.358Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.358Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.364Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.377Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.377Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.385Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.385Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.392Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.404Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.405Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.414Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.414Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.422Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.436Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.436Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.445Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.445Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.452Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.465Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.465Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.475Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.475Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.482Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.495Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.495Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.505Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.505Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.513Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.526Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.526Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.536Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.536Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.544Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.557Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.557Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.565Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.565Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.572Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.585Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.585Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.593Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.593Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.598Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.612Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.612Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.621Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.621Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.628Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.641Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.641Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.650Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.650Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.657Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.670Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.670Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.679Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.679Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.686Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.699Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.699Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.708Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.708Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.713Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.726Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.726Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.734Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.734Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.740Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.752Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.752Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.759Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.759Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.764Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.776Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.776Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.785Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.785Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.792Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.805Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.805Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.813Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.813Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.820Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.833Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.833Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.841Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.841Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.847Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.860Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.860Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.870Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.870Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.876Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.889Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.889Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.897Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.897Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.902Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.915Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.915Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.923Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.923Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.929Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.941Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.941Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.949Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.949Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.955Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.969Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.969Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:37.976Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:37.976Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:37.981Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.993Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:37.994Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:38.002Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:38.002Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:38.009Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:38.021Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:38.021Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:38.028Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:38.028Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:38.033Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:38.046Z","pid":26612,"hostname":"Jesper","msg":"Start of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:38.046Z","pid":26612,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-03-24T08:33:38.054Z","pid":26612,"hostname":"Jesper","msg":"Element id=login-tab is not editable: Error: locator.isEditable: Error: Element is not an <input>, <textarea>, <select> or [contenteditable] and does not have a role allowing [aria-readonly]\nCall log:\n\u001b[2m  - waiting for locator('id=login-tab')\u001b[22m\n"}
+{"level":30,"time":"2025-03-24T08:33:38.054Z","pid":26612,"hostname":"Jesper","msg":"Checking checked state"}
+{"level":30,"time":"2025-03-24T08:33:38.060Z","pid":26612,"hostname":"Jesper","msg":"End of node method getElementStates"}
+{"level":30,"time":"2025-03-24T08:33:38.063Z","pid":26612,"hostname":"Jesper","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2025-03-24T08:33:38.063Z","pid":26612,"hostname":"Jesper","Take screenshot with options: ":{"path":"C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\tests\\browser\\screenshot\\fail-screenshot-1.png","fileType":"png","fullPage":false,"timeout":10000,"omitBackground":false}}
+{"level":30,"time":"2025-03-24T08:33:38.254Z","pid":26612,"hostname":"Jesper","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2025-03-24T08:33:53.379Z","pid":26612,"hostname":"Jesper","msg":"Removed page=f4cde923-edd1-4b65-8e0d-27507cba3a6b from context=dfc6adf9-90e9-4f8c-a9d4-c5cf5fc3022f page stack"}

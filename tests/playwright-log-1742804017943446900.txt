@@ -1,0 +1,54 @@
+{"level":30,"time":"2025-03-24T08:13:38.552Z","pid":19536,"hostname":"Jesper","msg":"Listening on 53512"}
+(node:19536) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-03-24T08:13:39.155Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-03-24T08:13:39.389Z","pid":19536,"hostname":"Jesper","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-03-24T08:13:39.390Z","pid":19536,"hostname":"Jesper","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-03-24T08:13:39.390Z","pid":19536,"hostname":"Jesper","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-03-24T08:13:39.398Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:39.399Z","pid":19536,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:13:39.414Z","pid":19536,"hostname":"Jesper","msg":"Changed active context"}
+{"level":30,"time":"2025-03-24T08:13:39.557Z","pid":19536,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:13:39.558Z","pid":19536,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:13:39.905Z","pid":19536,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:39.916Z","pid":19536,"hostname":"Jesper","msg":"<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\"message\":\"Not Found - /\",\"status\":404,\"errors\":null}</pre><div class=\"json-formatter-container\"></div></body></html>"}
+{"level":30,"time":"2025-03-24T08:13:39.920Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:39.920Z","pid":19536,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:13:39.961Z","pid":19536,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:13:39.961Z","pid":19536,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:13:39.986Z","pid":19536,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:39.995Z","pid":19536,"hostname":"Jesper","msg":"<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\"message\":\"Not Found - /frontend\",\"status\":404,\"errors\":null}</pre><div class=\"json-formatter-container\"></div></body></html>"}
+{"level":30,"time":"2025-03-24T08:13:40.000Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:40.000Z","pid":19536,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:13:40.034Z","pid":19536,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:13:40.034Z","pid":19536,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:13:40.060Z","pid":19536,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:40.068Z","pid":19536,"hostname":"Jesper","msg":"<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\"message\":\"Not Found - /frontend/index.html\",\"status\":404,\"errors\":null}</pre><div class=\"json-formatter-container\"></div></body></html>"}
+{"level":30,"time":"2025-03-24T08:13:40.074Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:40.074Z","pid":19536,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:13:40.112Z","pid":19536,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:13:40.112Z","pid":19536,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:13:40.140Z","pid":19536,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:40.151Z","pid":19536,"hostname":"Jesper","msg":"<html><head><meta name=\"color-scheme\" content=\"light dark\"><meta charset=\"utf-8\"></head><body><pre>{\"message\":\"Not Found - /src/pages/dashboard.html\",\"status\":404,\"errors\":null}</pre><div class=\"json-formatter-container\"></div></body></html>"}
+{"level":30,"time":"2025-03-24T08:13:40.156Z","pid":19536,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-03-24T08:13:40.156Z","pid":19536,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-03-24T08:13:40.193Z","pid":19536,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-03-24T08:13:40.193Z","pid":19536,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-03-24T08:13:40.207Z","pid":19536,"hostname":"Jesper","msg":"Error of node method  newPage"}
+================= Original suppressed error =================
+page.goto: net::ERR_FILE_NOT_FOUND at file:///C:/Users/jespe/OneDrive/Ty%C3%B6p%C3%B6yt%C3%A4/HYTE-KEV%C3%84T/Backend_Server/tests/frontend/index.html
+Call log:
+[2m  - navigating to "file:///C:/Users/jespe/OneDrive/Ty%C3%B6p%C3%B6yt%C3%A4/HYTE-KEV%C3%84T/Backend_Server/tests/frontend/index.html", waiting until "load"[22m
+
+    at newPage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:12567:18)
+    at async PlaywrightServer.newPage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13132:28) {
+  name: 'Error'
+}
+=============================================================
+{"level":30,"time":"2025-03-24T08:13:40.235Z","pid":19536,"hostname":"Jesper","msg":"Start of node method takeScreenshot"}
+{"level":30,"time":"2025-03-24T08:13:40.235Z","pid":19536,"hostname":"Jesper","Take screenshot with options: ":{"path":"C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\tests\\browser\\screenshot\\fail-screenshot-1.png","fileType":"png","fullPage":false,"timeout":10000,"omitBackground":false}}
+{"level":30,"time":"2025-03-24T08:13:40.311Z","pid":19536,"hostname":"Jesper","msg":"End of node method takeScreenshot"}
+{"level":30,"time":"2025-03-24T08:13:46.935Z","pid":19536,"hostname":"Jesper","msg":"Removed page=9b3bc829-0126-4d26-a309-e44afcfc1924 from context=0c5acb89-6376-409b-8b5e-eee349f1b04c page stack"}
+{"level":30,"time":"2025-03-24T08:13:46.938Z","pid":19536,"hostname":"Jesper","msg":"Removed page=9cb5a02b-1075-4870-be80-f74fe813be83 from context=0c5acb89-6376-409b-8b5e-eee349f1b04c page stack"}
+{"level":30,"time":"2025-03-24T08:13:46.939Z","pid":19536,"hostname":"Jesper","msg":"Removed page=92458e47-692f-41ad-8c20-10f2794abd73 from context=0c5acb89-6376-409b-8b5e-eee349f1b04c page stack"}
+{"level":30,"time":"2025-03-24T08:13:46.941Z","pid":19536,"hostname":"Jesper","msg":"Removed page=7f48ae9a-55ab-45f6-b407-2fb31f0c55f0 from context=0c5acb89-6376-409b-8b5e-eee349f1b04c page stack"}
