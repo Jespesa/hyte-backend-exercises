@@ -190,3 +190,10 @@ Asensin koneelleni seuraavat työkalut =
 - Requests library
 - CryptoLibrary
 - Robotidy
+
+Tehtävä 2
+
+- Kirjautumistesti onnistui (PASS), katso health_diary_login.robot tiedosto.
+
+Tehtävä 3
+
