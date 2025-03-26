@@ -201,4 +201,4 @@ Tehtävä 3
 
 Tehtävä 4
 
-- 
+- Luotu diary_entry.robot tiedosto joka luo nettisivulleni automaattisesti testipäiväkirjamerkinnän.
