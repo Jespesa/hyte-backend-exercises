@@ -202,3 +202,7 @@ Tehtävä 3
 Tehtävä 4
 
 - Luotu diary_entry.robot tiedosto joka luo nettisivulleni automaattisesti testipäiväkirjamerkinnän.
+
+Tehtävä 5
+
+- Luotu secure_login_test.robot tiedosto joka kirjautuu sivulleni käyttäen .env tiedostoon piilotettuja käyttäjätunnusta ja salasanaa.
