@@ -1,7 +1,6 @@
 *** Settings ***
 Library     Browser    auto_closing_level=KEEP
 Library     CryptoLibrary    variable_decryption=True   # Kryptatut muuttujat puretaan automaattisesti
-Resource    Keywords.robot  # Jos käytät omia avainsanoja
 
 *** Variables ***
 ${Username}    crypt:gAAAAABn8XEDmhBCM_P8EmS_oUJGLrKfv4tFyHMvYk4AL6Ev-0VtzbfIH5LQT6Z2O_IETH9M1-t5n9l7_9V51JYNjGFN9dl7aw==

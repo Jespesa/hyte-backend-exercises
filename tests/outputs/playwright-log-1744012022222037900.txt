@@ -1,0 +1,38 @@
+{"level":30,"time":"2025-04-07T07:47:02.876Z","pid":24964,"hostname":"Jesper","msg":"Listening on 55848"}
+(node:24964) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-04-07T07:47:03.407Z","pid":24964,"hostname":"Jesper","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-04-07T07:47:03.619Z","pid":24964,"hostname":"Jesper","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-04-07T07:47:03.619Z","pid":24964,"hostname":"Jesper","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-04-07T07:47:03.619Z","pid":24964,"hostname":"Jesper","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-04-07T07:47:03.627Z","pid":24964,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-04-07T07:47:03.627Z","pid":24964,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-07T07:47:03.641Z","pid":24964,"hostname":"Jesper","msg":"Changed active context"}
+{"level":30,"time":"2025-04-07T07:47:03.791Z","pid":24964,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-04-07T07:47:03.791Z","pid":24964,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-04-07T07:47:05.836Z","pid":24964,"hostname":"Jesper","msg":"Error of node method  newPage"}
+================= Original suppressed error =================
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5500/frontend/index.html
+Call log:
+[2m  - navigating to "http://127.0.0.1:5500/frontend/index.html", waiting until "load"[22m
+
+    at newPage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:12567:18)
+    at async PlaywrightServer.newPage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13132:28) {
+  name: 'Error'
+}
+=============================================================
+{"level":30,"time":"2025-04-07T07:47:05.868Z","pid":24964,"hostname":"Jesper","msg":"Start of node method takeScreenshot"}
+================= Original suppressed error =================
+Error: Tried to take screenshot, but no page was open.
+    at exists (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:10725:11)
+    at takeScreenshot (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:10769:3)
+    at PlaywrightServer.takeScreenshot (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13132:34)
+    at Object.onReceiveHalfClose (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:536:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-04-07T07:47:05.869Z","pid":24964,"hostname":"Jesper","msg":"Error of node method  takeScreenshot"}

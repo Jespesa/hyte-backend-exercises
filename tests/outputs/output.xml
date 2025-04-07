@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.0 on win32)" generated="2025-04-07T10:47:06.568345" rpa="false" schemaversion="5">
+<suite id="s1" name="Encrypted Login Test" source="C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\tests\encrypted_login_test.robot">
+<test id="s1-t1" name="Login to Health Diary Application" line="10">
+<msg time="2025-04-07T10:47:07.133967" level="INFO">Decrypting text and return value.</msg>
+<kw name="New Browser" owner="Browser">
+<msg time="2025-04-07T10:47:07.137693" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\jespe\\OneDrive\\Ty\u00f6p\u00f6yt\u00e4\\HYTE-KEV\u00c4T\\Backend_Server\\tests\\outputs\\browser\\traces\\temp\\963cc606-1b37-4f8e-b368-548d0406e24b"}</msg>
+<msg time="2025-04-07T10:47:07.163117" level="INFO">Starting Browser process C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js using port 55858</msg>
+<msg time="2025-04-07T10:47:07.163261" level="INFO">Node startup parameters: ['node', 'C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\.venv\\Lib\\site-packages\\Browser\\wrapper\\index.js', '55858']</msg>
+<msg time="2025-04-07T10:47:07.945183" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\tests\\outputs\\browser\\traces\\temp\\963cc606-1b37-4f8e-b368-548d0406e24b"}</msg>
+<arg>chromium</arg>
+<arg>headless=No</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-04-07T10:47:07.136854" elapsed="0.808651"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-04-07T10:47:10.210709" level="INFO">Keyword 'Take Screenshot  fail-screenshot-{index}' could not be run on failure:
+Error: Tried to take screenshot, but no page was open.</msg>
+<msg time="2025-04-07T10:47:10.210869" level="INFO">See also file:///C:/Users/jespe/OneDrive/Ty%C3%B6p%C3%B6yt%C3%A4/HYTE-KEV%C3%84T/Backend_Server/tests/outputs/playwright-log-1744012026726133800.txt for additional details.</msg>
+<msg time="2025-04-07T10:47:10.211184" level="FAIL">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5500/frontend/index.html
+Call log:
+  - navigating to "http://127.0.0.1:5500/frontend/index.html", waiting until "load"
+</msg>
+<arg>http://127.0.0.1:5500/frontend/index.html</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="FAIL" start="2025-04-07T10:47:07.946089" elapsed="2.268491">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5500/frontend/index.html
+Call log:
+  - navigating to "http://127.0.0.1:5500/frontend/index.html", waiting until "load"
+</status>
+</kw>
+<kw name="Get Title" owner="Browser">
+<var>${PageTitle}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.214938" elapsed="0.000164"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${PageTitle}</arg>
+<arg>TerveysPlus</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.215289" elapsed="0.000114"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>id=login-form</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.215544" elapsed="0.000110"/>
+</kw>
+<kw name="Get Element" owner="Browser">
+<var>${loginTab}</var>
+<arg>id=login-tab</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns a reference to a Playwright [https://playwright.dev/docs/api/class-locator|Locator].</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.215809" elapsed="0.000103"/>
+</kw>
+<kw name="Get Property" owner="Browser">
+<var>${loginTabClass}</var>
+<arg>${loginTab}</arg>
+<arg>className</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the ``property`` of the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.216061" elapsed="0.000098"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${loginTabClass}</arg>
+<arg>active</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.216291" elapsed="0.000093"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${username}</var>
+<arg>${Username}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.216498" elapsed="0.000090"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<var>${password}</var>
+<arg>${Password}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.216795" elapsed="0.000118"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<arg>id=login-username</arg>
+<arg>${username}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.217063" elapsed="0.000102"/>
+</kw>
+<kw name="Type Secret" owner="Browser">
+<arg>id=login-password</arg>
+<arg>${password}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given secret from ``variable_name`` into the text field
+found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.217295" elapsed="0.000109"/>
+</kw>
+<kw name="Get Property" owner="Browser">
+<var>${username_value}</var>
+<arg>id=login-username</arg>
+<arg>value</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the ``property`` of the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.217627" elapsed="0.000167"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Username field value: ${username_value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.217946" elapsed="0.000093"/>
+</kw>
+<kw name="Click" owner="Browser">
+<arg>css=#login-form button[type="submit"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.218207" elapsed="0.000142"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.218520" elapsed="0.000141"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<var>${currentUrl}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.218833" elapsed="0.000145"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Current URL after login: ${currentUrl}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.219204" elapsed="0.000085"/>
+</kw>
+<kw name="Get Page Source" owner="Browser">
+<var>${pageSource}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets pages HTML source as a string.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.219399" elapsed="0.000083"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${hasLoginError}</var>
+<arg>Should Not Contain</arg>
+<arg>${pageSource}</arg>
+<arg>Bad username/password</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.219612" elapsed="0.000085"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>not ${hasLoginError}</arg>
+<arg>Fail</arg>
+<arg>Login failed: Bad username/password</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.219931" elapsed="0.000091"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${isDashboardVisible}</var>
+<arg>Wait For Elements State</arg>
+<arg>id=user-greeting</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.220148" elapsed="0.000085"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>Dashboard elements visible: ${isDashboardVisible}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.220340" elapsed="0.000083"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${isDashboardVisible}</arg>
+<arg>Log</arg>
+<arg>Successfully redirected to dashboard</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.220545" elapsed="0.000084"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<var>${hasRedirectButton}</var>
+<arg>Get Element</arg>
+<arg>text="Go to Dashboard" &gt;&gt; visible=true</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.220876" elapsed="0.000205"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${hasRedirectButton}</arg>
+<arg>Click</arg>
+<arg>text="Go to Dashboard"</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.221370" elapsed="0.000156"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<arg>id=user-greeting</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.221720" elapsed="0.000157"/>
+</kw>
+<kw name="Close Browser" owner="Browser">
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="NOT RUN" start="2025-04-07T10:47:10.222067" elapsed="0.000082"/>
+</kw>
+<msg time="2025-04-07T10:47:10.225817" level="INFO">Set timeout to: 10000</msg>
+<status status="FAIL" start="2025-04-07T10:47:07.132810" elapsed="3.089645">Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:5500/frontend/index.html
+Call log:
+  - navigating to "http://127.0.0.1:5500/frontend/index.html", waiting until "load"
+</status>
+</test>
+<status status="FAIL" start="2025-04-07T10:47:06.569628" elapsed="3.657181"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Encrypted Login Test" id="s1" pass="0" fail="1" skip="0">Encrypted Login Test</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-04-07T10:47:07.132379" level="ERROR">Calling method '_start_suite' of listener 'CryptoLibrary' failed: AttributeError: No password found! Password must be set ahead!</msg>
+<msg time="2025-04-07T10:47:07.135944" level="ERROR">Calling method '_start_test' of listener 'CryptoLibrary' failed: AttributeError: No password found! Password must be set ahead!</msg>
+</errors>
+</robot>
