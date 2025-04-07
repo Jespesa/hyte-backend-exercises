@@ -210,3 +210,7 @@ Tehtävä 5
 Tehtävä 6
 
 - Luotu generate_credentials.py-niminen skripti, joka luo salausavaimen ja tallentaa sen tiedostoon crypto.key. Tämän jälkeen käyttäjää pyydetään syöttämään käyttäjätunnus ja salasana. Kun tiedot on syötetty, ne salataan ja tulostetaan Robot Framework -yhteensopivassa muodossa. Salattuja tunnuksia käytetään encrypted_login_test.robot testissä.
+
+Tehtävä 7
+
+- Luotu outputs kansio ja muutettu niin että kaikkien .robot testien logit ja raportit yms ohjautuvat sinne.
