@@ -214,6 +214,6 @@ Tehtävä 7
 
 - Luotu outputs kansio ja muutettu niin että kaikkien .robot testien logit ja raportit yms ohjautuvat sinne.
 
-### Tehtävä 8
+Tehtävä 8
 
-- Luotu GitHub Pages -sivusto testien tulosten katseluun. [GitHub Pages -sivustolla](https://jespesa.github.io/hyte-backend-exercises/).
+- Luotu GitHub io -sivusto testien tulosten katseluun. [GitHub io -sivustolle](https://jespesa.github.io/hyte-backend-exercises/). [Log.html](https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/log.html). [Report.html](https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/report.html)
