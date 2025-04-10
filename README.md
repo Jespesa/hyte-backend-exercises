@@ -190,5 +190,30 @@ Asensin koneelleni seuraavat työkalut =
 - CryptoLibrary
 - Robotidy
 
-Tehtävä 
+Tehtävä 2
 
+- Kirjautumistesti onnistui (PASS), katso health_diary_login.robot tiedosto.
+
+Tehtävä 3
+
+- Web form-esimerkkisivun jokainen kenttä ja lomake testattu ja testistä saatu 13/13 PASS, katso web_form_test.robot tiedosto.
+
+Tehtävä 4
+
+- Luotu diary_entry.robot tiedosto joka luo nettisivulleni automaattisesti testipäiväkirjamerkinnän.
+
+Tehtävä 5
+
+- Luotu secure_login_test.robot tiedosto joka kirjautuu sivulleni käyttäen .env tiedostoon piilotettuja käyttäjätunnusta ja salasanaa.
+
+Tehtävä 6
+
+- Luotu generate_credentials.py-niminen skripti, joka luo salausavaimen ja tallentaa sen tiedostoon crypto.key. Tämän jälkeen käyttäjää pyydetään syöttämään käyttäjätunnus ja salasana. Kun tiedot on syötetty, ne salataan ja tulostetaan Robot Framework -yhteensopivassa muodossa. Salattuja tunnuksia käytetään encrypted_login_test.robot testissä.
+
+Tehtävä 7
+
+- Luotu outputs kansio ja muutettu niin että kaikkien .robot testien logit ja raportit yms ohjautuvat sinne.
+
+### Tehtävä 8
+
+- Luotu GitHub Pages -sivusto testien tulosten katseluun. [GitHub Pages -sivustolla](https://jespesa.github.io/hyte-backend-exercises/).
