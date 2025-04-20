@@ -221,7 +221,7 @@ Tehtävä 8
 
 Tehtävä 9
 
-- Luotu [health_diary_api_tests.robot] testisarja, joka käyttää requestslibrary kirjastoa api kutsujen tekemiseen. Testisarja testaa 1. Kirjautumisen ja JWT-tokenin hankkimisen, 2. Kirjautuneen käyttäjän tietojen hakemista, 3.Päiväkirjamerkintöjen haku, 4. Uuden päiväkirjamerkinnän luontia, 5. Päiväkirjamerkinnän päivittämistä, 6. Päiväkirjamerkinnän poistamista, 7. Aktiivisen lääkitysten hakemista, 8. Lääkityksen luontia ja poistamista.'
+- Luotu [health_diary_api_tests.robot](https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/health_diary_api_tests.robot) testisarja, joka käyttää requestslibrary kirjastoa api kutsujen tekemiseen. Testisarja testaa 1. Kirjautumisen ja JWT-tokenin hankkimisen, 2. Kirjautuneen käyttäjän tietojen hakemista, 3.Päiväkirjamerkintöjen haku, 4. Uuden päiväkirjamerkinnän luontia, 5. Päiväkirjamerkinnän päivittämistä, 6. Päiväkirjamerkinnän poistamista, 7. Aktiivisen lääkitysten hakemista, 8. Lääkityksen luontia ja poistamista.'
 
 Tehtävä 10
 
