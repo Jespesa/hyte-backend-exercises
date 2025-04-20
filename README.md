@@ -218,3 +218,11 @@ Tehtävä 7
 Tehtävä 8
 
 - Luotu GitHub io -sivusto testien tulosten katseluun. [GitHub io -sivustolle](https://jespesa.github.io/hyte-backend-exercises/). Hyperlinkki Logi tiedostoon [Log.html](https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/log.html) ja Report tiedostoon [Report.html](https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/report.html)
+
+Tehtävä 9
+
+- Luotu [health_diary_api_tests.robot] testisarja, joka käyttää requestslibrary kirjastoa api kutsujen tekemiseen. Testisarja testaa 1. Kirjautumisen ja JWT-tokenin hankkimisen, 2. Kirjautuneen käyttäjän tietojen hakemista, 3.Päiväkirjamerkintöjen haku, 4. Uuden päiväkirjamerkinnän luontia, 5. Päiväkirjamerkinnän päivittämistä, 6. Päiväkirjamerkinnän poistamista, 7. Aktiivisen lääkitysten hakemista, 8. Lääkityksen luontia ja poistamista.'
+
+Tehtävä 10
+
+- Kaikki tällä kurssilla tehdyt ohjelmistotestaus tehtävät ovat dokumentoitu tähän README.md tiedostoon.
