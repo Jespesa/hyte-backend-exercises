@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.0 on win32)" generated="2025-04-23T19:19:12.587269" rpa="false" schemaversion="5">
+<suite id="s1" name="Health Diary Login" source="C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\tests\health_diary_login.robot">
+<test id="s1-t1" name="Login to Health Diary Application" line="6">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-04-23T19:19:12.748662" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\jespe\\OneDrive\\Ty\u00f6p\u00f6yt\u00e4\\HYTE-KEV\u00c4T\\Backend_Server\\tests\\browser\\traces\\temp\\c8b45bc1-2c9f-4d63-8b99-0d36aab36fc5"}</msg>
+<msg time="2025-04-23T19:19:12.770979" level="INFO">Starting Browser process C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js using port 51679</msg>
+<msg time="2025-04-23T19:19:12.771125" level="INFO">Node startup parameters: ['node', 'C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\.venv\\Lib\\site-packages\\Browser\\wrapper\\index.js', '51679']</msg>
+<msg time="2025-04-23T19:19:13.534169" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\tests\\browser\\traces\\temp\\c8b45bc1-2c9f-4d63-8b99-0d36aab36fc5"}</msg>
+<arg>chromium</arg>
+<arg>headless=No</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-04-23T19:19:12.747396" elapsed="0.787054"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-04-23T19:19:13.835400" level="INFO">Successfully initialized new page object and opened url: http://127.0.0.1:5500/frontend/index.html</msg>
+<msg time="2025-04-23T19:19:13.835504" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>http://127.0.0.1:5500/frontend/index.html</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.535042" elapsed="0.300647"/>
+</kw>
+<kw name="Get Title" owner="Browser">
+<msg time="2025-04-23T19:19:13.847995" level="INFO">Title: 'TerveysPlus - Hyvinvointisi seuranta'</msg>
+<msg time="2025-04-23T19:19:13.848179" level="INFO">${PageTitle} = TerveysPlus - Hyvinvointisi seuranta</msg>
+<var>${PageTitle}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the title of the current page.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.836334" elapsed="0.011867"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${PageTitle}</arg>
+<arg>TerveysPlus</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.848666" elapsed="0.000695"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T19:19:13.878241" level="INFO">Waited for Element with selector id=login-form at state visible</msg>
+<arg>id=login-form</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.849673" elapsed="0.028752"/>
+</kw>
+<kw name="Get Element" owner="Browser">
+<msg time="2025-04-23T19:19:13.888484" level="INFO">Locator found successfully.</msg>
+<msg time="2025-04-23T19:19:13.888863" level="INFO">${loginTab} = id=login-tab</msg>
+<var>${loginTab}</var>
+<arg>id=login-tab</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns a reference to a Playwright [https://playwright.dev/docs/api/class-locator|Locator].</doc>
+<status status="PASS" start="2025-04-23T19:19:13.878841" elapsed="0.010054"/>
+</kw>
+<kw name="Get Property" owner="Browser">
+<msg time="2025-04-23T19:19:13.911313" level="INFO">Property: 'auth-tab active'</msg>
+<msg time="2025-04-23T19:19:13.911508" level="INFO">${loginTabClass} = auth-tab active</msg>
+<var>${loginTabClass}</var>
+<arg>${loginTab}</arg>
+<arg>className</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the ``property`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.889253" elapsed="0.022285"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${loginTabClass}</arg>
+<arg>active</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.911980" elapsed="0.000425"/>
+</kw>
+<kw name="Type Text" owner="Browser">
+<msg time="2025-04-23T19:19:13.913301" level="INFO">Types the text 'Jesperx1' in the given field.</msg>
+<arg>id=login-username</arg>
+<arg>${Username}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.912669" elapsed="0.054123"/>
+</kw>
+<kw name="Type Secret" owner="Browser">
+<arg>id=login-password</arg>
+<arg>$Password</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Types the given secret from ``variable_name`` into the text field
+found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T19:19:13.967340" elapsed="0.034154"/>
+</kw>
+<kw name="Get Property" owner="Browser">
+<msg time="2025-04-23T19:19:14.013060" level="INFO">Property: 'Jesperx1'</msg>
+<msg time="2025-04-23T19:19:14.013296" level="INFO">${username_value} = Jesperx1</msg>
+<var>${username_value}</var>
+<arg>id=login-username</arg>
+<arg>value</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the ``property`` of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T19:19:14.002070" elapsed="0.011271"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-04-23T19:19:14.014145" level="INFO">Username field value: Jesperx1</msg>
+<arg>Username field value: ${username_value}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-04-23T19:19:14.013748" elapsed="0.000442"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-04-23T19:19:14.014941" level="INFO">Clicks the element 'css=#login-form button[type="submit"]'.</msg>
+<arg>css=#login-form button[type="submit"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T19:19:14.014432" elapsed="0.213490"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-23T19:19:17.228636" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-23T19:19:14.228200" elapsed="3.000571"/>
+</kw>
+<kw name="Get Url" owner="Browser">
+<msg time="2025-04-23T19:19:17.231906" level="INFO">${currentUrl} = http://127.0.0.1:5500/frontend/src/pages/dashboard.html</msg>
+<var>${currentUrl}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the current URL.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.229175" elapsed="0.002769"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-04-23T19:19:17.232602" level="INFO">Current URL after login: http://127.0.0.1:5500/frontend/src/pages/dashboard.html</msg>
+<arg>Current URL after login: ${currentUrl}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.232282" elapsed="0.000368"/>
+</kw>
+<kw name="Get Page Source" owner="Browser">
+<msg time="2025-04-23T19:19:17.240790" level="INFO">${pageSource} = &lt;!DOCTYPE html&gt;&lt;html lang="fi"&gt;&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;TerveysPlus - Etusivu&lt;/title&gt;
+    &lt;link rel="styl...</msg>
+<var>${pageSource}</var>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Gets pages HTML source as a string.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.232873" elapsed="0.008107"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Should Not Contain" owner="BuiltIn">
+<arg>${pageSource}</arg>
+<arg>Bad username/password</arg>
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.241859" elapsed="0.000185"/>
+</kw>
+<msg time="2025-04-23T19:19:17.242128" level="INFO">${hasLoginError} = True</msg>
+<var>${hasLoginError}</var>
+<arg>Should Not Contain</arg>
+<arg>${pageSource}</arg>
+<arg>Bad username/password</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.241468" elapsed="0.000676"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>not ${hasLoginError}</arg>
+<arg>Fail</arg>
+<arg>Login failed: Bad username/password</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.242262" elapsed="0.000274"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T19:19:17.260265" level="INFO">Waited for Element with selector id=user-greeting at state visible</msg>
+<arg>id=user-greeting</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.242883" elapsed="0.017586"/>
+</kw>
+<msg time="2025-04-23T19:19:17.260646" level="INFO">${isDashboardVisible} = True</msg>
+<var>${isDashboardVisible}</var>
+<arg>Wait For Elements State</arg>
+<arg>id=user-greeting</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.242667" elapsed="0.018007"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-04-23T19:19:17.261200" level="INFO">Dashboard elements visible: True</msg>
+<arg>Dashboard elements visible: ${isDashboardVisible}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.260917" elapsed="0.000318"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-04-23T19:19:17.261968" level="INFO">Successfully redirected to dashboard</msg>
+<arg>Successfully redirected to dashboard</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.261830" elapsed="0.000173"/>
+</kw>
+<arg>${isDashboardVisible}</arg>
+<arg>Log</arg>
+<arg>Successfully redirected to dashboard</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.261467" elapsed="0.000574"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Get Element" owner="Browser">
+<msg time="2025-04-23T19:19:27.440031" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="browser/screenshot/fail-screenshot-1.png" target="_blank"&gt;&lt;img src="browser/screenshot/fail-screenshot-1.png" width="800px"/&gt;&lt;/a&gt;</msg>
+<msg time="2025-04-23T19:19:27.440331" level="INFO">See also file:///C:/Users/jespe/OneDrive/Ty%C3%B6p%C3%B6yt%C3%A4/HYTE-KEV%C3%84T/Backend_Server/tests/playwright-log-1745425152698920700.txt for additional details.</msg>
+<msg time="2025-04-23T19:19:27.440732" level="FAIL">TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('text="Go to Dashboard"').filter({ visible: true })
+    - waiting for" http://127.0.0.1:5500/frontend/src/pages/dashboard.html" navigation to finish...
+    - navigated to "http://127.0.0.1:5500/frontend/src/pages/dashboard.html"
+</msg>
+<arg>text="Go to Dashboard" &gt;&gt; visible=true</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns a reference to a Playwright [https://playwright.dev/docs/api/class-locator|Locator].</doc>
+<status status="FAIL" start="2025-04-23T19:19:17.262345" elapsed="10.183040">TimeoutError: locator.waitFor: Timeout 10000ms exceeded.
+Call log:
+  - waiting for locator('text="Go to Dashboard"').filter({ visible: true })
+    - waiting for" http://127.0.0.1:5500/frontend/src/pages/dashboard.html" navigation to finish...
+    - navigated to "http://127.0.0.1:5500/frontend/src/pages/dashboard.html"
+</status>
+</kw>
+<msg time="2025-04-23T19:19:27.445574" level="INFO">${hasRedirectButton} = False</msg>
+<var>${hasRedirectButton}</var>
+<arg>Get Element</arg>
+<arg>text="Go to Dashboard" &gt;&gt; visible=true</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-04-23T19:19:17.262174" elapsed="10.183425"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${hasRedirectButton}</arg>
+<arg>Click</arg>
+<arg>text="Go to Dashboard"</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-04-23T19:19:27.445981" elapsed="0.000381"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T19:19:27.452480" level="INFO">Waited for Element with selector id=user-greeting at state visible</msg>
+<arg>id=user-greeting</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T19:19:27.446564" elapsed="0.006145"/>
+</kw>
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-04-23T19:19:27.688837" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-23T19:19:27.453449" elapsed="0.235776"/>
+</kw>
+<status status="PASS" start="2025-04-23T19:19:12.745674" elapsed="14.944092"/>
+</test>
+<status status="PASS" start="2025-04-23T19:19:12.588633" elapsed="15.121468"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Health Diary Login" id="s1" pass="1" fail="0" skip="0">Health Diary Login</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
