@@ -3,84 +3,124 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robot Framework Test Results</title>
+    <title>Robot Framework Results</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
+            color: #333;
+            background-color: #f7f9fc;
+            padding: 20px;
+        }
+
+        .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-            color: #333;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         h1 {
+            color: #2c3e50;
             text-align: center;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
             margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eaeaea;
         }
-        
+
         h2 {
-            color: #2979ff;
-            border-left: 4px solid #2979ff;
+            color: #3498db;
+            margin: 25px 0 15px;
             padding-left: 10px;
-            margin-top: 40px;
+            border-left: 4px solid #3498db;
         }
-        
+
+        ul {
+            list-style-type: none;
+            padding-left: 15px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            transition: transform 0.2s;
+        }
+
+        li:hover {
+            transform: translateX(5px);
+        }
+
         a {
-            color: #2979ff;
+            color: #2980b9;
             text-decoration: none;
+            padding: 5px;
             display: block;
-            padding: 5px 0;
+            border-radius: 4px;
+            transition: background-color 0.2s;
         }
-        
+
         a:hover {
-            text-decoration: underline;
+            background-color: #f1f8fe;
+            color: #1a5276;
         }
-        
+
         .section {
             background-color: #f9f9f9;
+            border-radius: 6px;
             padding: 20px;
-            margin-bottom: 30px;
-            border-radius: 5px;
+            margin-bottom: 20px;
         }
-        
-        .view-options {
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
             font-size: 0.9em;
-            margin-top: 10px;
-            color: #666;
+            color: #7f8c8d;
+            padding-top: 15px;
+            border-top: 1px solid #eaeaea;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Robot Framework Test Results</h1>
-    
-    <div class="section">
-        <h2>Logs</h2>
-        <div id="logs-section">
-            <a href="https://raw.githubusercontent.com/Jespesa/hyte-backend-exercises/ohjelmistotestaus/tests/outputs/log.html" target="_blank">Testitulokset (log.html)</a>
-            <div class="view-options">
-                <a href="https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/log.html" target="_blank">Katso GitHub-näkymässä</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>Reports</h2>
-        <div id="reports-section">
-            <a href="https://raw.githubusercontent.com/Jespesa/hyte-backend-exercises/ohjelmistotestaus/tests/outputs/report.html" target="_blank">Testiraportti (report.html)</a>
-            <div class="view-options">
-                <a href="https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/report.html" target="_blank">Katso GitHub-näkymässä</a>
-            </div>
-        </div>
-    </div>
+    <div class="container">
+        <h1>Robot Framework Test Results</h1>
 
-    <div class="section">
-        <h2>TerveysPlus-projekti</h2>
-        <p>TerveysPlus on kokonaisvaltainen terveydenseurantasovellus, joka mahdollistaa erilaisten hyvinvointiin liittyvien asioiden kuten päivittäisen mielialan, painon, unirytmin, lääkitysten ja liikunta-aktiviteettien seurannan.</p>
-        <p>Tämä sivu näyttää TerveysPlus-sovelluksen Robot Framework -testien tulokset.</p>
-        <p>Tutustu projektiin tarkemmin <a href="https://github.com/Jespesa/hyte-backend-exercises" target="_blank">GitHub-repositoriossa</a>.</p>
+        <div class="section">
+            <h2>Logs</h2>
+            <ul id="robot-results-logs">
+                <li><a href="https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/log.html">log.html</a></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Reports</h2>
+            <ul id="robot-results-reports">
+                <li><a href="https://github.com/Jespesa/hyte-backend-exercises/blob/ohjelmistotestaus/tests/outputs/report.html">report.html</a></li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>TerveysPlus - Testitulokset</p>
+        </footer>
     </div>
 </body>
 </html>
