@@ -1,0 +1,96 @@
+{"level":30,"time":"2025-04-23T13:49:02.185Z","pid":8064,"hostname":"Jesper","msg":"Listening on 63792"}
+(node:8064) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-04-23T13:49:02.713Z","pid":8064,"hostname":"Jesper","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-04-23T13:49:02.888Z","pid":8064,"hostname":"Jesper","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-04-23T13:49:02.889Z","pid":8064,"hostname":"Jesper","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-04-23T13:49:02.889Z","pid":8064,"hostname":"Jesper","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-04-23T13:49:02.896Z","pid":8064,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-04-23T13:49:02.897Z","pid":8064,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-23T13:49:02.915Z","pid":8064,"hostname":"Jesper","msg":"Changed active context"}
+{"level":30,"time":"2025-04-23T13:49:03.059Z","pid":8064,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-04-23T13:49:03.060Z","pid":8064,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-04-23T13:49:03.264Z","pid":8064,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-04-23T13:49:03.273Z","pid":8064,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:03.274Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-form in page."}
+{"level":30,"time":"2025-04-23T13:49:03.307Z","pid":8064,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:03.312Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:03.312Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-username in page."}
+{"level":30,"time":"2025-04-23T13:49:03.324Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:03.328Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:03.328Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-password in page."}
+{"level":30,"time":"2025-04-23T13:49:03.337Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:03.340Z","pid":8064,"hostname":"Jesper","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-23T13:49:03.341Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with css=#login-form button[type=\"submit\"] in page."}
+{"level":30,"time":"2025-04-23T13:49:03.575Z","pid":8064,"hostname":"Jesper","msg":"End of node method click"}
+{"level":30,"time":"2025-04-23T13:49:06.580Z","pid":8064,"hostname":"Jesper","msg":"Start of node method goTo"}
+{"level":30,"time":"2025-04-23T13:49:06.606Z","pid":8064,"hostname":"Jesper","msg":"End of node method goTo"}
+{"level":30,"time":"2025-04-23T13:49:06.613Z","pid":8064,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:06.613Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with css=main.container in page."}
+{"level":30,"time":"2025-04-23T13:49:06.674Z","pid":8064,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:06.679Z","pid":8064,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:06.679Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=quick-entry-form in page."}
+{"level":30,"time":"2025-04-23T13:49:06.683Z","pid":8064,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:06.689Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.690Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-date in page."}
+{"level":30,"time":"2025-04-23T13:49:06.697Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.701Z","pid":8064,"hostname":"Jesper","msg":"Start of node method getElement"}
+{"level":30,"time":"2025-04-23T13:49:06.702Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-mood-slider in page."}
+{"level":30,"time":"2025-04-23T13:49:06.706Z","pid":8064,"hostname":"Jesper","msg":"End of node method getElement"}
+{"level":30,"time":"2025-04-23T13:49:06.711Z","pid":8064,"hostname":"Jesper","msg":"Start of node method evaluateJavascript"}
+{"level":30,"time":"2025-04-23T13:49:06.711Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-mood-slider in page."}
+{"level":30,"time":"2025-04-23T13:49:06.729Z","pid":8064,"hostname":"Jesper","msg":"End of node method evaluateJavascript"}
+{"level":30,"time":"2025-04-23T13:49:06.732Z","pid":8064,"hostname":"Jesper","msg":"Start of node method getText"}
+{"level":30,"time":"2025-04-23T13:49:06.732Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=mood-value in page."}
+{"level":30,"time":"2025-04-23T13:49:06.749Z","pid":8064,"hostname":"Jesper","msg":"Retrieved text for element id=mood-value containing 8"}
+{"level":30,"time":"2025-04-23T13:49:06.749Z","pid":8064,"hostname":"Jesper","msg":"End of node method getText"}
+{"level":30,"time":"2025-04-23T13:49:06.753Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.753Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-weight in page."}
+{"level":30,"time":"2025-04-23T13:49:06.760Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.763Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.763Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-sleep in page."}
+{"level":30,"time":"2025-04-23T13:49:06.770Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.772Z","pid":8064,"hostname":"Jesper","msg":"Start of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.773Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=entry-notes in page."}
+{"level":30,"time":"2025-04-23T13:49:06.779Z","pid":8064,"hostname":"Jesper","msg":"End of node method fillText"}
+{"level":30,"time":"2025-04-23T13:49:06.782Z","pid":8064,"hostname":"Jesper","msg":"Start of node method click"}
+{"level":30,"time":"2025-04-23T13:49:06.782Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with css=#quick-entry-form button[type=\"submit\"] in page."}
+{"level":30,"time":"2025-04-23T13:49:07.136Z","pid":8064,"hostname":"Jesper","msg":"End of node method click"}
+{"level":30,"time":"2025-04-23T13:49:07.139Z","pid":8064,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:07.139Z","pid":8064,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with css=.toast.show in page."}
+{"level":30,"time":"2025-04-23T13:49:07.145Z","pid":8064,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:07.149Z","pid":8064,"hostname":"Jesper","msg":"Start of node method closeBrowser"}
+{"level":30,"time":"2025-04-23T13:49:07.159Z","pid":8064,"hostname":"Jesper","msg":"Removed page=75f383d3-ebe6-4e47-a4b1-8f3791bd58f0 from context=be1ea4bf-ccad-4ff4-8d5d-59b31c7b5d12 page stack"}
+{"level":30,"time":"2025-04-23T13:49:07.359Z","pid":8064,"hostname":"Jesper","msg":"End of node method closeBrowser"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:12223:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13119:59)
+    at PlaywrightServer.setTimeout (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13367:57)
+    at Object.onReceiveHalfClose (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:536:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-04-23T13:49:07.383Z","pid":8064,"hostname":"Jesper","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-23T13:49:07.383Z","pid":8064,"hostname":"Jesper","msg":"End of node method getBrowserCatalog"}
+================= Original suppressed error =================
+Error: Browser has been closed.
+    at PlaywrightState.getActiveBrowser (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:12223:15)
+    at PlaywrightServer.getActiveBrowser (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13119:59)
+    at PlaywrightServer.setTimeout (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js:13367:57)
+    at Object.onReceiveHalfClose (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server.js:1461:25)
+    at BaseServerInterceptingCall.maybePushNextMessage (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:575:31)
+    at BaseServerInterceptingCall.handleEndEvent (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:615:14)
+    at ServerHttp2Stream.<anonymous> (C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\node_modules\@grpc\grpc-js\build\src\server-interceptors.js:382:18)
+    at ServerHttp2Stream.emit (node:events:536:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+=============================================================
+{"level":30,"time":"2025-04-23T13:49:07.405Z","pid":8064,"hostname":"Jesper","msg":"Start of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-23T13:49:07.405Z","pid":8064,"hostname":"Jesper","msg":"End of node method getBrowserCatalog"}
+{"level":30,"time":"2025-04-23T13:49:07.456Z","pid":8064,"hostname":"Jesper","msg":"Start of node method closeAllBrowsers"}
+{"level":30,"time":"2025-04-23T13:49:07.456Z","pid":8064,"hostname":"Jesper","msg":"End of node method closeAllBrowsers"}

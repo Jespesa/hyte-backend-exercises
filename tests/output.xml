@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.0 on win32)" generated="2025-04-23T16:38:08.859001" rpa="false" schemaversion="5">
+<suite id="s1" name="Diary Entry" source="C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\tests\diary_entry.robot">
+<test id="s1-t1" name="Add New Health Diary Entry" line="17">
+<kw name="New Browser" owner="Browser">
+<msg time="2025-04-23T16:38:09.271614" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\jespe\\OneDrive\\Ty\u00f6p\u00f6yt\u00e4\\HYTE-KEV\u00c4T\\Backend_Server\\tests\\browser\\traces\\temp\\7202e800-29b5-4c85-8503-839038f45e12"}</msg>
+<msg time="2025-04-23T16:38:09.293635" level="INFO">Starting Browser process C:\Users\jespe\OneDrive\Työpöytä\HYTE-KEVÄT\Backend_Server\.venv\Lib\site-packages\Browser\wrapper\index.js using port 63293</msg>
+<msg time="2025-04-23T16:38:09.293780" level="INFO">Node startup parameters: ['node', 'C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\.venv\\Lib\\site-packages\\Browser\\wrapper\\index.js', '63293']</msg>
+<msg time="2025-04-23T16:38:14.698512" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\jespe\\OneDrive\\Työpöytä\\HYTE-KEVÄT\\Backend_Server\\tests\\browser\\traces\\temp\\7202e800-29b5-4c85-8503-839038f45e12"}</msg>
+<arg>chromium</arg>
+<arg>headless=No</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2025-04-23T16:38:09.269917" elapsed="5.428947"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2025-04-23T16:38:15.030946" level="INFO">Successfully initialized new page object and opened url: http://127.0.0.1:5500/frontend/index.html</msg>
+<msg time="2025-04-23T16:38:15.031050" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${LOGIN_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2025-04-23T16:38:14.699905" elapsed="0.331342"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T16:38:15.060723" level="INFO">Waited for Element with selector id=login-form at state visible</msg>
+<arg>id=login-form</arg>
+<arg>visible</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T16:38:15.031599" elapsed="0.029285"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-23T16:38:15.062087" level="INFO">Fills the text 'Jesperx1' in the given field.</msg>
+<arg>id=login-username</arg>
+<arg>${USERNAME}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:15.061183" elapsed="0.016368"/>
+</kw>
+<kw name="Fill Secret" owner="Browser">
+<arg>id=login-password</arg>
+<arg>$PASSWORD</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Fills the given secret from ``variable_name`` into the
+text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:15.077870" elapsed="0.011937"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-04-23T16:38:15.090747" level="INFO">Clicks the element 'css=#login-form button[type="submit"]'.</msg>
+<arg>css=#login-form button[type="submit"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:15.090237" elapsed="0.066400"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-04-23T16:38:18.157725" level="INFO">Slept 3 seconds.</msg>
+<arg>3s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-04-23T16:38:15.156974" elapsed="3.000890"/>
+</kw>
+<kw name="Go To" owner="Browser">
+<msg time="2025-04-23T16:38:18.189485" level="INFO">Successfully opened URL http://127.0.0.1:5500/frontend/src/pages/dashboard.html</msg>
+<arg>${DASHBOARD_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Navigates to the given ``url``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.158187" elapsed="0.031548"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T16:38:18.256488" level="INFO">Waited for Element with selector css=main.container at state visible</msg>
+<arg>css=main.container</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.190165" elapsed="0.066495"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T16:38:18.263260" level="INFO">Waited for Element with selector id=quick-entry-form at state visible</msg>
+<arg>id=quick-entry-form</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.257059" elapsed="0.006406"/>
+</kw>
+<kw name="Get Current Date" owner="DateTime">
+<msg time="2025-04-23T16:38:18.264894" level="INFO">${today} = 2025-04-23</msg>
+<var>${today}</var>
+<arg>result_format=%Y-%m-%d</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.263885" elapsed="0.001076"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-23T16:38:18.266120" level="INFO">Fills the text '2025-04-23' in the given field.</msg>
+<arg>id=entry-date</arg>
+<arg>${today}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.265374" elapsed="0.013957"/>
+</kw>
+<kw name="Get Element" owner="Browser">
+<msg time="2025-04-23T16:38:18.290666" level="INFO">Locator found successfully.</msg>
+<msg time="2025-04-23T16:38:18.291068" level="INFO">${slider} = id=entry-mood-slider</msg>
+<var>${slider}</var>
+<arg>id=entry-mood-slider</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns a reference to a Playwright [https://playwright.dev/docs/api/class-locator|Locator].</doc>
+<status status="PASS" start="2025-04-23T16:38:18.279980" elapsed="0.011138"/>
+</kw>
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2025-04-23T16:38:18.324568" level="INFO">JavaScript executed successfully.</msg>
+<arg>${slider}</arg>
+<arg>(element) =&gt; { element.value = ${MOOD_VALUE}; element.dispatchEvent(new Event('input', {bubbles: true})); }</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.291705" elapsed="0.033383"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2025-04-23T16:38:18.346466" level="INFO">Text: '8'</msg>
+<msg time="2025-04-23T16:38:18.346616" level="INFO">${mood_value_text} = 8</msg>
+<var>${mood_value_text}</var>
+<arg>id=mood-value</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.325846" elapsed="0.020790"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${mood_value_text}</arg>
+<arg>${MOOD_VALUE}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.346964" elapsed="0.000704"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-23T16:38:18.348481" level="INFO">Fills the text '75.5' in the given field.</msg>
+<arg>id=entry-weight</arg>
+<arg>${WEIGHT}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.347967" elapsed="0.009678"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-23T16:38:18.358951" level="INFO">Fills the text '7.5' in the given field.</msg>
+<arg>id=entry-sleep</arg>
+<arg>${SLEEP_HOURS}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.358161" elapsed="0.018833"/>
+</kw>
+<kw name="Fill Text" owner="Browser">
+<msg time="2025-04-23T16:38:18.378385" level="INFO">Fills the text 'Automated test entry: Had a great day with plenty of exercise and healthy food.' in the given field.</msg>
+<arg>id=entry-notes</arg>
+<arg>${NOTES}</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Clears and fills the given ``txt`` into the text field found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.377453" elapsed="0.013924"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2025-04-23T16:38:18.392501" level="INFO">Clicks the element 'css=#quick-entry-form button[type="submit"]'.</msg>
+<arg>css=#quick-entry-form button[type="submit"]</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.391821" elapsed="0.283714"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2025-04-23T16:38:18.718492" level="INFO">Waited for Element with selector css=.toast.show at state visible</msg>
+<arg>css=.toast.show</arg>
+<arg>visible</arg>
+<arg>timeout=5s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.675962" elapsed="0.042912"/>
+</kw>
+<kw name="Close Browser" owner="Browser">
+<msg time="2025-04-23T16:38:19.026055" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2025-04-23T16:38:18.719383" elapsed="0.306926"/>
+</kw>
+<status status="PASS" start="2025-04-23T16:38:09.268128" elapsed="9.758603"/>
+</test>
+<status status="PASS" start="2025-04-23T16:38:08.860213" elapsed="10.237208"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Diary Entry" id="s1" pass="1" fail="0" skip="0">Diary Entry</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

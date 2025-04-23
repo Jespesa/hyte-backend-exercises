@@ -1,0 +1,27 @@
+{"level":30,"time":"2025-04-23T13:49:36.897Z","pid":26808,"hostname":"Jesper","msg":"Listening on 63842"}
+(node:26808) DeprecationWarning: Calling start() is no longer necessary. It can be safely omitted.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"level":30,"time":"2025-04-23T13:49:36.962Z","pid":26808,"hostname":"Jesper","msg":"Start of node method newBrowser"}
+{"level":30,"time":"2025-04-23T13:49:37.151Z","pid":26808,"hostname":"Jesper","msg":"Adding browser to stack: chromium, version: 134.0.6998.35"}
+{"level":30,"time":"2025-04-23T13:49:37.152Z","pid":26808,"hostname":"Jesper","msg":"End of node method newBrowser"}
+{"level":30,"time":"2025-04-23T13:49:37.152Z","pid":26808,"hostname":"Jesper","msg":"Adding 0 contexts to browser"}
+{"level":30,"time":"2025-04-23T13:49:37.160Z","pid":26808,"hostname":"Jesper","msg":"Start of node method newPage"}
+{"level":30,"time":"2025-04-23T13:49:37.160Z","pid":26808,"hostname":"Jesper","msg":"currentBrowser: [object Object]"}
+{"level":30,"time":"2025-04-23T13:49:37.181Z","pid":26808,"hostname":"Jesper","msg":"Changed active context"}
+{"level":30,"time":"2025-04-23T13:49:37.348Z","pid":26808,"hostname":"Jesper","msg":"Video path: undefined"}
+{"level":30,"time":"2025-04-23T13:49:37.349Z","pid":26808,"hostname":"Jesper","msg":"Changed active page"}
+{"level":30,"time":"2025-04-23T13:49:37.538Z","pid":26808,"hostname":"Jesper","msg":"End of node method newPage"}
+{"level":30,"time":"2025-04-23T13:49:37.558Z","pid":26808,"hostname":"Jesper","msg":"Start of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:37.559Z","pid":26808,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-form in page."}
+{"level":30,"time":"2025-04-23T13:49:37.587Z","pid":26808,"hostname":"Jesper","msg":"End of node method waitForElementState"}
+{"level":30,"time":"2025-04-23T13:49:37.591Z","pid":26808,"hostname":"Jesper","msg":"Start of node method getElement"}
+{"level":30,"time":"2025-04-23T13:49:37.591Z","pid":26808,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-04-23T13:49:37.599Z","pid":26808,"hostname":"Jesper","msg":"End of node method getElement"}
+{"level":30,"time":"2025-04-23T13:49:37.605Z","pid":26808,"hostname":"Jesper","msg":"Start of node method getDomProperty"}
+{"level":30,"time":"2025-04-23T13:49:37.606Z","pid":26808,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-tab in page."}
+{"level":30,"time":"2025-04-23T13:49:37.625Z","pid":26808,"hostname":"Jesper","msg":"Retrieved dom property for element id=login-tab containing auth-tab active"}
+{"level":30,"time":"2025-04-23T13:49:37.625Z","pid":26808,"hostname":"Jesper","msg":"End of node method getDomProperty"}
+{"level":30,"time":"2025-04-23T13:49:37.630Z","pid":26808,"hostname":"Jesper","msg":"Start of node method typeText"}
+{"level":30,"time":"2025-04-23T13:49:37.631Z","pid":26808,"hostname":"Jesper","msg":"Strict mode is enabled, find Locator with id=login-username in page."}
+{"level":30,"time":"2025-04-23T13:49:37.955Z","pid":26808,"hostname":"Jesper","msg":"End of node method typeText"}
+{"level":30,"time":"2025-04-23T13:49:41.323Z","pid":26808,"hostname":"Jesper","msg":"Removed page=9c1d7ca7-6179-43f1-98db-7915a2f60851 from context=03898e18-b734-490e-9c7a-f59471b2f85f page stack"}
